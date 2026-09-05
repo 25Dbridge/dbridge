@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>임상병리사는 병원으로만 취업해야 하는가 — D-Bridge</title>
+
+<meta name="description" content="임상병리학과 2학년 5명이 일본 고베 4개 기관과 국내 3개 기업을 찾아가 현직자 10명을 만나 정리한 비임상 진로 안내.">
+<meta name="theme-color" content="#101114">
+
+<!-- QR·링크 공유 시 미리보기 -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="임상병리사는 병원으로만 취업해야 하는가">
+<meta property="og:description" content="방문 기관 7 · 만난 현직자 10 · 정리한 경로 3">
+<meta property="og:locale" content="ko_KR">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<a class="skip-link" href="#roadmap">본문으로 건너뛰기</a>
+
+<!-- ═══════════════════════════════════════════════
+     1. 첫 화면
+     ═══════════════════════════════════════════════ -->
+<header class="hero" id="hero">
+  <div class="hero__inner">
+
+    <!-- hero.question 의 \n 마다 <span class="hero__line"> 으로 쪼개 넣음 -->
+    <h1 class="hero__question" data-render="hero-question"></h1>
+
+    <!-- 결과보고서의 답 문장. 질문 바로 아래. -->
+    <p class="hero__answer" data-render="hero-answer"></p>
+
+    <!-- hero.stats — 카운트업은 1회만, prefers-reduced-motion 이면 즉시 최종값 -->
+    <dl class="hero__stats" data-render="hero-stats"></dl>
+
+    <p class="hero__byline" data-render="hero-byline"></p>
+    <p class="hero__team"   data-render="hero-team"></p>
+
+  </div>
+</header>
+
+
+<main>
+
+  <!-- ═══════════════════════════════════════════════
+       2. 로드맵 — 핵심 화면
+       ═══════════════════════════════════════════════ -->
+  <section class="roadmap" id="roadmap" aria-labelledby="roadmap-title">
+    <h2 class="section__title" id="roadmap-title">학년별 준비 로드맵</h2>
+
+    <!-- roadmap.notice — 타임라인 시작 전, 놓치면 안 되는 문장 -->
+    <p class="roadmap__notice" data-render="roadmap-notice" role="note"></p>
+
+    <!-- 위에서 아래로 흐르는 시간축. 순서가 의미를 가지므로 ol. -->
+    <ol class="timeline" data-render="timeline">
+      <!--
+        stage 가 items 를 가지면      → li.stage
+        stage 가 branches 를 가지면   → li.stage.stage--fork  (4학년)
+        분기 SVG 는 fork 안에 script.js 가 삽입
+      -->
+    </ol>
+
+    <div class="roadmap__closing" data-render="roadmap-closing">
+      <!-- closing.quote / closing.line -->
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       3. 세 경로
+       ═══════════════════════════════════════════════ -->
+  <section class="paths" id="paths" aria-labelledby="paths-title">
+    <h2 class="section__title" id="paths-title">비임상 세 갈래</h2>
+    <ul class="paths__list" data-render="paths"></ul>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       4. 체크리스트
+       ═══════════════════════════════════════════════ -->
+  <section class="checklist" id="checklist" aria-labelledby="checklist-title">
+    <h2 class="section__title" id="checklist-title">지금 무엇이 비어 있는지 확인합니다</h2>
+
+    <!-- 학년 탭 : role=tablist, 좌우 화살표 키로 이동 -->
+    <div class="grades" role="tablist" aria-label="학년 선택" data-render="grade-tabs"></div>
+
+    <!-- 선택된 학년의 문항. form 이지만 제출은 없음(전송 방지는 script.js) -->
+    <form class="check" id="check-form" aria-labelledby="checklist-title">
+
+      <fieldset class="check__group" data-group="now">
+        <legend class="check__legend" data-render="legend-now"></legend>
+        <ul class="check__list" data-render="items-now"></ul>
+      </fieldset>
+
+      <hr class="check__divider">
+
+      <fieldset class="check__group" data-group="ongoing">
+        <legend class="check__legend" data-render="legend-ongoing"></legend>
+        <ul class="check__list" data-render="items-ongoing"></ul>
+      </fieldset>
+
+    </form>
+
+    <!-- 결과 : 체크할 때마다 즉시 갱신되므로 aria-live -->
+    <div class="result" id="result" aria-live="polite">
+      <h3 class="result__heading" data-render="result-heading"></h3>
+      <ul class="result__list"    data-render="result-list"></ul>
+
+      <!-- 1·2학년에게만 노출 -->
+      <div class="result__preview" data-render="result-preview" hidden></div>
+
+      <!-- 비어 있는 항목이 없을 때만 노출 -->
+      <div class="result__done" data-render="result-done" hidden></div>
+
+      <div class="result__actions">
+        <button type="button" class="btn" data-action="save-image">이미지로 저장</button>
+        <button type="button" class="btn" data-action="print">인쇄</button>
+        <button type="button" class="btn btn--quiet" data-action="reset">체크 지우기</button>
+      </div>
+    </div>
+
+    <!-- 이미지·인쇄 전용 영역. 화면에는 안 보이고 저장 시에만 그려짐 -->
+    <div class="export-sheet" id="export-sheet" aria-hidden="true"></div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════
+       5. 다녀온 곳
+       ═══════════════════════════════════════════════ -->
+  <section class="visits" id="visits" aria-labelledby="visits-title">
+    <h2 class="section__title" id="visits-title">다녀온 곳</h2>
+    <ul class="visits__list" data-render="visits"></ul>
+
+    <div class="method" data-render="method"></div>
+  </section>
+
+</main>
+
+
+<!-- ═══════════════════════════════════════════════
+     6. 하단
+     ═══════════════════════════════════════════════ -->
+<footer class="foot" id="foot">
+  <section class="foot__limit" aria-labelledby="limit-title">
+    <h2 class="foot__title" id="limit-title" data-render="limit-heading"></h2>
+    <p data-render="limit-body"></p>
+  </section>
+
+  <!-- 마지막에 읽고 나가는 문장. 문의처보다 위에 둔다. -->
+  <p class="foot__baton" data-render="baton"></p>
+
+  <section class="foot__contact" aria-labelledby="contact-title">
+    <h2 class="foot__title" id="contact-title" data-render="contact-heading"></h2>
+    <dl class="contact" data-render="contact-list"></dl>
+  </section>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════
+     바텀시트 (모바일) / 사이드 패널 (1024px~)
+     dialog 하나를 재사용. ESC 닫기·포커스 가둠은 dialog 기본 동작.
+     ═══════════════════════════════════════════════ -->
+<dialog class="sheet" id="sheet" aria-labelledby="sheet-title">
+  <div class="sheet__panel">
+    <div class="sheet__grip" aria-hidden="true"></div>
+
+    <header class="sheet__head">
+      <p class="sheet__eyebrow" data-render="sheet-eyebrow"></p>
+      <h2 class="sheet__title" id="sheet-title" data-render="sheet-title"></h2>
+      <button type="button" class="sheet__close" data-action="close-sheet" aria-label="닫기"></button>
+    </header>
+
+    <div class="sheet__body" data-render="sheet-body" tabindex="-1"></div>
+  </div>
+</dialog>
+
+
+<!-- ═══════════════════════════════════════════════
+     반복 단위 템플릿 — script.js 가 복제해서 채웁니다
+     ═══════════════════════════════════════════════ -->
+
+<!-- 로드맵 한 단계 -->
+<template id="tpl-stage">
+  <li class="stage">
+    <div class="stage__marker" aria-hidden="true"></div>
+    <div class="stage__head">
+      <h3 class="stage__grade"></h3>
+      <p class="stage__caption"></p>
+    </div>
+    <ul class="stage__items"></ul>
+  </li>
+</template>
+
+<!-- 로드맵 항목 : 한 줄 요약 + 누르면 바텀시트 -->
+<template id="tpl-stage-item">
+  <li class="stage__item">
+    <button type="button" class="stage__item-btn" aria-haspopup="dialog">
+      <span class="stage__item-text"></span>
+    </button>
+  </li>
+</template>
+
+<!-- 4학년 분기. svg 는 script.js 가 그려 넣음 -->
+<template id="tpl-fork">
+  <li class="stage stage--fork">
+    <div class="fork__lines" aria-hidden="true"></div>
+
+    <div class="fork__branches">
+      <!-- 임상 : 여기서 끝나는 갈래 -->
+      <article class="branch branch--clinical">
+        <h3 class="branch__name"></h3>
+        <p class="branch__summary"></p>
+        <ul class="branch__items"></ul>
+      </article>
+
+      <!-- 비임상 : 아래로 이어지는 갈래 -->
+      <article class="branch branch--nonclinical">
+        <h3 class="branch__name"></h3>
+        <p class="branch__summary"></p>
+        <ul class="branch__items"></ul>
+
+        <!-- entryOptions : 라벨 + 원문 문장 -->
+        <ul class="entry" aria-label="대학원 진학 시점"></ul>
+      </article>
+    </div>
+
+    <!-- 비임상 아래에서 세 갈래로 벌어지는 지점 -->
+    <div class="fan" data-render="fan"></div>
+  </li>
+</template>
+
+<!-- entryOptions 한 개 : 라벨 아래 원문 그대로 -->
+<template id="tpl-entry">
+  <li class="entry__item">
+    <h4 class="entry__label"></h4>
+    <p class="entry__text"></p>
+  </li>
+</template>
+
+<!-- 세 경로 카드 -->
+<template id="tpl-path">
+  <li class="path">
+    <button type="button" class="path__btn" aria-haspopup="dialog">
+      <h3 class="path__name"></h3>
+      <p class="path__degree"></p>
+      <p class="path__work"></p>
+      <ul class="path__majors"></ul>
+    </button>
+  </li>
+</template>
+
+<!-- 바텀시트 안의 출처 구분 섹션 (field / public) -->
+<template id="tpl-sheet-section">
+  <section class="src">
+    <p class="src__badge"></p>
+    <h3 class="src__title"></h3>
+    <div class="src__body"></div>
+    <div class="src__groups"></div>
+  </section>
+</template>
+
+<!-- 체크 문항 -->
+<template id="tpl-check">
+  <li class="check__item">
+    <label class="check__label">
+      <input type="checkbox" class="check__box">
+      <span class="check__text"></span>
+    </label>
+  </li>
+</template>
+
+<!-- 선택형 문항 (D1) -->
+<template id="tpl-choice">
+  <li class="check__item check__item--choice">
+    <fieldset>
+      <legend class="check__text"></legend>
+      <div class="choice__options"></div>
+    </fieldset>
+  </li>
+</template>
+
+<!-- 결과 : 비어 있는 항목 한 개 -->
+<template id="tpl-empty">
+  <li class="empty">
+    <h4 class="empty__text"></h4>
+    <p class="empty__note"></p>
+    <ul class="empty__programs"></ul>
+    <ul class="empty__jobs"></ul>
+  </li>
+</template>
+
+<!-- 방문 지역 -->
+<template id="tpl-visit">
+  <li class="visit">
+    <h3 class="visit__region"></h3>
+    <p class="visit__period"></p>
+    <ul class="visit__places"></ul>
+  </li>
+</template>
+
+<noscript>
+  <p class="noscript">이 페이지는 자바스크립트로 내용을 표시합니다. 브라우저에서 자바스크립트를 켜 주세요.</p>
+</noscript>
+
+<script src="script.js" defer></script>
+</body>
+</html>
