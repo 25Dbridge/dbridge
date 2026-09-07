@@ -51,7 +51,7 @@
 </header>
 
 <main>
-  <!-- 2. 세 경로 (연구실을 이 안으로 통합시켰습니다!) -->
+  <!-- 2. 세 경로 -->
   <section class="paths" id="paths" aria-labelledby="paths-title">
     <h2 class="section__title" id="paths-title">비임상 진출 경로 3가지</h2>
     <ul class="paths__list" data-render="paths"></ul>
@@ -67,7 +67,12 @@
 
   <!-- 4. 체크리스트 -->
   <section class="checklist" id="checklist" aria-labelledby="checklist-title">
-    <h2 class="section__title" id="checklist-title">진로 준비도 자가 진단</h2>
+    <header style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:var(--sp-4); flex-wrap:wrap; gap:1rem;">
+      <h2 class="section__title" id="checklist-title" style="margin-bottom:0;">진로 준비도 자가 진단</h2>
+      <!-- 비교과 모아보기 버튼 추가 -->
+      <button type="button" class="btn btn--outline" id="btn-show-programs">💡 비교과 프로그램 모아보기</button>
+    </header>
+    
     <div class="grades" role="tablist" aria-label="학년 선택" data-render="grade-tabs"></div>
     <form class="check" id="check-form" aria-labelledby="checklist-title">
       <fieldset class="check__group" data-group="now">
@@ -176,12 +181,13 @@
 <template id="tpl-path">
   <li class="path">
     <button type="button" class="path__btn" aria-haspopup="dialog">
-      <h3 class="path__name"></h3>
-      <p class="path__degree"></p>
-      <p class="path__work"></p>
-      <ul class="path__majors"></ul>
-      <!-- 연구실이 이 안으로 쏙 들어옵니다 -->
-      <div class="path__labs"></div>
+      <div class="path__content">
+        <h3 class="path__name"></h3>
+        <p class="path__degree"></p>
+        <p class="path__work"></p>
+        <ul class="path__majors"></ul>
+      </div>
+      <span class="path__more">자세히 보기 &rarr;</span>
     </button>
   </li>
 </template>
