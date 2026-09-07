@@ -51,17 +51,10 @@
 </header>
 
 <main>
-  <!-- 2. 세 경로 -->
+  <!-- 2. 세 경로 (연구실을 이 안으로 통합시켰습니다!) -->
   <section class="paths" id="paths" aria-labelledby="paths-title">
     <h2 class="section__title" id="paths-title">비임상 진출 경로 3가지</h2>
     <ul class="paths__list" data-render="paths"></ul>
-  </section>
-
-  <!-- 2b. 학과 연구실 -->
-  <section class="labs" id="labs" aria-labelledby="labs-title">
-    <h2 class="section__title" id="labs-title" data-render="labs-heading"></h2>
-    <p class="labs__note" data-render="labs-note"></p>
-    <ul class="labs__list" data-render="labs"></ul>
   </section>
 
   <!-- 3. 로드맵 -->
@@ -141,7 +134,7 @@
   </div>
 </dialog>
 
-<!-- 반복 단위 템플릿 — script.js 가 복제해서 채웁니다 -->
+<!-- 반복 단위 템플릿 -->
 <template id="tpl-stage">
   <li class="stage">
     <div class="stage__marker" aria-hidden="true"></div>
@@ -187,20 +180,9 @@
       <p class="path__degree"></p>
       <p class="path__work"></p>
       <ul class="path__majors"></ul>
+      <!-- 연구실이 이 안으로 쏙 들어옵니다 -->
+      <div class="path__labs"></div>
     </button>
-  </li>
-</template>
-
-<template id="tpl-lab">
-  <li class="lab">
-    <div class="lab__head">
-      <h3 class="lab__name"></h3>
-    </div>
-    <p class="lab__full"></p>
-    <p class="lab__pi"></p>
-    <p class="lab__focus"></p>
-    <ul class="lab__paths"></ul>
-    <a class="lab__link chip">연구실 정보</a>
   </li>
 </template>
 
