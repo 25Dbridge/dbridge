@@ -239,8 +239,7 @@ const DATA = {
         text: '공인 어학 역량 확보를 꾸준히 진행하고 있다.',
         emptyNote: '방문한 3개 기업 중 2곳이 기본 요건으로 언급한 사항입니다.',
         programs: ['language_course'],
-        // 요청하신 "상시"가 빠진 텍스트 적용!
-        noProgram: '응시료 지원 제도는 확인되지 않았으나, 어학 점수 취득 시 교내 장학금이 운영되고 있습니다.' }
+        noProgram: '응시료 직접 지원 제도는 확인되지 않았으나, 어학 점수 취득 시 교내 장학금이 운영되고 있습니다.' }
     ],
     result: {
       headingTemplate: '지금 해볼 수 있는 것 {n}개',
@@ -765,7 +764,7 @@ function labelledList(label, items) {
   return wrap;
 }
 
-/* 경로 상세 팝업 */
+/* 팝업 창 안에서 돌아가는 로직 */
 function openPathSheet(path) {
   openSheet({
     eyebrow: path.degree,
@@ -790,10 +789,10 @@ function openPathSheet(path) {
       // 2. 인사이트 카드 블록
       (path.sections || []).forEach(sec => {
         const node = tpl('sheet-section');
-        node.dataset.origin = sec.origin;
+        node.dataset.origin = sec.origin; // HTML의 data-origin 값 주입
         
         $('.src__badge', node).textContent = DATA.originLabels[sec.origin];
-        $('.src__title', node).remove(); // 팝업에서는 제목 불필요
+        $('.src__title', node).remove(); // 팝업에서는 제목을 빼서 심플하게
         
         sec.body.forEach(t => $('.src__body', node).append(make('p', null, t)));
         (sec.groups || []).forEach(grp => {
@@ -811,7 +810,6 @@ function openPathSheet(path) {
   });
 }
 
-/* 비교과 프로그램 모아보기 */
 function initProgramBtn() {
   const btn = $('#btn-show-programs');
   if (!btn) return;
