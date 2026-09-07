@@ -65,6 +65,14 @@ const DATA = {
             opensPaths: true
           }
         ]
+      },
+      {
+        id: 'after', grade: '졸업 후', caption: '첫 직장',
+        items: [
+          '소규모 기업은 신약 개발의 전 과정을 경험할 수 있고 업무 범위가 유동적이다.',
+          '대규모 기업은 담당 영역이 명확한 대신 다루는 범위가 한정적이다.',
+          'AI가 대체하기 어려운 실험 설계, 결과 평가, 최종 판단에 역량을 집중한다.'
+        ]
       }
     ],
     closing: { quote: '"임상병리사의 길은 무궁무진하다"', line: '다만 어느 방향으로 갈지에 따라 지금 준비할 것이 달라진다.' }
@@ -231,6 +239,7 @@ const DATA = {
         text: '공인 어학 역량 확보를 꾸준히 진행하고 있다.',
         emptyNote: '방문한 3개 기업 중 2곳이 기본 요건으로 언급한 사항입니다.',
         programs: ['language_course'],
+        // 요청하신 "상시" 단어 삭제 완료
         noProgram: '응시료 지원 제도는 확인되지 않았으나, 어학 점수 취득 시 교내 장학금이 운영되고 있습니다.' }
     ],
     result: {
@@ -380,7 +389,6 @@ function renderPaths() {
     path.courses.forEach(c => courses.append(make('li', null, c)));
 
     $('.path__btn', li).addEventListener('click', () => openPathSheet(path));
-    li.classList.add('reveal');
     list.append(li);
   });
 }
@@ -417,7 +425,6 @@ function renderRoadmap() {
         entry.append(item);
       });
 
-      li.classList.add('reveal');
       list.append(li);
     } else {
       const li = tpl('stage');
@@ -425,7 +432,6 @@ function renderRoadmap() {
       $('.stage__grade', li).textContent = stage.grade;
       $('.stage__caption', li).textContent = stage.caption;
       stage.items.forEach(text => $('.stage__items', li).append(make('li', 'stage__item', text)));
-      li.classList.add('reveal');
       list.append(li);
     }
   });
@@ -444,7 +450,6 @@ function renderVisits() {
     $('.visit__region', li).textContent = v.region;
     $('.visit__period', li).textContent = v.period;
     v.places.forEach(p => $('.visit__places', li).append(make('li', null, p)));
-    li.classList.add('reveal');
     list.append(li);
   });
   const m = slot('method');
@@ -476,21 +481,6 @@ function renderFooter() {
     wrap.append(make('dt', null, row.label), dd);
     dl.append(wrap);
   });
-}
-
-function setupReveal() {
-  if (prefersReducedMotion) {
-    $$('.reveal').forEach(n => n.classList.add('is-in'));
-    return;
-  }
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      e.target.classList.add('is-in');
-      io.unobserve(e.target);
-    });
-  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
-  $$('.reveal').forEach(n => io.observe(n));
 }
 
 /* ════════════════════════════════════════════════════════════════
@@ -762,7 +752,6 @@ function openPathSheet(path) {
     eyebrow: path.degree,
     title: `${path.num} ${path.name}`,
     build(body) {
-      // 1. 상단 기본 정보 카드
       const basics = make('section', 'src src--basics');
       
       const wWrap = make('div', 'src__info-block'); 
@@ -778,13 +767,12 @@ function openPathSheet(path) {
       basics.append(wWrap, cWrap);
       body.append(basics);
 
-      // 2. 인사이트 카드 블록
       (path.sections || []).forEach(sec => {
         const node = tpl('sheet-section');
-        node.dataset.origin = sec.origin; // HTML의 data-origin 값 주입
+        node.dataset.origin = sec.origin;
         
         $('.src__badge', node).textContent = DATA.originLabels[sec.origin];
-        $('.src__title', node).remove(); // 팝업에서는 제목을 빼서 심플하게
+        $('.src__title', node).remove();
         
         sec.body.forEach(t => $('.src__body', node).append(make('p', null, t)));
         (sec.groups || []).forEach(grp => {
@@ -843,7 +831,7 @@ function initProgramBtn() {
 
           head.append(kind, name);
 
-          const when = make('p', null, pr.when || '상시 운영');
+          const when = make('p', null, pr.when || '운영 중');
           when.style.fontSize = '0.8125rem';
           when.style.color = 'var(--ink-2)';
           when.style.marginBottom = pr.url ? '0.75rem' : '0';
@@ -880,7 +868,6 @@ function init() {
   safe('checklist', renderChecklist);
   safe('visits',    renderVisits);
   safe('footer',    renderFooter);
-  safe('reveal',    setupReveal);
   safe('programs',  initProgramBtn);
 
   $('[data-action="close-sheet"]').addEventListener('click', closeSheet);
