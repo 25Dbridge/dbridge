@@ -143,7 +143,33 @@ const DATA = {
     }
   ],
 
-  sheetLabels: { work: '하는 일', courses: '연결 과목' },
+  labs: {
+    heading: '학과 연구실',
+    note: '연구실과 세 경로가 하나씩 맞아떨어지지는 않습니다. 지금 학과에 있는 연구실과, 각 연구실이 어느 경로에 닿는지만 적었습니다.',
+    items: [
+      {
+        name: 'SPL', full: 'Skin Physiology Lab', pi: '김동원 교수',
+        focus: '피부세포 성장 및 분화, 피부·모발 재생과 아토피 피부염, 천연물 및 의약품 생리활성 검증',
+        paths: ['analysis'],
+        url: 'https://spl-dongseo.github.io/'
+      },
+      {
+        name: 'IVDL', full: 'In Vitro Diagnostic Laboratory', pi: '이태희 교수',
+        focus: 'POCT 및 체외진단 개발, 액체생검 기반 진단과 예후 예측, 임상연구코디네이터',
+        paths: ['ra'],
+        url: 'https://v0-next-js-boilerplate-sigma-rosy.vercel.app/'
+      },
+      {
+        name: 'MoMiLab', full: 'Molecular Microbiology Lab', pi: '이용헌 교수',
+        status: '2027년 개설 예정',
+        focus: '세균 병독성의 분자적 메커니즘, 슈퍼박테리아 항생제 내성, 유전자 기반 분자진단',
+        paths: ['analysis', 'ra'],
+        url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=professor'
+      }
+    ]
+  },
+
+  sheetLabels: { work: '주요 업무', courses: '연결 전공 과목' },
   originLabels: { field: 'GELS에서 확인한 것', public: '공개 자료로 보강한 내용' },
 
   checklist: {
@@ -154,99 +180,66 @@ const DATA = {
     ],
     groupLabels: { now: '지금 할 것', ongoing: '학년과 무관하게' },
     items: [
-      {
-        id: 'A1', grades: ['g12'], group: 'now', type: 'check',
+      { id: 'A1', grades: ['g12'], group: 'now', type: 'check',
         text: '학부 실험실에 들어가 있거나, 들어가는 방법을 알아본 적이 있다.',
-        emptyNote: '',
-        programs: ['undergrad_researcher', 'prof_counsel']
-      },
-      {
-        id: 'A2', grades: ['g12'], group: 'now', type: 'check',
+        emptyNote: '', programs: ['undergrad_researcher', 'prof_counsel'] },
+      { id: 'A2', grades: ['g12'], group: 'now', type: 'check',
         text: '가설 수립부터 검증, 리뷰까지 실험의 한 사이클을 완수해 보았다.',
-        emptyNote: '단순히 실험을 해본 것과 한 사이클을 끝내본 것은 실무에서 큰 차이를 만듭니다.',
-        programs: ['capstone', 'academic_fest', 'ugrad_research_fund']
-      },
-      {
-        id: 'B1', grades: ['g3'], group: 'now', type: 'check',
+        emptyNote: '단순히 실험을 해본 것과 한 사이클을 끝내본 실무에서 큰 차이를 만듭니다.',
+        programs: ['capstone', 'academic_fest', 'ugrad_research_fund'] },
+      { id: 'B1', grades: ['g3'], group: 'now', type: 'check',
         text: '비임상 3대 직무 경로 중 타깃으로 삼는 직무를 정했다.',
         emptyNote: '채용공고의 자격 요건을 보면 그 경로가 학사를 뽑는지 석사를 뽑는지 바로 보입니다.',
         programs: ['career_counsel', 'job_lecture', 'senior_mentoring'],
-        jobSearch: { mode: 'byPath' },
-        linkToSection: 'paths'
-      },
-      {
-        id: 'B2', grades: ['g3'], group: 'now', type: 'check',
+        jobSearch: { mode: 'byPath' }, linkToSection: 'paths' },
+      { id: 'B2', grades: ['g3'], group: 'now', type: 'check',
         text: '목표 직무의 요구 학위를 파악하고 대학원 진학 여부를 판단했다.',
         emptyNote: '분석·효능평가는 석사 이상, 생산·품질은 학사로 진입 가능합니다.',
-        programs: ['grad_briefing', 'prof_counsel', 'grad_counsel']
-      },
-      {
-        id: 'B3', grades: ['g3'], group: 'now', type: 'check',
+        programs: ['grad_briefing', 'prof_counsel', 'grad_counsel'] },
+      { id: 'B3', grades: ['g3'], group: 'now', type: 'check',
         text: '목표 직무 현장에서 쓰는 실무 용어와 기술을 미리 찾아본 적이 있다.',
         emptyNote: '현장에서 실무 용어와 회의 내용에 벽을 느꼈다는 인터뷰 내용이 있었습니다.',
-        programs: ['job_lecture', 'senior_mentoring']
-      },
-      {
-        id: 'B4', grades: ['g3'], group: 'now', type: 'check',
+        programs: ['job_lecture', 'senior_mentoring'] },
+      { id: 'B4', grades: ['g3'], group: 'now', type: 'check',
         text: '목표 경로에서 요구하는 외부 직무 교육을 검토한 적이 있다.',
         emptyNote: '생산·품질 직군이 목표라면 GMP 교육 과정 이수를 추천합니다.',
         programs: ['gmp_course'],
-        noProgram: '교내에 직무교육·자격증 지원 제도는 확인되지 않았습니다.'
-      },
-      {
-        id: 'B5', grades: ['g3'], group: 'now', type: 'check',
+        noProgram: '교내에 직무교육·자격증 지원 제도는 확인되지 않았습니다.' },
+      { id: 'B5', grades: ['g3'], group: 'now', type: 'check',
         text: '복수전공과 융합 과목으로 전공 지식을 넓히는 방법을 알아보았다.',
-        emptyNote: '',
-        programs: ['double_major']
-      },
-      {
-        id: 'D1', grades: ['g4'], group: 'now', type: 'choice',
+        emptyNote: '', programs: ['double_major'] },
+      { id: 'D1', grades: ['g4'], group: 'now', type: 'choice',
         text: '임상과 비임상 중 지원할 방향을 확정했다.',
         options: [
           { value: 'clinical',    label: '임상'   },
           { value: 'nonclinical', label: '비임상' },
           { value: 'undecided',   label: '아직'   }
         ],
-        defaultValue: 'undecided',
-        emptyWhen: ['undecided'],
-        emptyLabel: '방향 결정',
+        defaultValue: 'undecided', emptyWhen: ['undecided'], emptyLabel: '방향 결정',
         emptyNote: '어느 쪽을 고르느냐에 따라 남은 준비 과정이 완전히 달라집니다.',
-        programs: ['career_counsel', 'senior_mentoring']
-      },
-      {
-        id: 'D2', grades: ['g4'], group: 'now', type: 'check',
+        programs: ['career_counsel', 'senior_mentoring'] },
+      { id: 'D2', grades: ['g4'], group: 'now', type: 'check',
         showIf: { item: 'D1', valueIn: ['nonclinical'] },
         text: '취업 선행과 진학 선행 중 어느 쪽인지 정했다.',
-        emptyNote: '',
-        programs: ['grad_counsel', 'grad_briefing'],
-        jobSearch: { mode: 'keywords', keywords: ['연구보조', '실험실 인턴'] }
-      },
-      {
-        id: 'D3', grades: ['g4'], group: 'now', type: 'check',
+        emptyNote: '', programs: ['grad_counsel', 'grad_briefing'],
+        jobSearch: { mode: 'keywords', keywords: ['연구보조', '실험실 인턴'] } },
+      { id: 'D3', grades: ['g4'], group: 'now', type: 'check',
         text: '내 경험과 역량을 논리적인 의사소통(말과 글)으로 설명할 수 있다.',
         emptyNote: '면접과 실무 현장에서 직접 평가되는 가장 중요한 항목입니다.',
-        programs: ['writing_clinic', 'mock_interview']
-      },
-      {
-        id: 'D4', grades: ['g4'], group: 'now', type: 'check',
+        programs: ['writing_clinic', 'mock_interview'] },
+      { id: 'D4', grades: ['g4'], group: 'now', type: 'check',
         text: '지원할 기업의 파이프라인(기술 실현성 및 양산 가능성)을 분석해 보았다.',
         emptyNote: '단순히 기업 이름만 보지 말고, 채용공고와 파이프라인을 함께 검토해야 합니다.',
-        programs: [],
-        jobSearch: { mode: 'company' }
-      },
-      {
-        id: 'C1', grades: ['g12', 'g3', 'g4'], group: 'ongoing', type: 'check',
+        programs: [], jobSearch: { mode: 'company' } },
+      { id: 'C1', grades: ['g12', 'g3', 'g4'], group: 'ongoing', type: 'check',
         text: '전공 과목 성적을 확인하고 목표 학점을 정해두었다.',
         emptyNote: '채용 서류에 성적증명서가 주요 평가 지표로 포함됩니다.',
-        programs: ['study_lecture', 'tutoring']
-      },
-      {
-        id: 'C2', grades: ['g12', 'g3', 'g4'], group: 'ongoing', type: 'check',
+        programs: ['study_lecture', 'tutoring'] },
+      { id: 'C2', grades: ['g12', 'g3', 'g4'], group: 'ongoing', type: 'check',
         text: '공인 어학 역량 확보를 꾸준히 진행하고 있다.',
         emptyNote: '방문한 3개 기업 중 2곳이 기본 요건으로 언급한 사항입니다.',
         programs: ['language_course'],
-        noProgram: '응시료 지원 제도는 확인되지 않았습니다. 학과 안에서 스터디를 만드는 방법도 있습니다.'
-      }
+        noProgram: '응시료 지원 제도는 확인되지 않았으나, 어학 점수 취득 시 교내 장학금이 운영되고 있습니다.' }
     ],
     result: {
       headingTemplate: '지금 해볼 수 있는 것 {n}개',
@@ -258,22 +251,22 @@ const DATA = {
 
   programs: {
     undergrad_researcher: { name: '임상병리학과 연구회', kind: 'campus', when: '학과 공지로 모집', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa&mode=view&idx=34132' },
-    capstone: { name: '캡스톤디자인 지원 프로그램', kind: 'campus', when: '매 학기', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=MN2000197&mode=view&idx=103053' },
-    academic_fest: { name: '바이오헬스융합대학 학술제 엑스포', kind: 'campus', when: '11월경', url: '' },
-    ugrad_research_fund: { name: '학부생 연구지원 (MYDEX)', kind: 'campus', when: '', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    job_lecture: { name: '앵커 취업스쿨 — 기업 탐방 및 직무 특강', kind: 'campus', when: '7월 말', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    senior_mentoring: { name: '전공과 진로설계 — 선배가 들려주는 임상병리사의 첫걸음', kind: 'campus', when: '4월 말', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    career_counsel: { name: '취업지원센터 진로 상담', kind: 'campus', when: '상시 · 051-320-4600', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=research&mode=view&code=028' },
-    grad_briefing: { name: '일반대학원 학·석사 연계과정 안내', kind: 'campus', when: '1월 · 7월 첫째 주', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa&mode=view&idx=34142' },
-    grad_counsel: { name: '취업지원센터 진학 상담', kind: 'campus', when: '상시 · 051-320-4600', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=research&mode=view&code=028' },
-    prof_counsel: { name: '지도교수 상담', kind: 'campus', when: '학과 사무실 051-320-2733', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=professor' },
-    double_major: { name: '부·복수전공 신청', kind: 'campus', when: '매 학기 개강 2개월 전', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa&mode=view&idx=34133' },
-    writing_clinic: { name: '기초 글쓰기 클리닉', kind: 'campus', when: '매 학기 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    mock_interview: { name: 'RISE 취업스쿨 — 모의면접 특강', kind: 'campus', when: '학기 중 1~2회 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    study_lecture: { name: '학습전략특강', kind: 'campus', when: '학기 중 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    tutoring: { name: 'BDAD DLC 학습클럽', kind: 'campus', when: '매 학기 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    language_course: { name: '교내 어학 강좌', kind: 'campus', when: '매 학기 초 학교 홈페이지 공지 확인', url: '' },
-    gmp_course: { name: 'GMP 교육 과정 (외부 기관)', kind: 'external', when: '한국제약바이오협회 등', url: '' }
+    capstone:             { name: '캡스톤디자인 지원 프로그램', kind: 'campus', when: '매 학기', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=MN2000197&mode=view&idx=103053' },
+    academic_fest:        { name: '바이오헬스융합대학 학술제 엑스포', kind: 'campus', when: '11월경', url: '' },
+    ugrad_research_fund:  { name: '학부생 연구지원 (MYDEX)', kind: 'campus', when: '', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    job_lecture:          { name: '앵커 취업스쿨 — 기업 탐방 및 직무 특강', kind: 'campus', when: '7월 말', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    senior_mentoring:     { name: '전공과 진로설계 — 선배가 들려주는 임상병리사의 첫걸음', kind: 'campus', when: '4월 말', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    career_counsel:       { name: '취업지원센터 진로 상담', kind: 'campus', when: '상시 · 051-320-4600', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=research&mode=view&code=028' },
+    grad_briefing:        { name: '일반대학원 학·석사 연계과정 안내', kind: 'campus', when: '1월 · 7월 첫째 주', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa&mode=view&idx=34142' },
+    grad_counsel:         { name: '취업지원센터 진학 상담', kind: 'campus', when: '상시 · 051-320-4600', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=research&mode=view&code=028' },
+    prof_counsel:         { name: '지도교수 상담', kind: 'campus', when: '학과 사무실 051-320-2733', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=professor' },
+    double_major:         { name: '부·복수전공 신청', kind: 'campus', when: '매 학기 개강 2개월 전', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa&mode=view&idx=34133' },
+    writing_clinic:       { name: '기초 글쓰기 클리닉', kind: 'campus', when: '매 학기 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    mock_interview:       { name: 'RISE 취업스쿨 — 모의면접 특강', kind: 'campus', when: '학기 중 1~2회 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    study_lecture:        { name: '학습전략특강', kind: 'campus', when: '학기 중 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    tutoring:             { name: 'BDAD DLC 학습클럽', kind: 'campus', when: '매 학기 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    language_course:      { name: '교내 어학 강좌', kind: 'campus', when: '매 학기 초 학교 홈페이지 공지 확인', url: '' },
+    gmp_course:           { name: 'GMP 교육 과정 (외부 기관)', kind: 'external', when: '한국제약바이오협회 등', url: '' }
   },
 
   jobSites: [
@@ -564,7 +557,6 @@ function renderChecklist() {
   $('#check-form').addEventListener('submit', e => e.preventDefault());
   $('[data-action="reset"]').addEventListener('click', () => { checkState = {}; saveState(); paintChecklist(); });
   
-  // 이미지 저장 이벤트만 유지
   $('[data-action="save-image"]').addEventListener('click', saveImage);
 
   paintChecklist();
@@ -779,17 +771,18 @@ function openPathSheet(path) {
     title: `${path.num} ${path.name}`,
     build(body) {
       const basics = make('section', 'src src--basics');
-      const wWrap = make('div', 'src__group'); wWrap.append(make('p', 'src__group-label', DATA.sheetLabels.work));
-      const wUl = make('ul'); wUl.append(make('li', null, path.work)); wWrap.append(wUl);
+      const wWrap = make('div', 'src__info-block'); wWrap.append(make('h4', 'src__info-title', '💼 ' + DATA.sheetLabels.work));
+      const wUl = make('p', 'src__info-desc', path.work); wWrap.append(wUl);
       
-      const cWrap = make('div', 'src__group'); cWrap.append(make('p', 'src__group-label', DATA.sheetLabels.courses));
-      const cUl = make('ul'); path.courses.forEach(c => cUl.append(make('li', null, c))); cWrap.append(cUl);
+      const cWrap = make('div', 'src__info-block'); cWrap.append(make('h4', 'src__info-title', '🧬 ' + DATA.sheetLabels.courses));
+      const cUl = make('ul', 'src__chip-list'); path.courses.forEach(c => cUl.append(make('li', 'src__chip-item', c))); cWrap.append(cUl);
       
       basics.append(wWrap, cWrap);
       body.append(basics);
 
       (path.sections || []).forEach(sec => {
         const node = tpl('sheet-section');
+        node.dataset.origin = sec.origin;
         $('.src__badge', node).textContent = DATA.originLabels[sec.origin];
         $('.src__title', node).remove();
         sec.body.forEach(t => $('.src__body', node).append(make('p', null, t)));
@@ -871,14 +864,19 @@ function initProgramBtn() {
 }
 
 function init() {
-  renderHero();
-  renderPaths();
-  renderRoadmap();
-  renderChecklist();
-  renderVisits();
-  renderFooter();
-  setupReveal();
-  initProgramBtn();
+  const safe = (name, fn) => {
+    try { fn(); } catch (err) { console.error(`[${name}] 렌더 실패`, err); }
+  };
+
+  safe('hero',      renderHero);
+  safe('paths',     renderPaths);
+  safe('labs',      renderLabs);
+  safe('roadmap',   renderRoadmap);
+  safe('checklist', renderChecklist);
+  safe('visits',    renderVisits);
+  safe('footer',    renderFooter);
+  safe('reveal',    setupReveal);
+  safe('programs',  initProgramBtn);
 
   $('[data-action="close-sheet"]').addEventListener('click', closeSheet);
   $('#sheet').addEventListener('close', () => document.documentElement.classList.remove('is-locked'));
