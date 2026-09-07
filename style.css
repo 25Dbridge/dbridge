@@ -225,6 +225,25 @@ main > section {
   .paths__list { grid-template-columns: repeat(3, 1fr); }
 }
 
+/* ─── 7b. 학과 연구실 ───────────────────────────────────────── */
+.labs { max-width: calc(60rem + var(--gutter) * 2); }
+.labs__note { margin: calc(var(--sp-4) * -1 + .25rem) 0 var(--sp-5); font-size: .875rem; line-height: 1.7; color: var(--ink-2); max-width: var(--measure); }
+.labs__list { display: grid; gap: var(--sp-3); }
+.lab { padding: var(--sp-4); border: 1px solid var(--rule); border-radius: var(--radius-lg); background: var(--paper); }
+.lab__head { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+.lab__name { font-size: 1.25rem; font-weight: 800; letter-spacing: -.02em; }
+.lab__status { padding: .0625rem .4375rem; border: 1px solid var(--rule-2); border-radius: 999px; font-size: .6875rem; color: var(--ink-2); }
+.lab__full { margin-top: .0625rem; font-size: .75rem; color: var(--ink-3); }
+.lab__pi { margin-top: var(--sp-2); font-size: .875rem; font-weight: 600; color: var(--ink-2); }
+.lab__focus { margin-top: .375rem; font-size: .875rem; line-height: 1.7; color: var(--ink-2); }
+.lab__paths { margin-top: var(--sp-3); display: flex; flex-wrap: wrap; gap: .375rem; }
+.lab__tag { padding: .1875rem .5625rem; border-radius: 999px; font-size: .75rem; font-weight: 600; background: var(--paper-2); }
+.lab__tag[data-path="analysis"] { color: var(--path-1); }
+.lab__tag[data-path="quality"]  { color: var(--path-2); }
+.lab__tag[data-path="ra"]       { color: var(--path-3); }
+.lab__link { margin-top: var(--sp-3); }
+@media (min-width: 900px) { .labs__list { grid-template-columns: repeat(3, 1fr); align-items: start; } }
+
 /* ─── 8. 체크리스트 ─────────────────────────────────────────── */
 .checklist {
   margin-top: var(--sp-5);
