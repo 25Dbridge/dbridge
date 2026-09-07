@@ -41,6 +41,7 @@
     <span class="sticky-nav__logo">D-Bridge</span>
     <ul class="sticky-nav__links">
       <li><a href="#paths">비임상 진출 경로</a></li>
+      <li><a href="#labs">학과 연구실</a></li>
       <li><a href="#roadmap">학년별 로드맵</a></li>
       <li><a href="#checklist">자가 진단</a></li>
       <li><a href="#visits">다녀온 곳</a></li>
@@ -68,6 +69,13 @@
   <section class="paths" id="paths" aria-labelledby="paths-title">
     <h2 class="section__title" id="paths-title">비임상 진출 경로 3가지</h2>
     <ul class="paths__list" data-render="paths"></ul>
+  </section>
+
+  <!-- 2b. 학과 연구실 -->
+  <section class="labs" id="labs" aria-labelledby="labs-title">
+    <h2 class="section__title" id="labs-title" data-render="labs-heading"></h2>
+    <p class="labs__note" data-render="labs-note"></p>
+    <ul class="labs__list" data-render="labs"></ul>
   </section>
 
   <!-- 3. 로드맵 -->
@@ -249,6 +257,19 @@
     <h3 class="visit__region"></h3>
     <p class="visit__period"></p>
     <ul class="visit__places"></ul>
+  </li>
+</template>
+
+<template id="tpl-lab">
+  <li class="lab">
+    <div class="lab__head">
+      <h3 class="lab__name"></h3>
+    </div>
+    <p class="lab__full"></p>
+    <p class="lab__pi"></p>
+    <p class="lab__focus"></p>
+    <ul class="lab__paths"></ul>
+    <a class="lab__link chip">연구실 정보</a>
   </li>
 </template>
 
