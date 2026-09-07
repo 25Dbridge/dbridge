@@ -1,12 +1,12 @@
 /* ═══════════════════════════════════════════════════════════════
    D-Bridge — 임상병리사의 바이오 진출 로드맵
-   script.js
+   script.js (수정 완료 버전)
    ═══════════════════════════════════════════════════════════════ */
 
 const DATA = {
   hero: {
     question: '임상병리사가 갈 수 있는\n병원 밖의 길을\n정리했습니다',
-    answer: '일본과 국내 일곱 곳을 찾아가 현직자 열 분을 만났습니다. 분석·효능평가, 생산·품질, 규제·임상이라는 3대 경로로 정리했으며, 어떤 직무를 목표로 하느냐에 따라 요구되는 학위와 역량이 달라집니다.',
+    answer: '일본과 국내 일곱 곳을 찾아가 현직자 10명을 만났습니다. 분석·효능평가, 생산·품질, 규제·임상이라는 3대 경로로 정리했으며, 어떤 직무를 목표로 하느냐에 따라 요구되는 학위와 역량이 달라집니다.',
     stats: [
       { value: 7,  label: '현장 방문 기관' },
       { value: 10, label: '대면 인터뷰' },
@@ -439,7 +439,6 @@ function renderPaths() {
     const courses = $('.path__majors', li);
     path.courses.forEach(c => courses.append(make('li', null, c)));
 
-    // [핵심 변경 사항] 카드 내부에 연구실 내용 직접 추가
     const labsBox = $('.path__labs', li);
     if (path.labs && path.labs.length > 0) {
       labsBox.style.marginTop = '1.25rem';
@@ -495,13 +494,11 @@ function renderRoadmap() {
       const cl = find('clinical');
       const ncl = find('nonclinical');
       
-      // Clinical Branch
       const clNode = $('.branch--clinical', li);
       $('.branch__name', clNode).textContent = cl.name;
       $('.branch__summary', clNode).textContent = cl.summary;
       cl.items.forEach(t => $('.branch__items', clNode).append(make('li', null, t)));
       
-      // Non-clinical Branch
       const nclNode = $('.branch--nonclinical', li);
       $('.branch__name', nclNode).textContent = ncl.name;
       $('.branch__summary', nclNode).textContent = ncl.summary;
@@ -605,7 +602,7 @@ function setupReveal() {
 }
 
 /* ════════════════════════════════════════════════════════════════
-   D. 체크리스트 기능
+   D. 체크리스트 기능 (에러 완벽 수정)
    ════════════════════════════════════════════════════════════════ */
 
 const STORE_KEY = 'dbridge-check-v1';
@@ -722,18 +719,39 @@ function paintResult() {
       if (pr.kind === 'external') tag.classList.add('chip--ext');
       tag.append(make('span', 'chip__name', pr.name));
       if (pr.when) tag.append(make('span', 'chip__when', pr.when));
-      progs.append(make('li', null)).append(tag);
+      
+      const liProg = make('li');
+      liProg.append(tag);
+      progs.append(liProg);
     });
-    if (it.noProgram) li.insertBefore(make('p', 'empty__noprog', it.noProgram), progs.nextSibling);
+    if (it.noProgram) {
+      const pNote = make('p', 'empty__noprog', it.noProgram);
+      li.insertBefore(pNote, progs.nextSibling);
+    }
 
     const jobs = $('.empty__jobs', li);
     if (it.jobSearch) {
       const site = DATA.jobSites[0];
       const jobUrl = kw => site.template.replace('{q}', encodeURIComponent(kw));
+      
       if (it.jobSearch.mode === 'byPath') {
-        DATA.paths.forEach(p => jobs.append(make('li', null)).append(make('a', 'chip chip--job', `${p.num} ${p.name} 공고`)).lastChild.href = jobUrl(p.jobKeywords[0]));
+        DATA.paths.forEach(p => {
+          const liJob = make('li');
+          const aJob = make('a', 'chip chip--job', `${p.num} ${p.name} 공고`);
+          aJob.href = jobUrl(p.jobKeywords[0]);
+          aJob.target = '_blank';
+          liJob.append(aJob);
+          jobs.append(liJob);
+        });
       } else if (it.jobSearch.mode === 'keywords') {
-        it.jobSearch.keywords.forEach(kw => jobs.append(make('li', null)).append(make('a', 'chip chip--job', `“${kw}” 공고`)).lastChild.href = jobUrl(kw));
+        it.jobSearch.keywords.forEach(kw => {
+          const liJob = make('li');
+          const aJob = make('a', 'chip chip--job', `“${kw}” 공고`);
+          aJob.href = jobUrl(kw);
+          aJob.target = '_blank';
+          liJob.append(aJob);
+          jobs.append(liJob);
+        });
       } else if (it.jobSearch.mode === 'company') {
         const liJob = make('li', 'job-search');
         const input = make('input', 'job-search__input'); input.type = 'text'; input.placeholder = '기업 이름';
@@ -744,7 +762,7 @@ function paintResult() {
         liJob.append(input, go); jobs.append(liJob);
       }
     }
-    $$('a.chip--job', jobs).forEach(a => { a.target = '_blank'; a.rel = 'noopener'; });
+    
     if (!jobs.children.length) jobs.remove();
     if (!progs.children.length) progs.remove();
     list.append(li);
@@ -827,6 +845,15 @@ function openSheet({ eyebrow, title, build }) {
 function closeSheet() {
   $('#sheet').close();
   document.documentElement.classList.remove('is-locked');
+}
+
+function labelledList(label, items) {
+  const wrap = make('div', 'src__group');
+  wrap.append(make('p', 'src__group-label', label));
+  const ul = make('ul');
+  items.forEach(t => ul.append(make('li', null, t)));
+  wrap.append(ul);
+  return wrap;
 }
 
 function openPathSheet(path) {
