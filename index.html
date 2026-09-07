@@ -12,15 +12,8 @@
 <meta property="og:title" content="임상병리사의 바이오 진출 로드맵 · D-Bridge">
 <meta property="og:description" content="Carna Biosciences · RIKEN BDR · FBRI · 고베대학 BiCLET | 펩트론 · 지투지바이오 · 인코스팜">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:url" content="https://25dbridge.github.io/dbridge/">
+<meta property="og:image" content="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=1200&auto=format&fit=crop">
 
-<!-- ★ og-image.png 를 index.html 옆에 올린 뒤 이 주소가 맞는지 확인하세요 -->
-<meta property="og:image" content="https://25dbridge.github.io/dbridge/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-
-<!-- 파비콘 : 별도 파일 없이 문자 하나로 -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23201D2B'/%3E%3Cpath d='M20 44V20h9c7 0 11 4.5 11 12s-4 12-11 12z' fill='%23F6F5F8'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -35,15 +28,15 @@
   <p class="noscript">이 페이지는 자바스크립트로 내용을 표시합니다. 브라우저 설정에서 자바스크립트를 켜고 새로고침해 주세요.</p>
 </noscript>
 
-<!-- 상단 고정 내비게이션 (모바일에서는 숨김) -->
+<!-- 상단 고정 내비게이션 -->
 <nav class="sticky-nav">
   <div class="sticky-nav__inner">
     <span class="sticky-nav__logo">D-Bridge</span>
     <ul class="sticky-nav__links">
       <li><a href="#paths">비임상 진출 경로</a></li>
-      <li><a href="#labs">학과 연구실</a></li>
       <li><a href="#roadmap">학년별 로드맵</a></li>
       <li><a href="#checklist">자가 진단</a></li>
+      <li><a href="#labs">학과 연구실</a></li>
       <li><a href="#visits">다녀온 곳</a></li>
     </ul>
   </div>
@@ -54,7 +47,6 @@
   <div class="hero__bg" aria-hidden="true">
     <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=2000&auto=format&fit=crop" alt="" loading="eager" decoding="async">
   </div>
-
   <div class="hero__inner">
     <h1 class="hero__question" data-render="hero-question"></h1>
     <p class="hero__answer" data-render="hero-answer"></p>
@@ -69,13 +61,6 @@
   <section class="paths" id="paths" aria-labelledby="paths-title">
     <h2 class="section__title" id="paths-title">비임상 진출 경로 3가지</h2>
     <ul class="paths__list" data-render="paths"></ul>
-  </section>
-
-  <!-- 2b. 학과 연구실 -->
-  <section class="labs" id="labs" aria-labelledby="labs-title">
-    <h2 class="section__title" id="labs-title" data-render="labs-heading"></h2>
-    <p class="labs__note" data-render="labs-note"></p>
-    <ul class="labs__list" data-render="labs"></ul>
   </section>
 
   <!-- 3. 로드맵 -->
@@ -118,9 +103,14 @@
         <button type="button" class="btn btn--quiet" data-action="reset">체크 지우기</button>
       </div>
     </div>
-
-    <!-- 저장·인쇄 전용. 화면에는 보이지 않습니다. -->
     <div class="export-sheet" id="export-sheet" aria-hidden="true"></div>
+  </section>
+
+  <!-- 4b. 학과 연구실 (체크리스트 아래로 이동) -->
+  <section class="labs" id="labs" aria-labelledby="labs-title">
+    <h2 class="section__title" id="labs-title" data-render="labs-heading"></h2>
+    <p class="labs__note" data-render="labs-note"></p>
+    <ul class="labs__list" data-render="labs"></ul>
   </section>
 
   <!-- 5. 다녀온 곳 -->
@@ -191,7 +181,6 @@
         <ul class="entry" aria-label="대학원 진학 시점"></ul>
       </article>
     </div>
-    <div class="fan" data-render="fan"></div>
   </li>
 </template>
 
