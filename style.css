@@ -144,8 +144,8 @@ main > section { padding-block: var(--sp-6); max-width: calc(var(--measure) + va
 .stage__item { padding: var(--sp-3) 0; font-size: .9375rem; line-height: 1.7; transition: color .18s var(--ease); }
 .stage__item:hover { color: var(--accent); }
 
-.reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
-.reveal.is-in { opacity: 1; transform: none; }
+/* 애니메이션 충돌 원천 차단 - 모두 기본으로 보이게 고정 */
+.reveal { opacity: 1 !important; transform: none !important; }
 
 .stage--fork { padding-bottom: var(--sp-6); }
 .fork__lines { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
@@ -289,7 +289,7 @@ a.chip:hover { border-color: var(--accent); color: var(--accent); }
 .btn--quiet { background: none; color: var(--ink-2); border: 1px solid var(--rule-2); }
 .btn--outline { background: var(--paper); color: var(--ink); border: 1px solid var(--rule-2); }
 
-/* ─── 9. 바텀시트 / 사이드 패널 (팝업 디자인 전면 개편) ────────── */
+/* ─── 9. 바텀시트 / 사이드 패널 (팝업 디자인) ────────── */
 .sheet { width: 100%; max-width: 100%; height: 100%; max-height: 100%; margin: 0; padding: 0; border: 0; background: transparent; overflow: hidden; }
 .sheet::backdrop { background: rgba(32, 29, 43, .6); backdrop-filter: blur(4px); }
 .sheet__panel {
@@ -425,7 +425,7 @@ a.chip:hover { border-color: var(--accent); color: var(--accent); }
 
 /* ─── 11. 이미지 저장 시트 (화면 깨짐 완벽 방지) ────────────── */
 .export-sheet {
-  position: absolute; left: -9999px; top: 0;
+  position: absolute; left: 0; top: 0; z-index: -1; opacity: 0; pointer-events: none;
   width: 750px; padding: 40px; background: #ffffff; color: #111;
   box-sizing: border-box; font-family: "Pretendard Variable", sans-serif;
 }
@@ -439,12 +439,6 @@ a.chip:hover { border-color: var(--accent); color: var(--accent); }
 .export__prog-tag { display: inline-block; padding: 5px 10px; background: #EAE5F7; color: #4B3A8F; border-radius: 6px; font-size: 12px; font-weight: 600; }
 .export__prog-tag--no { background: #fff; border: 1px dashed #C6C0D2; color: #625E72; }
 .export__foot  { margin-top: 28px; font-size: 12px; color: #918DA0; text-align: center; }
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-  .reveal { opacity: 1; transform: none; }
-}
 
 /* ─── 13. 인터뷰 아카이브 (interview.html) ──────────────────── */
 .page-head { background: var(--hero-bg); color: var(--hero-ink); padding-block: var(--sp-5) var(--sp-6); padding-inline: var(--gutter); }
