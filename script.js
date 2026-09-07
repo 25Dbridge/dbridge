@@ -239,8 +239,7 @@ const DATA = {
         text: '공인 어학 역량 확보를 꾸준히 진행하고 있다.',
         emptyNote: '방문한 3개 기업 중 2곳이 기본 요건으로 언급한 사항입니다.',
         programs: ['language_course'],
-        // ▼ 텍스트 수정 완료!
-        noProgram: '응시료 지원 제도는 확인되지 않았으나, 어학 점수 취득 시 교내 장학금은 상시 운영되고 있습니다.' }
+        noProgram: '응시료 직접 지원 제도는 확인되지 않았으나, 어학 점수 취득 시 교내 장학금은 상시 운영되고 있습니다.' }
     ],
     result: {
       headingTemplate: '지금 해볼 수 있는 것 {n}개',
@@ -737,7 +736,7 @@ function saveImage() {
 }
 
 /* ════════════════════════════════════════════════════════════════
-   E. 바텀시트 기능 및 비교과 모아보기 팝업
+   E. 바텀시트 기능 (팝업 카드)
    ════════════════════════════════════════════════════════════════ */
 
 function openSheet({ eyebrow, title, build }) {
@@ -771,27 +770,40 @@ function openPathSheet(path) {
     eyebrow: path.degree,
     title: `${path.num} ${path.name}`,
     build(body) {
+      // 1. 기본 정보 블록
       const basics = make('section', 'src src--basics');
-      const wWrap = make('div', 'src__info-block'); wWrap.append(make('h4', 'src__info-title', '💼 ' + DATA.sheetLabels.work));
-      const wUl = make('p', 'src__info-desc', path.work); wWrap.append(wUl);
       
-      const cWrap = make('div', 'src__info-block'); cWrap.append(make('h4', 'src__info-title', '🧬 ' + DATA.sheetLabels.courses));
-      const cUl = make('ul', 'src__chip-list'); path.courses.forEach(c => cUl.append(make('li', 'src__chip-item', c))); cWrap.append(cUl);
+      const wWrap = make('div', 'src__info-block'); 
+      wWrap.append(make('h4', 'src__info-title', '💼 ' + DATA.sheetLabels.work));
+      wWrap.append(make('p', 'src__info-desc', path.work));
+      
+      const cWrap = make('div', 'src__info-block'); 
+      cWrap.append(make('h4', 'src__info-title', '🧬 ' + DATA.sheetLabels.courses));
+      const cUl = make('ul', 'src__chip-list'); 
+      path.courses.forEach(c => cUl.append(make('li', 'src__chip-item', c))); 
+      cWrap.append(cUl);
       
       basics.append(wWrap, cWrap);
       body.append(basics);
 
+      // 2. 인사이트 카드 블록
       (path.sections || []).forEach(sec => {
         const node = tpl('sheet-section');
-        node.dataset.origin = sec.origin;
+        node.dataset.origin = sec.origin; // ← 여기서 배지 종류(field/public)를 꼽아줍니다.
+        
         $('.src__badge', node).textContent = DATA.originLabels[sec.origin];
-        $('.src__title', node).remove();
+        $('.src__title', node).remove(); // 팝업에서는 제목 불필요
+        
         sec.body.forEach(t => $('.src__body', node).append(make('p', null, t)));
         (sec.groups || []).forEach(grp => {
-          const gWrap = make('div', 'src__group'); gWrap.append(make('p', 'src__group-label', grp.label));
-          const gUl = make('ul'); grp.items.forEach(i => gUl.append(make('li', null, i))); gWrap.append(gUl);
+          const gWrap = make('div', 'src__group'); 
+          gWrap.append(make('p', 'src__group-label', grp.label));
+          const gUl = make('ul'); 
+          grp.items.forEach(i => gUl.append(make('li', null, i))); 
+          gWrap.append(gUl);
           $('.src__groups', node).append(gWrap);
         });
+        
         body.append(node);
       });
     }
