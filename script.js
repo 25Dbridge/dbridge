@@ -239,7 +239,8 @@ const DATA = {
         text: '공인 어학 역량 확보를 꾸준히 진행하고 있다.',
         emptyNote: '방문한 3개 기업 중 2곳이 기본 요건으로 언급한 사항입니다.',
         programs: ['language_course'],
-        noProgram: '응시료 직접 지원 제도는 확인되지 않았으나, 어학 점수 취득 시 교내 장학금은 상시 운영되고 있습니다.' }
+        // 요청하신 "상시"가 빠진 텍스트 적용!
+        noProgram: '응시료 지원 제도는 확인되지 않았으나, 어학 점수 취득 시 교내 장학금이 운영되고 있습니다.' }
     ],
     result: {
       headingTemplate: '지금 해볼 수 있는 것 {n}개',
@@ -556,7 +557,6 @@ function renderChecklist() {
 
   $('#check-form').addEventListener('submit', e => e.preventDefault());
   $('[data-action="reset"]').addEventListener('click', () => { checkState = {}; saveState(); paintChecklist(); });
-  
   $('[data-action="save-image"]').addEventListener('click', saveImage);
 
   paintChecklist();
@@ -765,12 +765,13 @@ function labelledList(label, items) {
   return wrap;
 }
 
+/* 경로 상세 팝업 */
 function openPathSheet(path) {
   openSheet({
     eyebrow: path.degree,
     title: `${path.num} ${path.name}`,
     build(body) {
-      // 1. 기본 정보 블록
+      // 1. 상단 기본 정보 카드
       const basics = make('section', 'src src--basics');
       
       const wWrap = make('div', 'src__info-block'); 
@@ -789,7 +790,7 @@ function openPathSheet(path) {
       // 2. 인사이트 카드 블록
       (path.sections || []).forEach(sec => {
         const node = tpl('sheet-section');
-        node.dataset.origin = sec.origin; // ← 여기서 배지 종류(field/public)를 꼽아줍니다.
+        node.dataset.origin = sec.origin;
         
         $('.src__badge', node).textContent = DATA.originLabels[sec.origin];
         $('.src__title', node).remove(); // 팝업에서는 제목 불필요
@@ -810,6 +811,7 @@ function openPathSheet(path) {
   });
 }
 
+/* 비교과 프로그램 모아보기 */
 function initProgramBtn() {
   const btn = $('#btn-show-programs');
   if (!btn) return;
