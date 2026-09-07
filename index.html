@@ -18,7 +18,8 @@
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
-<link rel="stylesheet" href="style.css">
+<!-- 브라우저가 무조건 최신 CSS를 읽도록 ?v=100을 붙였습니다 -->
+<link rel="stylesheet" href="style.css?v=100">
 </head>
 
 <body>
@@ -99,13 +100,14 @@
       <div class="result__done" data-render="result-done" hidden></div>
       <div class="result__actions">
         <button type="button" class="btn" data-action="save-image">이미지로 저장</button>
+        <!-- 인쇄 버튼 삭제 완료 -->
         <button type="button" class="btn btn--quiet" data-action="reset">체크 지우기</button>
       </div>
     </div>
     <div class="export-sheet" id="export-sheet" aria-hidden="true"></div>
   </section>
 
-  <!-- 4b. 학과 연구실 -->
+  <!-- 4b. 학과 연구실 (체크리스트 아래로 이동 완료) -->
   <section class="labs" id="labs" aria-labelledby="labs-title">
     <h2 class="section__title" id="labs-title" data-render="labs-heading"></h2>
     <p class="labs__note" data-render="labs-note"></p>
@@ -261,6 +263,18 @@
   </li>
 </template>
 
-<script src="script.js" defer></script>
+<template id="tpl-program">
+  <li class="prog">
+    <div class="prog__head">
+      <span class="prog__kind"></span>
+      <strong class="prog__name"></strong>
+    </div>
+    <p class="prog__when"></p>
+    <a class="prog__link btn btn--quiet">바로가기</a>
+  </li>
+</template>
+
+<!-- 브라우저가 무조건 최신 JS를 읽도록 ?v=100을 붙였습니다 -->
+<script src="script.js?v=100" defer></script>
 </body>
 </html>
