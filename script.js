@@ -239,7 +239,6 @@ const DATA = {
         text: '공인 어학 역량 확보를 꾸준히 진행하고 있다.',
         emptyNote: '방문한 3개 기업 중 2곳이 기본 요건으로 언급한 사항입니다.',
         programs: ['language_course'],
-        // 요청하신 "상시" 단어 삭제 완료
         noProgram: '응시료 지원 제도는 확인되지 않았으나, 어학 점수 취득 시 교내 장학금이 운영되고 있습니다.' }
     ],
     result: {
@@ -312,10 +311,6 @@ const DATA = {
   }
 };
 
-/* ════════════════════════════════════════════════════════════════
-   B. 도구 및 초기화
-   ════════════════════════════════════════════════════════════════ */
-
 const $  = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 const slot = (name, root = document) => root.querySelector(`[data-render="${name}"]`);
@@ -337,12 +332,6 @@ function setRichText(node, str) {
   });
 }
 
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ════════════════════════════════════════════════════════════════
-   C. 렌더링 함수들
-   ════════════════════════════════════════════════════════════════ */
-
 function renderHero() {
   const h = DATA.hero;
   const q = slot('hero-question');
@@ -353,8 +342,7 @@ function renderHero() {
   h.stats.forEach(stat => {
     const wrap = make('div', 'hero__stat');
     const dd  = make('dd', 'hero__num');
-    const val = make('span', 'hero__val', prefersReducedMotion ? stat.value : '0');
-    val.dataset.target = stat.value;
+    const val = make('span', 'hero__val', stat.value);
     dd.append(val);
     wrap.append(dd, make('dt', 'hero__label', stat.label));
     stats.append(wrap);
@@ -362,18 +350,6 @@ function renderHero() {
 
   slot('hero-byline').textContent = h.byline;
   slot('hero-team').textContent   = h.team;
-
-  if (!prefersReducedMotion) {
-    const nums = $$('.hero__val', stats);
-    const t0 = performance.now();
-    function frame(now) {
-      const p = Math.min(1, (now - t0) / 850);
-      const eased = 1 - Math.pow(1 - p, 3);
-      nums.forEach(n => n.textContent = Math.round(eased * Number(n.dataset.target)));
-      if (p < 1) requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  }
 }
 
 function renderPaths() {
@@ -443,6 +419,39 @@ function renderRoadmap() {
   );
 }
 
+function renderLabs() {
+  const L = DATA.labs;
+  slot('labs-heading').textContent = L.heading;
+  slot('labs-note').textContent    = L.note;
+
+  const list = slot('labs');
+  list.textContent = '';
+  L.items.forEach(lab => {
+    const li = tpl('lab');
+    $('.lab__name', li).textContent  = lab.name;
+    $('.lab__full', li).textContent  = lab.full;
+    $('.lab__pi', li).textContent    = lab.pi;
+    $('.lab__focus', li).textContent = lab.focus;
+
+    if (lab.status) $('.lab__head', li).append(make('span', 'lab__status', lab.status));
+
+    const tags = $('.lab__paths', li);
+    (lab.paths || []).forEach(pid => {
+      const path = DATA.paths.find(p => p.id === pid);
+      if (!path) return;
+      const t = make('li', 'lab__tag', `${path.num} ${path.name}`);
+      t.dataset.path = pid;
+      tags.append(t);
+    });
+
+    const a = $('.lab__link', li);
+    if (lab.url) { a.href = lab.url; a.target = '_blank'; a.rel = 'noopener'; }
+    else a.remove();
+
+    list.append(li);
+  });
+}
+
 function renderVisits() {
   const list = slot('visits');
   DATA.visits.forEach(v => {
@@ -483,10 +492,7 @@ function renderFooter() {
   });
 }
 
-/* ════════════════════════════════════════════════════════════════
-   D. 체크리스트 기능
-   ════════════════════════════════════════════════════════════════ */
-
+/* 체크리스트 */
 const STORE_KEY = 'dbridge-check-v1';
 let checkState = {};
 let currentGrade = DATA.checklist.gradeTabs[0].id;
@@ -716,10 +722,7 @@ function saveImage() {
   document.head.append(sc);
 }
 
-/* ════════════════════════════════════════════════════════════════
-   E. 바텀시트 기능 (팝업 카드)
-   ════════════════════════════════════════════════════════════════ */
-
+/* 바텀시트 */
 function openSheet({ eyebrow, title, build }) {
   const dlg  = $('#sheet');
   const body = slot('sheet-body');
@@ -746,7 +749,6 @@ function labelledList(label, items) {
   return wrap;
 }
 
-/* 팝업 창 안에서 돌아가는 로직 */
 function openPathSheet(path) {
   openSheet({
     eyebrow: path.degree,
