@@ -57,10 +57,7 @@ const DATA = {
               '시험 일정과 응시자격은 매년 국시원 공고로 확인한다.'
             ],
             note: '한국보건의료인국가시험원 공개 자료로 보완했습니다.',
-            link: {
-              label: '국시원 임상병리사 안내',
-              url: 'https://www.kuksiwon.or.kr/subcnt/c_2012/1/view.do?seq=7&itm_seq=08'
-            },
+            link: { label: '국시원 임상병리사 안내', url: 'https://www.kuksiwon.or.kr/subcnt/c_2012/1/view.do?seq=7&itm_seq=08' },
             opensPaths: false
           },
           {
@@ -72,16 +69,8 @@ const DATA = {
               '지원할 기업의 파이프라인을 분석해 기술 실현성과 대량 생산 가능성을 검토한다.'
             ],
             entryOptions: [
-              {
-                id: 'A',
-                name: '취업 선행',
-                text: '연구 보조로 먼저 입사해 실무 흐름을 파악한 뒤 대학원에 진학한다.'
-              },
-              {
-                id: 'B',
-                name: '진학 선행',
-                text: '졸업 직후 대학원에 진학해 연구 성과를 확보한 후 기업에 지원한다.'
-              }
+              { id: 'A', name: '취업 선행', text: '연구 보조로 먼저 입사해 실무 흐름을 파악한 뒤 대학원에 진학한다.' },
+              { id: 'B', name: '진학 선행', text: '졸업 직후 대학원에 진학해 연구 성과를 확보한 후 기업에 지원한다.' }
             ],
             opensPaths: true
           }
@@ -98,10 +87,7 @@ const DATA = {
         ]
       }
     ],
-    closing: {
-      quote: '"임상병리사의 길은 무궁무진하다"',
-      line:  '다만 어느 방향으로 갈지에 따라 지금 준비할 것이 달라진다.'
-    }
+    closing: { quote: '"임상병리사의 길은 무궁무진하다"', line: '다만 어느 방향으로 갈지에 따라 지금 준비할 것이 달라진다.' }
   },
 
   paths: [
@@ -112,10 +98,6 @@ const DATA = {
       degree: '석사 이상 권장',
       work: 'ex vivo 효능평가, 기기분석, 동물실험',
       courses: ['조직학(2-2)', '세포생물학(2-1)', '임상화학및실험'],
-      labs: [
-        { name: 'SPL (김동원 교수)', focus: '피부세포 분화, 천연물·의약품 생리활성 검증' },
-        { name: 'MoMiLab (이용헌 교수)', focus: '세균 병독성, 유전자 기반 분자진단' }
-      ],
       jobKeywords: ['효능평가', '비임상', '전임상']
     },
     {
@@ -125,9 +107,6 @@ const DATA = {
       degree: '학사 · 전문학사 진입 가능',
       work: 'GMP 환경에서의 품질관리(QC), 품질보증(QA), 무균 공정 생산',
       courses: ['임상화학및실험1·2', '임상미생물학및실험1·2 (무균 조작)'],
-      labs: [
-        { name: '직접 연계되는 교내 연구실 없음', focus: '대신 외부 GMP 교육 이수를 통해 직무 이해도를 입증하는 것을 강력히 추천합니다.' }
-      ],
       jobKeywords: ['QC', '품질관리 제약', 'GMP']
     },
     {
@@ -137,9 +116,6 @@ const DATA = {
       degree: '학사 이상',
       work: '식약처 품목허가 대응(RA), 임상시험 운영, 기술이전 및 라이선싱',
       courses: ['면역학(3-1)', '임상분자생물학및실험1'],
-      labs: [
-        { name: 'IVDL (이태희 교수)', focus: '체외진단 개발, 액체생검, 임상연구코디네이터' }
-      ],
       jobKeywords: ['RA 인허가', '임상시험 CRA'],
       sections: [
         {
@@ -158,29 +134,15 @@ const DATA = {
           groups: [
             {
               label: '하는 일',
-              items: [
-                '허가자료 작성·검토 및 규제기관 제출',
-                '허가 유지·변경 관리',
-                'GMP·GCP 실사 지원',
-                '표시자재 관리'
-              ]
+              items: ['허가자료 작성·검토 및 규제기관 제출', '허가 유지·변경 관리', 'GMP·GCP 실사 지원', '표시자재 관리']
             },
             {
               label: '요구 역량',
-              items: [
-                '허가 규정 이해',
-                '문서 검토의 꼼꼼함',
-                '논리적 커뮤니케이션',
-                '유관부서 협업',
-                '외국어(영어)'
-              ]
+              items: ['허가 규정 이해', '문서 검토의 꼼꼼함', '논리적 커뮤니케이션', '유관부서 협업', '외국어(영어)']
             },
             {
               label: '준비',
-              items: [
-                '별도 자격증은 없으나 워드·엑셀 활용 능력이 매우 중요합니다.',
-                '의약품 규제업무 전문가 양성과정, 한국제약바이오협회 RA 기본교육(온라인) 등이 있습니다.'
-              ]
+              items: ['별도 자격증은 없으나 워드·엑셀 활용 능력이 매우 중요합니다.', '의약품 규제업무 전문가 양성과정, 한국제약바이오협회 RA 기본교육(온라인) 등이 있습니다.']
             }
           ]
         }
@@ -438,47 +400,6 @@ function renderPaths() {
 
     const courses = $('.path__majors', li);
     path.courses.forEach(c => courses.append(make('li', null, c)));
-
-    // 관련 학과 연구실
-    const labsBox = $('.path__labs', li);
-    if (path.labs && path.labs.length > 0) {
-      labsBox.style.marginTop = '1.25rem';
-      labsBox.style.paddingTop = '1rem';
-      labsBox.style.borderTop = '1px dashed var(--rule-2)';
-      labsBox.style.textAlign = 'left';
-
-      // 워딩 변경
-      const labsTitle = make('p', 'path__labs-title', '💡 관련 학과 연구실');
-      labsTitle.style.fontSize = '0.8125rem';
-      labsTitle.style.fontWeight = '700';
-      labsTitle.style.color = 'var(--ink-3)';
-      labsTitle.style.marginBottom = '0.375rem';
-      labsBox.append(labsTitle);
-
-      path.labs.forEach(lab => {
-        const lp = make('p', 'path__lab-item');
-        lp.style.marginTop = '0.375rem';
-        lp.style.lineHeight = '1.45';
-        
-        const st = make('strong', null, lab.name);
-        st.style.display = 'block';
-        st.style.fontSize = '0.875rem';
-        st.style.color = 'var(--ink)';
-        
-        const sp = make('span', null, lab.focus);
-        sp.style.fontSize = '0.8125rem';
-        sp.style.color = 'var(--ink-2)';
-        
-        lp.append(st, sp);
-        labsBox.append(lp);
-      });
-    } else {
-      labsBox.remove();
-    }
-
-    // 클릭 유도 화살표 동적 추가
-    const clickHint = make('div', 'path__click-hint', '자세히 보기 ➔');
-    $('.path__btn', li).append(clickHint);
 
     $('.path__btn', li).addEventListener('click', () => openPathSheet(path));
     li.classList.add('reveal');
@@ -833,7 +754,7 @@ function saveImage() {
 }
 
 /* ════════════════════════════════════════════════════════════════
-   E. 바텀시트 기능
+   E. 바텀시트 기능 및 비교과 모아보기 팝업 (새로 추가됨)
    ════════════════════════════════════════════════════════════════ */
 
 function openSheet({ eyebrow, title, build }) {
@@ -893,6 +814,73 @@ function openPathSheet(path) {
   });
 }
 
+// [새로 추가] 비교과 프로그램 모아보기 팝업 띄우기
+function initProgramBtn() {
+  const btn = $('#btn-show-programs');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    openSheet({
+      eyebrow: 'D-Bridge 추천',
+      title: '교내외 비교과 프로그램 모음',
+      build(body) {
+        const ul = make('ul', 'prog-popup-list');
+        ul.style.display = 'grid';
+        ul.style.gap = '1rem';
+        ul.style.marginTop = '1rem';
+
+        Object.values(DATA.programs).forEach(pr => {
+          const li = make('li', 'prog-popup-item');
+          li.style.padding = '1rem';
+          li.style.border = '1px solid var(--rule)';
+          li.style.borderRadius = 'var(--radius)';
+          li.style.background = 'var(--paper)';
+
+          const head = make('div', null);
+          head.style.display = 'flex';
+          head.style.alignItems = 'center';
+          head.style.gap = '0.5rem';
+          head.style.marginBottom = '0.5rem';
+
+          const kind = make('span', null, pr.kind === 'campus' ? '교내' : '외부');
+          kind.style.fontSize = '0.75rem';
+          kind.style.fontWeight = '700';
+          kind.style.padding = '0.2rem 0.5rem';
+          kind.style.borderRadius = '999px';
+          kind.style.background = pr.kind === 'campus' ? 'var(--accent-soft)' : 'transparent';
+          kind.style.border = pr.kind === 'campus' ? 'none' : '1px dashed var(--rule-2)';
+          kind.style.color = pr.kind === 'campus' ? 'var(--accent)' : 'var(--ink-2)';
+
+          const name = make('strong', null, pr.name);
+          name.style.fontSize = '0.9375rem';
+          name.style.color = 'var(--ink)';
+
+          head.append(kind, name);
+
+          const when = make('p', null, pr.when || '상시 운영');
+          when.style.fontSize = '0.8125rem';
+          when.style.color = 'var(--ink-2)';
+          when.style.marginBottom = pr.url ? '0.75rem' : '0';
+
+          li.append(head, when);
+
+          if (pr.url) {
+            const a = make('a', 'btn btn--quiet', '바로가기 ↗');
+            a.href = pr.url;
+            a.target = '_blank';
+            a.rel = 'noopener';
+            a.style.display = 'inline-block';
+            a.style.fontSize = '0.8125rem';
+            a.style.padding = '0.4rem 0.75rem';
+            li.append(a);
+          }
+          ul.append(li);
+        });
+        body.append(ul);
+      }
+    });
+  });
+}
+
 function init() {
   renderHero();
   renderPaths();
@@ -901,6 +889,7 @@ function init() {
   renderVisits();
   renderFooter();
   setupReveal();
+  initProgramBtn(); // 팝업 버튼 연결
 
   $('[data-action="close-sheet"]').addEventListener('click', closeSheet);
   $('#sheet').addEventListener('close', () => document.documentElement.classList.remove('is-locked'));
