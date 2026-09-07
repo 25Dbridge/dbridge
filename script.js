@@ -1,10 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
    D-Bridge — 임상병리사의 바이오 진출 로드맵
    script.js
-
-   ▸ 내용을 바꾸려면 아래 DATA 안쪽만 고치면 됩니다.
-   ▸ 따옴표 ' ' 안의 글자만 바꾸세요.
-   ▸ id 값(예: 'B1', 'analysis')은 바꾸지 마세요.
    ═══════════════════════════════════════════════════════════════ */
 
 const DATA = {
@@ -147,10 +143,6 @@ const DATA = {
     }
   ],
 
-  /* ─── 학과 연구실 ─────────────────────────────────────────
-     세 경로와 하나씩 짝지어지지 않습니다.
-     paths 에 적은 경로와 닿는다는 표시만 합니다.
-     ───────────────────────────────────────────────────────── */
   labs: {
     heading: '학과 연구실',
     note: '연구실과 세 경로가 하나씩 맞아떨어지지는 않습니다. 지금 학과에 있는 연구실과, 각 연구실이 어느 경로에 닿는지만 적었습니다.',
@@ -195,7 +187,6 @@ const DATA = {
         text: '가설 수립부터 검증, 리뷰까지 실험의 한 사이클을 완수해 보았다.',
         emptyNote: '단순히 실험을 해본 것과 한 사이클을 끝내본 것은 실무에서 큰 차이를 만듭니다.',
         programs: ['capstone', 'academic_fest', 'ugrad_research_fund'] },
-
       { id: 'B1', grades: ['g3'], group: 'now', type: 'check',
         text: '비임상 3대 직무 경로 중 타깃으로 삼는 직무를 정했다.',
         emptyNote: '채용공고의 자격 요건을 보면 그 경로가 학사를 뽑는지 석사를 뽑는지 바로 보입니다.',
@@ -217,7 +208,6 @@ const DATA = {
       { id: 'B5', grades: ['g3'], group: 'now', type: 'check',
         text: '복수전공과 융합 과목으로 전공 지식을 넓히는 방법을 알아보았다.',
         emptyNote: '', programs: ['double_major'] },
-
       { id: 'D1', grades: ['g4'], group: 'now', type: 'choice',
         text: '임상과 비임상 중 지원할 방향을 확정했다.',
         options: [
@@ -241,7 +231,6 @@ const DATA = {
         text: '지원할 기업의 파이프라인(기술 실현성 및 양산 가능성)을 분석해 보았다.',
         emptyNote: '단순히 기업 이름만 보지 말고, 채용공고와 파이프라인을 함께 검토해야 합니다.',
         programs: [], jobSearch: { mode: 'company' } },
-
       { id: 'C1', grades: ['g12', 'g3', 'g4'], group: 'ongoing', type: 'check',
         text: '전공 과목 성적을 확인하고 목표 학점을 정해두었다.',
         emptyNote: '채용 서류에 성적증명서가 주요 평가 지표로 포함됩니다.',
@@ -260,7 +249,6 @@ const DATA = {
     }
   },
 
-  /* when — 신청 시기. 모르는 것은 비워 두세요. 비면 화면에 안 나옵니다. */
   programs: {
     undergrad_researcher: { name: '임상병리학과 연구회', kind: 'campus', when: '학과 공지로 모집', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa&mode=view&idx=34132' },
     capstone:             { name: '캡스톤디자인 지원 프로그램', kind: 'campus', when: '매 학기', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=MN2000197&mode=view&idx=103053' },
@@ -317,12 +305,6 @@ const DATA = {
   }
 };
 
-
-/* ════════════════════════════════════════════════════════════════
-   여기서부터는 화면을 그리는 코드입니다.
-   내용만 바꾸실 거라면 아래는 건드리지 않으셔도 됩니다.
-   ════════════════════════════════════════════════════════════════ */
-
 const $  = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 const slot = (name, root = document) => root.querySelector(`[data-render="${name}"]`);
@@ -335,7 +317,6 @@ function make(tag, className, text) {
   return node;
 }
 
-/** 문장 안의 <b> 만 허용하고 나머지는 글자로 처리한다 */
 function setRichText(node, str) {
   node.textContent = '';
   str.split(/(<b>.*?<\/b>)/g).forEach(part => {
@@ -398,7 +379,7 @@ function renderPaths() {
   });
 }
 
-/* ─── 학과 연구실 ────────────────────────────────────────────── */
+/* ─── 학과 연구실 (복구완료) ─────────────────────────────────── */
 function renderLabs() {
   const L = DATA.labs;
   slot('labs-heading').textContent = L.heading;
@@ -455,9 +436,6 @@ function renderRoadmap() {
     const find = id => stage.branches.find(b => b.id === id);
     fillBranch($('.branch--clinical', li),    find('clinical'));
     fillBranch($('.branch--nonclinical', li), find('nonclinical'));
-
-    const fan = $('.fan', li);
-    if (fan) fan.remove();          // 경로 카드는 위 섹션에 이미 있다
 
     li.classList.add('reveal');
     list.append(li);
@@ -789,7 +767,7 @@ function saveImage() {
   const sc = document.createElement('script');
   sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
   sc.onload  = run;
-  sc.onerror = () => window.print();     // 못 불러오면 인쇄로 대체
+  sc.onerror = () => window.print();
   document.head.append(sc);
 }
 
@@ -858,7 +836,6 @@ function initProgramBtn() {
           $('.prog__kind', li).dataset.kind = pr.kind;
           $('.prog__name', li).textContent = pr.name;
 
-          // 모르는 신청 시기를 지어내지 않는다
           if (pr.when) $('.prog__when', li).textContent = pr.when;
           else $('.prog__when', li).remove();
 
@@ -876,14 +853,13 @@ function initProgramBtn() {
 
 /* ─── 시작 ───────────────────────────────────────────────────── */
 function init() {
-  // 한 곳이 실패해도 나머지 화면은 그린다
   const safe = (name, fn) => {
     try { fn(); } catch (err) { console.error(`[${name}] 렌더 실패`, err); }
   };
 
   safe('hero',      renderHero);
   safe('paths',     renderPaths);
-  safe('labs',      renderLabs);
+  safe('labs',      renderLabs);      // 학과 연구실 복구!
   safe('roadmap',   renderRoadmap);
   safe('checklist', renderChecklist);
   safe('visits',    renderVisits);
