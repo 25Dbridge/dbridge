@@ -98,7 +98,17 @@ const DATA = {
       degree: '석사 이상 권장',
       work: 'ex vivo 효능평가, 기기분석, 동물실험',
       courses: ['조직학(2-2)', '세포생물학(2-1)', '임상화학및실험'],
-      jobKeywords: ['효능평가', '비임상', '전임상']
+      jobKeywords: ['효능평가', '비임상', '전임상'],
+      sections: [
+        {
+          origin: 'field',
+          body: [
+            '조직학 석사 전공자가 입사 후 사내에 없던 ex vivo 효능평가 체계를 직접 구축하고 시스템화한 실제 사례를 확인했습니다.',
+            '바이오어세이(생물학적 검정) 분야는 약물마다 새로운 실험을 설계해야 하는 블루 오션입니다. 따라서 "실험 설계력" 자체가 진입장벽이자 강력한 차별화 무기가 됩니다.',
+            '신약개발 기업 현장에 임상병리 전공자가 분석과 동물실험 담당으로 다수 재직했던 이력도 교차 확인되었습니다.'
+          ]
+        }
+      ]
     },
     {
       id: 'quality',
@@ -107,7 +117,26 @@ const DATA = {
       degree: '학사 · 전문학사 진입 가능',
       work: 'GMP 환경에서의 품질관리(QC), 품질보증(QA), 무균 공정 생산',
       courses: ['임상화학및실험1·2', '임상미생물학및실험1·2 (무균 조작)'],
-      jobKeywords: ['QC', '품질관리 제약', 'GMP']
+      jobKeywords: ['QC', '품질관리 제약', 'GMP'],
+      sections: [
+        {
+          origin: 'field',
+          body: [
+            '병원 진단검사와 제약 품질관리는 기기(HPLC 등)가 같아도 목적이 완전히 다릅니다. 임상검사는 "진단"이 목적이라 재검사가 자유롭지만, 의약품 제조는 "품질 확인"이 목적이므로 GMP 규정에 따라 원칙적으로 "1회 분석"으로 완벽한 결과를 내야 합니다.',
+            '따라서 이 분야 진입 시 가장 중요한 것은 화려한 스펙이 아니라, 정해진 규칙(GMP)을 엄격하게 체득하고 따르려는 태도입니다.'
+          ],
+          groups: [
+            {
+              label: '현장의 특징',
+              items: [
+                '연구소의 수율 개선 결과가 상업 생산 공장으로 그대로 이전되는 구조',
+                '인접 전공(제약공학, 화학공학 등) 학사 및 전문학사 출신이 다수 포진',
+                'OOS(기준 이탈) 발생 시 임의 재검 불가, 철저한 원인 조사 필수'
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       id: 'ra',
@@ -439,19 +468,10 @@ function renderRoadmap() {
         entry.append(item);
       });
 
+      // 중복되는 .fan (경로 버튼) 섹션을 안전하게 완전히 삭제합니다.
       const fan = $('.fan', li);
-      DATA.paths.forEach(path => {
-        const btn = make('button', 'fan__item');
-        btn.dataset.path = path.id;
-        btn.setAttribute('aria-haspopup', 'dialog');
-        btn.append(
-          make('span', 'fan__num', path.num),
-          make('span', 'fan__name', path.name),
-          make('span', 'fan__degree', path.degree)
-        );
-        btn.addEventListener('click', () => openPathSheet(path));
-        fan.append(btn);
-      });
+      if (fan) fan.remove();
+
       li.classList.add('reveal');
       list.append(li);
     } else {
@@ -754,7 +774,7 @@ function saveImage() {
 }
 
 /* ════════════════════════════════════════════════════════════════
-   E. 바텀시트 기능 및 비교과 모아보기 팝업 (새로 추가됨)
+   E. 바텀시트 기능 및 비교과 모아보기 팝업
    ════════════════════════════════════════════════════════════════ */
 
 function openSheet({ eyebrow, title, build }) {
@@ -814,7 +834,6 @@ function openPathSheet(path) {
   });
 }
 
-// [새로 추가] 비교과 프로그램 모아보기 팝업 띄우기
 function initProgramBtn() {
   const btn = $('#btn-show-programs');
   if (!btn) return;
@@ -889,7 +908,7 @@ function init() {
   renderVisits();
   renderFooter();
   setupReveal();
-  initProgramBtn(); // 팝업 버튼 연결
+  initProgramBtn();
 
   $('[data-action="close-sheet"]').addEventListener('click', closeSheet);
   $('#sheet').addEventListener('close', () => document.documentElement.classList.remove('is-locked'));
