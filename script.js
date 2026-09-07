@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
    D-Bridge — 임상병리사의 바이오 진출 로드맵
-   script.js (수정 완료 버전)
+   script.js
    ═══════════════════════════════════════════════════════════════ */
 
 const DATA = {
@@ -439,6 +439,7 @@ function renderPaths() {
     const courses = $('.path__majors', li);
     path.courses.forEach(c => courses.append(make('li', null, c)));
 
+    // 관련 학과 연구실
     const labsBox = $('.path__labs', li);
     if (path.labs && path.labs.length > 0) {
       labsBox.style.marginTop = '1.25rem';
@@ -446,7 +447,8 @@ function renderPaths() {
       labsBox.style.borderTop = '1px dashed var(--rule-2)';
       labsBox.style.textAlign = 'left';
 
-      const labsTitle = make('p', 'path__labs-title', '💡 맞닿은 학과 연구실');
+      // 워딩 변경
+      const labsTitle = make('p', 'path__labs-title', '💡 관련 학과 연구실');
       labsTitle.style.fontSize = '0.8125rem';
       labsTitle.style.fontWeight = '700';
       labsTitle.style.color = 'var(--ink-3)';
@@ -473,6 +475,10 @@ function renderPaths() {
     } else {
       labsBox.remove();
     }
+
+    // 클릭 유도 화살표 동적 추가
+    const clickHint = make('div', 'path__click-hint', '자세히 보기 ➔');
+    $('.path__btn', li).append(clickHint);
 
     $('.path__btn', li).addEventListener('click', () => openPathSheet(path));
     li.classList.add('reveal');
@@ -602,7 +608,7 @@ function setupReveal() {
 }
 
 /* ════════════════════════════════════════════════════════════════
-   D. 체크리스트 기능 (에러 완벽 수정)
+   D. 체크리스트 기능
    ════════════════════════════════════════════════════════════════ */
 
 const STORE_KEY = 'dbridge-check-v1';
