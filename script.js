@@ -147,6 +147,36 @@ const DATA = {
     }
   ],
 
+  /* ─── 학과 연구실 ─────────────────────────────────────────
+     세 경로와 하나씩 짝지어지지 않습니다.
+     paths 에 적은 경로와 닿는다는 표시만 합니다.
+     ───────────────────────────────────────────────────────── */
+  labs: {
+    heading: '학과 연구실',
+    note: '연구실과 세 경로가 하나씩 맞아떨어지지는 않습니다. 지금 학과에 있는 연구실과, 각 연구실이 어느 경로에 닿는지만 적었습니다.',
+    items: [
+      {
+        name: 'SPL', full: 'Skin Physiology Lab', pi: '김동원 교수',
+        focus: '피부세포 성장 및 분화, 피부·모발 재생과 아토피 피부염, 천연물 및 의약품 생리활성 검증',
+        paths: ['analysis'],
+        url: 'https://spl-dongseo.github.io/'
+      },
+      {
+        name: 'IVDL', full: 'In Vitro Diagnostic Laboratory', pi: '이태희 교수',
+        focus: 'POCT 및 체외진단 개발, 액체생검 기반 진단과 예후 예측, 임상연구코디네이터',
+        paths: ['ra'],
+        url: 'https://v0-next-js-boilerplate-sigma-rosy.vercel.app/'
+      },
+      {
+        name: 'MoMiLab', full: 'Molecular Microbiology Lab', pi: '이용헌 교수',
+        status: '2027년 개설 예정',
+        focus: '세균 병독성의 분자적 메커니즘, 슈퍼박테리아 항생제 내성, 유전자 기반 분자진단',
+        paths: ['analysis', 'ra'],
+        url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=professor'
+      }
+    ]
+  },
+
   sheetLabels: { work: '하는 일', courses: '연결 과목' },
   originLabels: { field: 'GELS에서 확인한 것', public: '공개 자료로 보강한 내용' },
 
@@ -363,6 +393,40 @@ function renderPaths() {
     path.courses.forEach(c => courses.append(make('li', null, c)));
 
     $('.path__btn', li).addEventListener('click', () => openPathSheet(path));
+    li.classList.add('reveal');
+    list.append(li);
+  });
+}
+
+/* ─── 학과 연구실 ────────────────────────────────────────────── */
+function renderLabs() {
+  const L = DATA.labs;
+  slot('labs-heading').textContent = L.heading;
+  slot('labs-note').textContent    = L.note;
+
+  const list = slot('labs');
+  L.items.forEach(lab => {
+    const li = tpl('lab');
+    $('.lab__name', li).textContent  = lab.name;
+    $('.lab__full', li).textContent  = lab.full;
+    $('.lab__pi', li).textContent    = lab.pi;
+    $('.lab__focus', li).textContent = lab.focus;
+
+    if (lab.status) $('.lab__head', li).append(make('span', 'lab__status', lab.status));
+
+    const tags = $('.lab__paths', li);
+    (lab.paths || []).forEach(pid => {
+      const path = DATA.paths.find(p => p.id === pid);
+      if (!path) return;
+      const t = make('li', 'lab__tag', `${path.num} ${path.name}`);
+      t.dataset.path = pid;
+      tags.append(t);
+    });
+
+    const a = $('.lab__link', li);
+    if (lab.url) { a.href = lab.url; a.target = '_blank'; a.rel = 'noopener'; }
+    else a.remove();
+
     li.classList.add('reveal');
     list.append(li);
   });
@@ -819,6 +883,7 @@ function init() {
 
   safe('hero',      renderHero);
   safe('paths',     renderPaths);
+  safe('labs',      renderLabs);
   safe('roadmap',   renderRoadmap);
   safe('checklist', renderChecklist);
   safe('visits',    renderVisits);
