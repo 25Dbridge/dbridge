@@ -141,7 +141,8 @@ main > section { padding-block: var(--sp-6); max-width: calc(var(--measure) + va
 .stage__caption { margin-top: .125rem; font-size: .875rem; color: var(--ink-2); }
 .stage__items { margin-top: var(--sp-3); }
 .stage__item + .stage__item { border-top: 1px solid var(--rule); }
-.stage__item { padding: var(--sp-3) 0; font-size: .9375rem; line-height: 1.7; }
+.stage__item { padding: var(--sp-3) 0; font-size: .9375rem; line-height: 1.7; transition: color .18s var(--ease); }
+.stage__item:hover { color: var(--accent); }
 
 .reveal { opacity: 0; transform: translateY(12px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
 .reveal.is-in { opacity: 1; transform: none; }
@@ -253,7 +254,6 @@ main > section { padding-block: var(--sp-6); max-width: calc(var(--measure) + va
 .choice__btn { flex: 1; padding: .625rem .5rem; border: 1px solid var(--rule-2); border-radius: var(--radius); font-size: .9375rem; font-weight: 600; color: var(--ink-2); transition: border-color .18s var(--ease), background .18s var(--ease); }
 .choice__btn[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
 
-/* ── 결과 ─────────────────────────────────────────────────── */
 .result { margin-top: var(--sp-6); padding-top: var(--sp-5); border-top: 2px solid var(--ink); }
 .result__heading { font-size: 1.5rem; font-weight: 800; letter-spacing: -.03em; margin-bottom: var(--sp-4); }
 .result__list { display: grid; gap: var(--sp-3); }
