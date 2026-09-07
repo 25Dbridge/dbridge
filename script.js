@@ -1,6 +1,10 @@
 /* ═══════════════════════════════════════════════════════════════
    D-Bridge — 임상병리사의 바이오 진출 로드맵
    script.js
+
+   ▸ 내용을 바꾸려면 아래 DATA 안쪽만 고치면 됩니다.
+   ▸ 따옴표 ' ' 안의 글자만 바꾸세요.
+   ▸ id 값(예: 'B1', 'analysis')은 바꾸지 마세요.
    ═══════════════════════════════════════════════════════════════ */
 
 const DATA = {
@@ -20,9 +24,7 @@ const DATA = {
     notice: '3학년 전까지는 임상과 비임상의 준비 과정이 크게 다르지 않습니다.',
     stages: [
       {
-        id: 'g12',
-        grade: '1·2학년',
-        caption: '탐색과 기초',
+        id: 'g12', grade: '1·2학년', caption: '탐색과 기초',
         items: [
           '학부 실험실에 들어가 기초 연구에 참여한다.',
           '가설 수립부터 검증, 결과 리뷰까지 실험의 한 사이클을 완수해 본다.',
@@ -31,9 +33,7 @@ const DATA = {
         ]
       },
       {
-        id: 'g3',
-        grade: '3학년',
-        caption: '방향 결정',
+        id: 'g3', grade: '3학년', caption: '방향 결정',
         items: [
           '비임상 3대 직무 경로 중 목표 직무를 정한다.',
           '목표에 따라 대학원 진학 여부를 판단한다. 분석·효능평가는 석사 이상, 생산·품질은 학사로 진입 가능하다.',
@@ -43,17 +43,13 @@ const DATA = {
         ]
       },
       {
-        id: 'g4',
-        grade: '4학년',
-        caption: '선택',
+        id: 'g4', grade: '4학년', caption: '선택',
         branches: [
           {
-            id: 'clinical',
-            name: '임상',
-            summary: '국가시험과 병원 취업',
+            id: 'clinical', name: '임상', summary: '국가시험과 병원 취업',
             items: [
               '국가시험 합격과 병원 취업 준비에 집중한다.',
-              '합격 기준은 필기 40% 이상, 전 과목 총점 60% 이상, 실기 60% 이상이다.',
+              '합격 기준은 필기 매 과목 40% 이상, 전 과목 총점 60% 이상, 실기 60% 이상이다.',
               '시험 일정과 응시자격은 매년 국시원 공고로 확인한다.'
             ],
             note: '한국보건의료인국가시험원 공개 자료로 보완했습니다.',
@@ -61,9 +57,7 @@ const DATA = {
             opensPaths: false
           },
           {
-            id: 'nonclinical',
-            name: '비임상',
-            summary: '기업의 연구 · 생산 · 규제 직무',
+            id: 'nonclinical', name: '비임상', summary: '기업의 연구 · 생산 · 규제 직무',
             items: [
               '논리적으로 설명하는 역량을 강화한다. 면접과 실무에서 직접 평가되는 항목이다.',
               '지원할 기업의 파이프라인을 분석해 기술 실현성과 대량 생산 가능성을 검토한다.'
@@ -77,9 +71,7 @@ const DATA = {
         ]
       },
       {
-        id: 'after',
-        grade: '졸업 후',
-        caption: '첫 직장',
+        id: 'after', grade: '졸업 후', caption: '첫 직장',
         items: [
           '소규모 기업은 신약 개발의 전 과정을 경험할 수 있고 업무 범위가 유동적이다.',
           '대규모 기업은 담당 영역이 명확한 대신 다루는 범위가 한정적이다.',
@@ -92,57 +84,42 @@ const DATA = {
 
   paths: [
     {
-      id: 'analysis',
-      num: '①',
-      name: '분석 · 효능평가',
-      degree: '석사 이상 권장',
+      id: 'analysis', num: '①', name: '분석 · 효능평가', degree: '석사 이상 권장',
       work: 'ex vivo 효능평가, 기기분석, 동물실험',
       courses: ['조직학(2-2)', '세포생물학(2-1)', '임상화학및실험'],
       jobKeywords: ['효능평가', '비임상', '전임상'],
-      sections: [
-        {
-          origin: 'field',
-          body: [
-            '조직학 석사 전공자가 입사 후 사내에 없던 ex vivo 효능평가 체계를 직접 구축하고 시스템화한 실제 사례를 확인했습니다.',
-            '바이오어세이(생물학적 검정) 분야는 약물마다 새로운 실험을 설계해야 하는 블루 오션입니다. 따라서 "실험 설계력" 자체가 진입장벽이자 강력한 차별화 무기가 됩니다.',
-            '신약개발 기업 현장에 임상병리 전공자가 분석과 동물실험 담당으로 다수 재직했던 이력도 교차 확인되었습니다.'
-          ]
-        }
-      ]
+      sections: [{
+        origin: 'field',
+        body: [
+          '조직학 석사 전공자가 입사 후 사내에 없던 ex vivo 효능평가 체계를 직접 구축하고 시스템화한 실제 사례를 확인했습니다.',
+          '바이오어세이(생물학적 검정) 분야는 약물마다 새로운 실험을 설계해야 하는 블루 오션입니다. 따라서 "실험 설계력" 자체가 진입장벽이자 강력한 차별화 무기가 됩니다.',
+          '신약개발 기업 현장에 임상병리 전공자가 분석과 동물실험 담당으로 다수 재직했던 이력도 교차 확인되었습니다.'
+        ]
+      }]
     },
     {
-      id: 'quality',
-      num: '②',
-      name: '생산 · 품질 (QC·QA)',
-      degree: '학사 · 전문학사 진입 가능',
+      id: 'quality', num: '②', name: '생산 · 품질 (QC·QA)', degree: '학사 · 전문학사 진입 가능',
       work: 'GMP 환경에서의 품질관리(QC), 품질보증(QA), 무균 공정 생산',
       courses: ['임상화학및실험1·2', '임상미생물학및실험1·2 (무균 조작)'],
       jobKeywords: ['QC', '품질관리 제약', 'GMP'],
-      sections: [
-        {
-          origin: 'field',
-          body: [
-            '병원 진단검사와 제약 품질관리는 기기(HPLC 등)가 같아도 목적이 완전히 다릅니다. 임상검사는 "진단"이 목적이라 재검사가 자유롭지만, 의약품 제조는 "품질 확인"이 목적이므로 GMP 규정에 따라 원칙적으로 "1회 분석"으로 완벽한 결과를 내야 합니다.',
-            '따라서 이 분야 진입 시 가장 중요한 것은 화려한 스펙이 아니라, 정해진 규칙(GMP)을 엄격하게 체득하고 따르려는 태도입니다.'
-          ],
-          groups: [
-            {
-              label: '현장의 특징',
-              items: [
-                '연구소의 수율 개선 결과가 상업 생산 공장으로 그대로 이전되는 구조',
-                '인접 전공(제약공학, 화학공학 등) 학사 및 전문학사 출신이 다수 포진',
-                'OOS(기준 이탈) 발생 시 임의 재검 불가, 철저한 원인 조사 필수'
-              ]
-            }
+      sections: [{
+        origin: 'field',
+        body: [
+          '병원 진단검사와 제약 품질관리는 기기(HPLC 등)가 같아도 목적이 완전히 다릅니다. 임상검사는 "진단"이 목적이라 재검사가 자유롭지만, 의약품 제조는 "품질 확인"이 목적이므로 GMP 규정에 따라 원칙적으로 "1회 분석"으로 완벽한 결과를 내야 합니다.',
+          '따라서 이 분야 진입 시 가장 중요한 것은 화려한 스펙이 아니라, 정해진 규칙(GMP)을 엄격하게 체득하고 따르려는 태도입니다.'
+        ],
+        groups: [{
+          label: '현장의 특징',
+          items: [
+            '연구소의 수율 개선 결과가 상업 생산 공장으로 그대로 이전되는 구조',
+            '인접 전공(제약공학, 화학공학 등) 학사 및 전문학사 출신이 다수 포진',
+            'OOS(기준 이탈) 발생 시 임의 재검 불가, 철저한 원인 조사 필수'
           ]
-        }
-      ]
+        }]
+      }]
     },
     {
-      id: 'ra',
-      num: '③',
-      name: '규제 · 임상 · 사업개발',
-      degree: '학사 이상',
+      id: 'ra', num: '③', name: '규제 · 임상 · 사업개발', degree: '학사 이상',
       work: '식약처 품목허가 대응(RA), 임상시험 운영, 기술이전 및 라이선싱',
       courses: ['면역학(3-1)', '임상분자생물학및실험1'],
       jobKeywords: ['RA 인허가', '임상시험 CRA'],
@@ -161,18 +138,9 @@ const DATA = {
             'RA는 약사만 지원할 수 있는 업무로 알려져 있으나 실제로는 비약사 신입 채용 사례가 존재합니다. 다만 대형 제약사는 약사 면허 소지자를 선호하는 편이라, 소규모 기업에서 실무 경력을 먼저 확보하는 경로가 현실적입니다.'
           ],
           groups: [
-            {
-              label: '하는 일',
-              items: ['허가자료 작성·검토 및 규제기관 제출', '허가 유지·변경 관리', 'GMP·GCP 실사 지원', '표시자재 관리']
-            },
-            {
-              label: '요구 역량',
-              items: ['허가 규정 이해', '문서 검토의 꼼꼼함', '논리적 커뮤니케이션', '유관부서 협업', '외국어(영어)']
-            },
-            {
-              label: '준비',
-              items: ['별도 자격증은 없으나 워드·엑셀 활용 능력이 매우 중요합니다.', '의약품 규제업무 전문가 양성과정, 한국제약바이오협회 RA 기본교육(온라인) 등이 있습니다.']
-            }
+            { label: '하는 일', items: ['허가자료 작성·검토 및 규제기관 제출', '허가 유지·변경 관리', 'GMP·GCP 실사 지원', '표시자재 관리'] },
+            { label: '요구 역량', items: ['허가 규정 이해', '문서 검토의 꼼꼼함', '논리적 커뮤니케이션', '유관부서 협업', '외국어(영어)'] },
+            { label: '준비', items: ['별도 자격증은 없으나 워드·엑셀 활용 능력이 매우 중요합니다.', '의약품 규제업무 전문가 양성과정, 한국제약바이오협회 RA 기본교육(온라인) 등이 있습니다.'] }
           ]
         }
       ]
@@ -190,99 +158,69 @@ const DATA = {
     ],
     groupLabels: { now: '지금 할 것', ongoing: '학년과 무관하게' },
     items: [
-      {
-        id: 'A1', grades: ['g12'], group: 'now', type: 'check',
+      { id: 'A1', grades: ['g12'], group: 'now', type: 'check',
         text: '학부 실험실에 들어가 있거나, 들어가는 방법을 알아본 적이 있다.',
-        emptyNote: '',
-        programs: ['undergrad_researcher', 'prof_counsel']
-      },
-      {
-        id: 'A2', grades: ['g12'], group: 'now', type: 'check',
+        emptyNote: '', programs: ['undergrad_researcher', 'prof_counsel'] },
+      { id: 'A2', grades: ['g12'], group: 'now', type: 'check',
         text: '가설 수립부터 검증, 리뷰까지 실험의 한 사이클을 완수해 보았다.',
         emptyNote: '단순히 실험을 해본 것과 한 사이클을 끝내본 것은 실무에서 큰 차이를 만듭니다.',
-        programs: ['capstone', 'academic_fest', 'ugrad_research_fund']
-      },
-      {
-        id: 'B1', grades: ['g3'], group: 'now', type: 'check',
+        programs: ['capstone', 'academic_fest', 'ugrad_research_fund'] },
+
+      { id: 'B1', grades: ['g3'], group: 'now', type: 'check',
         text: '비임상 3대 직무 경로 중 타깃으로 삼는 직무를 정했다.',
         emptyNote: '채용공고의 자격 요건을 보면 그 경로가 학사를 뽑는지 석사를 뽑는지 바로 보입니다.',
         programs: ['career_counsel', 'job_lecture', 'senior_mentoring'],
-        jobSearch: { mode: 'byPath' },
-        linkToSection: 'paths'
-      },
-      {
-        id: 'B2', grades: ['g3'], group: 'now', type: 'check',
+        jobSearch: { mode: 'byPath' }, linkToSection: 'paths' },
+      { id: 'B2', grades: ['g3'], group: 'now', type: 'check',
         text: '목표 직무의 요구 학위를 파악하고 대학원 진학 여부를 판단했다.',
         emptyNote: '분석·효능평가는 석사 이상, 생산·품질은 학사로 진입 가능합니다.',
-        programs: ['grad_briefing', 'prof_counsel', 'grad_counsel']
-      },
-      {
-        id: 'B3', grades: ['g3'], group: 'now', type: 'check',
+        programs: ['grad_briefing', 'prof_counsel', 'grad_counsel'] },
+      { id: 'B3', grades: ['g3'], group: 'now', type: 'check',
         text: '목표 직무 현장에서 쓰는 실무 용어와 기술을 미리 찾아본 적이 있다.',
         emptyNote: '현장에서 실무 용어와 회의 내용에 벽을 느꼈다는 인터뷰 내용이 있었습니다.',
-        programs: ['job_lecture', 'senior_mentoring']
-      },
-      {
-        id: 'B4', grades: ['g3'], group: 'now', type: 'check',
+        programs: ['job_lecture', 'senior_mentoring'] },
+      { id: 'B4', grades: ['g3'], group: 'now', type: 'check',
         text: '목표 경로에서 요구하는 외부 직무 교육을 검토한 적이 있다.',
         emptyNote: '생산·품질 직군이 목표라면 GMP 교육 과정 이수를 추천합니다.',
         programs: ['gmp_course'],
-        noProgram: '교내에 직무교육·자격증 지원 제도는 확인되지 않았습니다.'
-      },
-      {
-        id: 'B5', grades: ['g3'], group: 'now', type: 'check',
+        noProgram: '교내에 직무교육·자격증 지원 제도는 확인되지 않았습니다.' },
+      { id: 'B5', grades: ['g3'], group: 'now', type: 'check',
         text: '복수전공과 융합 과목으로 전공 지식을 넓히는 방법을 알아보았다.',
-        emptyNote: '',
-        programs: ['double_major']
-      },
-      {
-        id: 'D1', grades: ['g4'], group: 'now', type: 'choice',
+        emptyNote: '', programs: ['double_major'] },
+
+      { id: 'D1', grades: ['g4'], group: 'now', type: 'choice',
         text: '임상과 비임상 중 지원할 방향을 확정했다.',
         options: [
           { value: 'clinical',    label: '임상'   },
           { value: 'nonclinical', label: '비임상' },
           { value: 'undecided',   label: '아직'   }
         ],
-        defaultValue: 'undecided',
-        emptyWhen: ['undecided'],
-        emptyLabel: '방향 결정',
+        defaultValue: 'undecided', emptyWhen: ['undecided'], emptyLabel: '방향 결정',
         emptyNote: '어느 쪽을 고르느냐에 따라 남은 준비 과정이 완전히 달라집니다.',
-        programs: ['career_counsel', 'senior_mentoring']
-      },
-      {
-        id: 'D2', grades: ['g4'], group: 'now', type: 'check',
+        programs: ['career_counsel', 'senior_mentoring'] },
+      { id: 'D2', grades: ['g4'], group: 'now', type: 'check',
         showIf: { item: 'D1', valueIn: ['nonclinical'] },
         text: '취업 선행과 진학 선행 중 어느 쪽인지 정했다.',
-        emptyNote: '',
-        programs: ['grad_counsel', 'grad_briefing'],
-        jobSearch: { mode: 'keywords', keywords: ['연구보조', '실험실 인턴'] }
-      },
-      {
-        id: 'D3', grades: ['g4'], group: 'now', type: 'check',
+        emptyNote: '', programs: ['grad_counsel', 'grad_briefing'],
+        jobSearch: { mode: 'keywords', keywords: ['연구보조', '실험실 인턴'] } },
+      { id: 'D3', grades: ['g4'], group: 'now', type: 'check',
         text: '내 경험과 역량을 논리적인 의사소통(말과 글)으로 설명할 수 있다.',
         emptyNote: '면접과 실무 현장에서 직접 평가되는 가장 중요한 항목입니다.',
-        programs: ['writing_clinic', 'mock_interview']
-      },
-      {
-        id: 'D4', grades: ['g4'], group: 'now', type: 'check',
+        programs: ['writing_clinic', 'mock_interview'] },
+      { id: 'D4', grades: ['g4'], group: 'now', type: 'check',
         text: '지원할 기업의 파이프라인(기술 실현성 및 양산 가능성)을 분석해 보았다.',
         emptyNote: '단순히 기업 이름만 보지 말고, 채용공고와 파이프라인을 함께 검토해야 합니다.',
-        programs: [],
-        jobSearch: { mode: 'company' }
-      },
-      {
-        id: 'C1', grades: ['g12', 'g3', 'g4'], group: 'ongoing', type: 'check',
+        programs: [], jobSearch: { mode: 'company' } },
+
+      { id: 'C1', grades: ['g12', 'g3', 'g4'], group: 'ongoing', type: 'check',
         text: '전공 과목 성적을 확인하고 목표 학점을 정해두었다.',
         emptyNote: '채용 서류에 성적증명서가 주요 평가 지표로 포함됩니다.',
-        programs: ['study_lecture', 'tutoring']
-      },
-      {
-        id: 'C2', grades: ['g12', 'g3', 'g4'], group: 'ongoing', type: 'check',
+        programs: ['study_lecture', 'tutoring'] },
+      { id: 'C2', grades: ['g12', 'g3', 'g4'], group: 'ongoing', type: 'check',
         text: '공인 어학 역량 확보를 꾸준히 진행하고 있다.',
         emptyNote: '방문한 3개 기업 중 2곳이 기본 요건으로 언급한 사항입니다.',
         programs: ['language_course'],
-        noProgram: '응시료 지원 제도는 확인되지 않았습니다. 학과 안에서 스터디를 만드는 방법도 있습니다.'
-      }
+        noProgram: '응시료 지원 제도는 확인되지 않았습니다. 학과 안에서 스터디를 만드는 방법도 있습니다.' }
     ],
     result: {
       headingTemplate: '지금 해볼 수 있는 것 {n}개',
@@ -292,24 +230,25 @@ const DATA = {
     }
   },
 
+  /* when — 신청 시기. 모르는 것은 비워 두세요. 비면 화면에 안 나옵니다. */
   programs: {
-    undergrad_researcher: { name: '임상병리학과 연구회', kind: 'campus', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa&mode=view&idx=34132' },
-    capstone: { name: '캡스톤디자인 지원 프로그램', kind: 'campus', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=MN2000197&mode=view&idx=103053' },
-    academic_fest: { name: '바이오헬스융합대학 학술제 엑스포', kind: 'campus', url: '' },
-    ugrad_research_fund: { name: '학부생 연구지원 (MYDEX)', kind: 'campus', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    job_lecture: { name: '앵커 취업스쿨 — 기업 탐방 및 직무 특강', kind: 'campus', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    senior_mentoring: { name: '전공과 진로설계 — 선배가 들려주는 임상병리사의 첫걸음', kind: 'campus', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    career_counsel: { name: '취업지원센터 진로 상담', kind: 'campus', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=research&mode=view&code=028' },
-    grad_briefing: { name: '일반대학원 학·석사 연계과정 안내', kind: 'campus', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa&mode=view&idx=34142' },
-    grad_counsel: { name: '취업지원센터 진학 상담', kind: 'campus', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=research&mode=view&code=028' },
-    prof_counsel: { name: '지도교수 상담', kind: 'campus', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=professor' },
-    double_major: { name: '부·복수전공 신청', kind: 'campus', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa&mode=view&idx=34133' },
-    writing_clinic: { name: '기초 글쓰기 클리닉', kind: 'campus', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    mock_interview: { name: 'RISE 취업스쿨 — 모의면접 특강', kind: 'campus', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    study_lecture: { name: '학습전략특강', kind: 'campus', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    tutoring: { name: 'BDAD DLC 학습클럽', kind: 'campus', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    language_course: { name: '교내 어학 강좌', kind: 'campus', url: '' },
-    gmp_course: { name: 'GMP 교육 과정 (외부 기관)', kind: 'external', url: '' }
+    undergrad_researcher: { name: '임상병리학과 연구회', kind: 'campus', when: '학과 공지로 모집', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa&mode=view&idx=34132' },
+    capstone:             { name: '캡스톤디자인 지원 프로그램', kind: 'campus', when: '매 학기', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=MN2000197&mode=view&idx=103053' },
+    academic_fest:        { name: '바이오헬스융합대학 학술제 엑스포', kind: 'campus', when: '11월경', url: '' },
+    ugrad_research_fund:  { name: '학부생 연구지원 (MYDEX)', kind: 'campus', when: '', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    job_lecture:          { name: '앵커 취업스쿨 — 기업 탐방 및 직무 특강', kind: 'campus', when: '7월 말', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    senior_mentoring:     { name: '전공과 진로설계 — 선배가 들려주는 임상병리사의 첫걸음', kind: 'campus', when: '4월 말', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    career_counsel:       { name: '취업지원센터 진로 상담', kind: 'campus', when: '상시 · 051-320-4600', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=research&mode=view&code=028' },
+    grad_briefing:        { name: '일반대학원 학·석사 연계과정 안내', kind: 'campus', when: '1월 · 7월 첫째 주', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa&mode=view&idx=34142' },
+    grad_counsel:         { name: '취업지원센터 진학 상담', kind: 'campus', when: '상시 · 051-320-4600', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=research&mode=view&code=028' },
+    prof_counsel:         { name: '지도교수 상담', kind: 'campus', when: '학과 사무실 051-320-2733', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=professor' },
+    double_major:         { name: '부·복수전공 신청', kind: 'campus', when: '매 학기 개강 2개월 전', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa&mode=view&idx=34133' },
+    writing_clinic:       { name: '기초 글쓰기 클리닉', kind: 'campus', when: '매 학기 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    mock_interview:       { name: 'RISE 취업스쿨 — 모의면접 특강', kind: 'campus', when: '학기 중 1~2회 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    study_lecture:        { name: '학습전략특강', kind: 'campus', when: '학기 중 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    tutoring:             { name: 'BDAD DLC 학습클럽', kind: 'campus', when: '매 학기 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    language_course:      { name: '교내 어학 강좌', kind: 'campus', when: '매 학기 초 학교 홈페이지 공지 확인', url: '' },
+    gmp_course:           { name: 'GMP 교육 과정 (외부 기관)', kind: 'external', when: '한국제약바이오협회 등', url: '' }
   },
 
   jobSites: [
@@ -318,16 +257,10 @@ const DATA = {
   ],
 
   visits: [
-    {
-      region: '일본 고베',
-      period: '2026.06.28 ~ 07.02',
-      places: ['Carna Biosciences', 'RIKEN BDR', 'FBRI 첨단의료진흥재단', '고베대학 BiCLET', '제20회 국제생명공학심포지엄(IBS2026) 참관']
-    },
-    {
-      region: '국내 대전·오송',
-      period: '2026.07.30 ~ 31',
-      places: ['㈜펩트론 (오송 공장·대전 본사)', '㈜지투지바이오 (오송 본사)', '㈜인코스팜 (대전 본사)']
-    }
+    { region: '일본 고베', period: '2026.06.28 ~ 07.02',
+      places: ['Carna Biosciences', 'RIKEN BDR', 'FBRI 첨단의료진흥재단', '고베대학 BiCLET', '제20회 국제생명공학심포지엄(IBS2026) 참관'] },
+    { region: '국내 대전·오송', period: '2026.07.30 ~ 31',
+      places: ['㈜펩트론 (오송 공장·대전 본사)', '㈜지투지바이오 (오송 본사)', '㈜인코스팜 (대전 본사)'] }
   ],
 
   method: {
@@ -346,16 +279,18 @@ const DATA = {
     baton: '이 사이트는 2026년 <b>D-Bridge</b> 팀의 프로젝트 결과물입니다. 새로운 진로를 개척한 동문들의 데이터가 계속 누적되기를 기대합니다.',
     contactHeading: '문의',
     contact: [
-      { label: '학과',     value: '동서대학교 임상병리학과' },
+      { label: '학과',       value: '동서대학교 임상병리학과' },
       { label: '학과 사무실', value: '051-320-2733' },
-      { label: '홈페이지', value: '학과 홈페이지', url: 'https://uni.dongseo.ac.kr/bio/' },
-      { label: '만든 팀',  value: 'D-Bridge (2026)' }
+      { label: '홈페이지',   value: '학과 홈페이지', url: 'https://uni.dongseo.ac.kr/bio/' },
+      { label: '만든 팀',    value: 'D-Bridge (2026)' }
     ]
   }
 };
 
+
 /* ════════════════════════════════════════════════════════════════
-   B. 도구 및 초기화
+   여기서부터는 화면을 그리는 코드입니다.
+   내용만 바꾸실 거라면 아래는 건드리지 않으셔도 됩니다.
    ════════════════════════════════════════════════════════════════ */
 
 const $  = (sel, root = document) => root.querySelector(sel);
@@ -370,6 +305,7 @@ function make(tag, className, text) {
   return node;
 }
 
+/** 문장 안의 <b> 만 허용하고 나머지는 글자로 처리한다 */
 function setRichText(node, str) {
   node.textContent = '';
   str.split(/(<b>.*?<\/b>)/g).forEach(part => {
@@ -381,10 +317,7 @@ function setRichText(node, str) {
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/* ════════════════════════════════════════════════════════════════
-   C. 렌더링 함수들
-   ════════════════════════════════════════════════════════════════ */
-
+/* ─── 첫 화면 ────────────────────────────────────────────────── */
 function renderHero() {
   const h = DATA.hero;
   const q = slot('hero-question');
@@ -405,27 +338,26 @@ function renderHero() {
   slot('hero-byline').textContent = h.byline;
   slot('hero-team').textContent   = h.team;
 
-  if (!prefersReducedMotion) {
-    const nums = $$('.hero__val', stats);
-    const t0 = performance.now();
-    function frame(now) {
-      const p = Math.min(1, (now - t0) / 850);
-      const eased = 1 - Math.pow(1 - p, 3);
-      nums.forEach(n => n.textContent = Math.round(eased * Number(n.dataset.target)));
-      if (p < 1) requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  }
+  if (prefersReducedMotion) return;
+  const nums = $$('.hero__val', stats);
+  const t0 = performance.now();
+  (function frame(now) {
+    const p = Math.min(1, (now - t0) / 850);
+    const eased = 1 - Math.pow(1 - p, 3);
+    nums.forEach(n => n.textContent = Math.round(eased * Number(n.dataset.target)));
+    if (p < 1) requestAnimationFrame(frame);
+  })(t0);
 }
 
+/* ─── 세 경로 ────────────────────────────────────────────────── */
 function renderPaths() {
   const list = slot('paths');
   DATA.paths.forEach(path => {
     const li = tpl('path');
     li.dataset.path = path.id;
-    $('.path__name', li).textContent = `${path.num} ${path.name}`;
+    $('.path__name', li).textContent   = `${path.num} ${path.name}`;
     $('.path__degree', li).textContent = path.degree;
-    $('.path__work', li).textContent = path.work;
+    $('.path__work', li).textContent   = path.work;
 
     const courses = $('.path__majors', li);
     path.courses.forEach(c => courses.append(make('li', null, c)));
@@ -436,53 +368,35 @@ function renderPaths() {
   });
 }
 
+/* ─── 로드맵 ─────────────────────────────────────────────────── */
 function renderRoadmap() {
   const r = DATA.roadmap;
   slot('roadmap-notice').textContent = r.notice;
-
   const list = slot('timeline');
+
   r.stages.forEach(stage => {
-    if (stage.branches) {
-      const li = tpl('fork');
-      li.dataset.stage = stage.id;
-      const find = id => stage.branches.find(b => b.id === id);
-      
-      const cl = find('clinical');
-      const ncl = find('nonclinical');
-      
-      const clNode = $('.branch--clinical', li);
-      $('.branch__name', clNode).textContent = cl.name;
-      $('.branch__summary', clNode).textContent = cl.summary;
-      cl.items.forEach(t => $('.branch__items', clNode).append(make('li', null, t)));
-      
-      const nclNode = $('.branch--nonclinical', li);
-      $('.branch__name', nclNode).textContent = ncl.name;
-      $('.branch__summary', nclNode).textContent = ncl.summary;
-      ncl.items.forEach(t => $('.branch__items', nclNode).append(make('li', null, t)));
-      
-      const entry = $('.entry', nclNode);
-      ncl.entryOptions.forEach(opt => {
-        const item = tpl('entry');
-        $('.entry__label', item).textContent = opt.name;
-        $('.entry__text',  item).textContent = opt.text;
-        entry.append(item);
-      });
-
-      // 중복되는 .fan (경로 버튼) 섹션을 안전하게 완전히 삭제합니다.
-      const fan = $('.fan', li);
-      if (fan) fan.remove();
-
-      li.classList.add('reveal');
-      list.append(li);
-    } else {
+    if (!stage.branches) {
       const li = tpl('stage');
       li.dataset.stage = stage.id;
-      $('.stage__grade', li).textContent = stage.grade;
+      $('.stage__grade', li).textContent   = stage.grade;
       $('.stage__caption', li).textContent = stage.caption;
-      stage.items.forEach(text => $('.stage__items', li).append(make('li', 'stage__item', text)));
+      stage.items.forEach(t => $('.stage__items', li).append(make('li', 'stage__item', t)));
       li.classList.add('reveal');
       list.append(li);
+      return;
     }
+
+    const li = tpl('fork');
+    li.dataset.stage = stage.id;
+    const find = id => stage.branches.find(b => b.id === id);
+    fillBranch($('.branch--clinical', li),    find('clinical'));
+    fillBranch($('.branch--nonclinical', li), find('nonclinical'));
+
+    const fan = $('.fan', li);
+    if (fan) fan.remove();          // 경로 카드는 위 섹션에 이미 있다
+
+    li.classList.add('reveal');
+    list.append(li);
   });
 
   const closing = slot('roadmap-closing');
@@ -492,6 +406,34 @@ function renderRoadmap() {
   );
 }
 
+function fillBranch(node, data) {
+  $('.branch__name', node).textContent    = data.name;
+  $('.branch__summary', node).textContent = data.summary;
+  data.items.forEach(t => $('.branch__items', node).append(make('li', null, t)));
+
+  const entry = $('.entry', node);
+  if (entry) {
+    if (data.entryOptions) {
+      data.entryOptions.forEach(opt => {
+        const item = tpl('entry');
+        $('.entry__label', item).textContent = opt.name;
+        $('.entry__text',  item).textContent = opt.text;
+        entry.append(item);
+      });
+    } else entry.remove();
+  }
+
+  if (data.note) node.append(make('p', 'branch__note', data.note));
+  if (data.link) {
+    const a = make('a', 'chip', data.link.label);
+    a.href = data.link.url; a.target = '_blank'; a.rel = 'noopener';
+    const wrap = make('p', 'branch__link');
+    wrap.append(a);
+    node.append(wrap);
+  }
+}
+
+/* ─── 다녀온 곳 · 하단 ───────────────────────────────────────── */
 function renderVisits() {
   const list = slot('visits');
   DATA.visits.forEach(v => {
@@ -525,20 +467,15 @@ function renderFooter() {
       const a = make('a', null, row.value);
       a.href = row.url; a.target = '_blank'; a.rel = 'noopener';
       dd.append(a);
-    } else {
-      dd.textContent = row.value;
-    }
+    } else dd.textContent = row.value;
     wrap.append(make('dt', null, row.label), dd);
     dl.append(wrap);
   });
 }
 
 function setupReveal() {
-  if (prefersReducedMotion) {
-    $$('.reveal').forEach(n => n.classList.add('is-in'));
-    return;
-  }
-  const io = new IntersectionObserver((entries) => {
+  if (prefersReducedMotion) { $$('.reveal').forEach(n => n.classList.add('is-in')); return; }
+  const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
       e.target.classList.add('is-in');
@@ -548,16 +485,13 @@ function setupReveal() {
   $$('.reveal').forEach(n => io.observe(n));
 }
 
-/* ════════════════════════════════════════════════════════════════
-   D. 체크리스트 기능
-   ════════════════════════════════════════════════════════════════ */
-
+/* ─── 체크리스트 ─────────────────────────────────────────────── */
 const STORE_KEY = 'dbridge-check-v1';
 let checkState = {};
 let currentGrade = DATA.checklist.gradeTabs[0].id;
 
 function loadState() {
-  try { checkState = JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } 
+  try { checkState = JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }
   catch { checkState = {}; }
 }
 function saveState() {
@@ -574,10 +508,7 @@ function visibleItems(grade) {
 
 function emptyItems(grade) {
   return visibleItems(grade).filter(it => {
-    if (it.type === 'choice') {
-      const v = checkState[it.id] || it.defaultValue;
-      return it.emptyWhen.includes(v);
-    }
+    if (it.type === 'choice') return it.emptyWhen.includes(checkState[it.id] || it.defaultValue);
     return !checkState[it.id];
   });
 }
@@ -587,7 +518,11 @@ function renderChecklist() {
   const tabs = slot('grade-tabs');
   DATA.checklist.gradeTabs.forEach(g => {
     const b = make('button', 'grade-tab', g.label);
-    b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.grade = g.id;
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-controls', 'check-form');
+    b.id = `tab-${g.id}`;
+    b.dataset.grade = g.id;
     b.addEventListener('click', () => { currentGrade = g.id; paintChecklist(); });
     tabs.append(b);
   });
@@ -610,38 +545,51 @@ function renderChecklist() {
 }
 
 function paintChecklist() {
-  $$('.grade-tab').forEach(b => b.setAttribute('aria-selected', String(b.dataset.grade === currentGrade)));
-  slot('legend-now').textContent = DATA.checklist.groupLabels.now;
+  $$('.grade-tab').forEach(b => {
+    const on = b.dataset.grade === currentGrade;
+    b.setAttribute('aria-selected', String(on));
+    b.tabIndex = on ? 0 : -1;
+  });
+  $('#check-form').setAttribute('aria-labelledby', `tab-${currentGrade}`);
+
+  slot('legend-now').textContent     = DATA.checklist.groupLabels.now;
   slot('legend-ongoing').textContent = DATA.checklist.groupLabels.ongoing;
 
   const items = visibleItems(currentGrade);
   ['now', 'ongoing'].forEach(group => {
     const ul = slot(`items-${group}`);
     ul.textContent = '';
-    items.filter(it => it.group === group).forEach(it => {
-      if (it.type === 'choice') {
-        const li = tpl('choice');
-        $('.check__text', li).textContent = it.text;
-        const box = $('.choice__options', li);
-        const cur = checkState[it.id] || it.defaultValue;
-        it.options.forEach(opt => {
-          const b = make('button', 'choice__btn', opt.label);
-          b.type = 'button'; b.setAttribute('aria-pressed', String(cur === opt.value));
-          b.addEventListener('click', () => { checkState[it.id] = opt.value; saveState(); paintChecklist(); });
-          box.append(b);
-        });
-        ul.append(li);
-      } else {
-        const li = tpl('check');
-        const input = $('.check__box', li);
-        input.id = `chk-${it.id}`; input.checked = !!checkState[it.id];
-        $('.check__text', li).textContent = it.text;
-        input.addEventListener('change', () => { checkState[it.id] = input.checked; saveState(); paintResult(); });
-        ul.append(li);
-      }
-    });
+    items.filter(it => it.group === group).forEach(it => ul.append(buildCheckItem(it)));
   });
   paintResult();
+}
+
+function buildCheckItem(it) {
+  if (it.type === 'choice') {
+    const li = tpl('choice');
+    $('.check__text', li).textContent = it.text;
+    const box = $('.choice__options', li);
+    const cur = checkState[it.id] || it.defaultValue;
+    it.options.forEach(opt => {
+      const b = make('button', 'choice__btn', opt.label);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', String(cur === opt.value));
+      b.addEventListener('click', () => {
+        checkState[it.id] = opt.value; saveState(); paintChecklist();
+      });
+      box.append(b);
+    });
+    return li;
+  }
+  const li = tpl('check');
+  const input = $('.check__box', li);
+  input.id = `chk-${it.id}`;
+  input.checked = !!checkState[it.id];
+  $('.check__text', li).textContent = it.text;
+  input.addEventListener('change', () => {
+    checkState[it.id] = input.checked; saveState(); paintResult();
+  });
+  return li;
 }
 
 function paintResult() {
@@ -651,77 +599,16 @@ function paintResult() {
 
   const list = slot('result-list');
   list.textContent = '';
-  empties.forEach(it => {
-    const li = tpl('empty');
-    $('.empty__text', li).textContent = it.emptyLabel || it.text;
-    if (it.emptyNote) $('.empty__note', li).textContent = it.emptyNote;
-    else $('.empty__note', li).remove();
-
-    const progs = $('.empty__programs', li);
-    (it.programs || []).forEach(pid => {
-      const pr = DATA.programs[pid];
-      if (!pr) return;
-      const tag = pr.url ? make('a', 'chip') : make('span', 'chip');
-      if (pr.url) { tag.href = pr.url; tag.target = '_blank'; tag.rel = 'noopener'; }
-      if (pr.kind === 'external') tag.classList.add('chip--ext');
-      tag.append(make('span', 'chip__name', pr.name));
-      if (pr.when) tag.append(make('span', 'chip__when', pr.when));
-      
-      const liProg = make('li');
-      liProg.append(tag);
-      progs.append(liProg);
-    });
-    if (it.noProgram) {
-      const pNote = make('p', 'empty__noprog', it.noProgram);
-      li.insertBefore(pNote, progs.nextSibling);
-    }
-
-    const jobs = $('.empty__jobs', li);
-    if (it.jobSearch) {
-      const site = DATA.jobSites[0];
-      const jobUrl = kw => site.template.replace('{q}', encodeURIComponent(kw));
-      
-      if (it.jobSearch.mode === 'byPath') {
-        DATA.paths.forEach(p => {
-          const liJob = make('li');
-          const aJob = make('a', 'chip chip--job', `${p.num} ${p.name} 공고`);
-          aJob.href = jobUrl(p.jobKeywords[0]);
-          aJob.target = '_blank';
-          liJob.append(aJob);
-          jobs.append(liJob);
-        });
-      } else if (it.jobSearch.mode === 'keywords') {
-        it.jobSearch.keywords.forEach(kw => {
-          const liJob = make('li');
-          const aJob = make('a', 'chip chip--job', `“${kw}” 공고`);
-          aJob.href = jobUrl(kw);
-          aJob.target = '_blank';
-          liJob.append(aJob);
-          jobs.append(liJob);
-        });
-      } else if (it.jobSearch.mode === 'company') {
-        const liJob = make('li', 'job-search');
-        const input = make('input', 'job-search__input'); input.type = 'text'; input.placeholder = '기업 이름';
-        const go = make('button', 'chip chip--job', '공고 찾기'); go.type = 'button';
-        const open = () => { if (input.value.trim()) window.open(jobUrl(input.value.trim()), '_blank', 'noopener'); };
-        go.addEventListener('click', open);
-        input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); open(); } });
-        liJob.append(input, go); jobs.append(liJob);
-      }
-    }
-    
-    if (!jobs.children.length) jobs.remove();
-    if (!progs.children.length) progs.remove();
-    list.append(li);
-  });
+  empties.forEach(it => list.append(buildEmptyCard(it)));
 
   const prevWrap = slot('result-preview');
   prevWrap.textContent = '';
-  if (R.preview[currentGrade]) {
+  const prev = R.preview[currentGrade];
+  if (prev) {
     prevWrap.hidden = false;
-    prevWrap.append(make('p', 'result__preview-caption', R.preview[currentGrade].caption));
+    prevWrap.append(make('p', 'result__preview-caption', prev.caption));
     const ul = make('ul');
-    R.preview[currentGrade].items.forEach(id => {
+    prev.items.forEach(id => {
       const it = DATA.checklist.items.find(x => x.id === id);
       if (it) ul.append(make('li', null, it.text));
     });
@@ -739,16 +626,82 @@ function paintResult() {
   } else done.hidden = true;
 }
 
+function buildEmptyCard(it) {
+  const li = tpl('empty');
+  $('.empty__text', li).textContent = it.emptyLabel || it.text;
+  if (it.emptyNote) $('.empty__note', li).textContent = it.emptyNote;
+  else $('.empty__note', li).remove();
+
+  const progs = $('.empty__programs', li);
+  (it.programs || []).forEach(pid => {
+    const pr = DATA.programs[pid];
+    if (!pr) return;
+    const tag = pr.url ? make('a', 'chip') : make('span', 'chip');
+    if (pr.url) { tag.href = pr.url; tag.target = '_blank'; tag.rel = 'noopener'; }
+    if (pr.kind === 'external') tag.classList.add('chip--ext');
+    tag.append(make('span', 'chip__name', pr.name));
+    if (pr.when) tag.append(make('span', 'chip__when', pr.when));
+    const wrap = make('li');
+    wrap.append(tag);
+    progs.append(wrap);
+  });
+
+  if (it.noProgram) li.insertBefore(make('p', 'empty__noprog', it.noProgram), progs.nextSibling);
+
+  const jobs = $('.empty__jobs', li);
+  buildJobs(jobs, it);
+
+  if (!jobs.children.length) jobs.remove();
+  if (!progs.children.length) progs.remove();
+  return li;
+}
+
+function buildJobs(wrap, it) {
+  if (!it.jobSearch) return;
+  const site = DATA.jobSites[0];
+  const url = kw => site.template.replace('{q}', encodeURIComponent(kw));
+  const chip = (label, href) => {
+    const a = make('a', 'chip chip--job', label);
+    a.href = href; a.target = '_blank'; a.rel = 'noopener';
+    const li = make('li'); li.append(a); return li;
+  };
+
+  if (it.jobSearch.mode === 'byPath') {
+    DATA.paths.forEach(p => wrap.append(chip(`${p.num} ${p.name} 공고`, url(p.jobKeywords[0]))));
+  } else if (it.jobSearch.mode === 'keywords') {
+    it.jobSearch.keywords.forEach(kw => wrap.append(chip(`“${kw}” 공고`, url(kw))));
+  } else if (it.jobSearch.mode === 'company') {
+    const li = make('li', 'job-search');
+    const input = make('input', 'job-search__input');
+    input.type = 'text';
+    input.placeholder = '기업 이름';
+    input.setAttribute('aria-label', '검색할 기업 이름');
+    const go = make('button', 'chip chip--job', '공고 찾기');
+    go.type = 'button';
+    const open = () => { if (input.value.trim()) window.open(url(input.value.trim()), '_blank', 'noopener'); };
+    go.addEventListener('click', open);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); open(); } });
+    li.append(input, go);
+    wrap.append(li);
+  }
+}
+
+/* ─── 저장 · 인쇄 ────────────────────────────────────────────── */
 function buildExport() {
-  const box = $('#export-sheet'); box.textContent = '';
-  box.append(make('p', 'export__eyebrow', `${DATA.checklist.gradeTabs.find(g => g.id === currentGrade).label} · 임상병리사의 바이오 진출 로드맵`));
+  const box = $('#export-sheet');
+  box.textContent = '';
+  const label = DATA.checklist.gradeTabs.find(g => g.id === currentGrade).label;
+  box.append(make('p', 'export__eyebrow', `${label} · 임상병리사의 바이오 진출 로드맵`));
   box.append(make('h2', 'export__title', slot('result-heading').textContent));
+
   const ul = make('ul', 'export__list');
   emptyItems(currentGrade).forEach(it => {
     const li = make('li', 'export__item');
     li.append(make('h3', null, it.emptyLabel || it.text));
     if (it.emptyNote) li.append(make('p', 'export__note', it.emptyNote));
-    const names = (it.programs || []).map(pid => DATA.programs[pid]).filter(Boolean).map(pr => pr.when ? `${pr.name} (${pr.when})` : pr.name);
+    const names = (it.programs || [])
+      .map(pid => DATA.programs[pid]).filter(Boolean)
+      .map(pr => pr.when ? `${pr.name} (${pr.when})` : pr.name);
     if (it.noProgram) names.push(it.noProgram);
     if (names.length) li.append(make('p', 'export__progs', names.join('  ·  ')));
     ul.append(li);
@@ -760,32 +713,31 @@ function buildExport() {
 
 function saveImage() {
   const box = buildExport();
-  const done = (canvas) => {
+  const done = canvas => {
     const a = document.createElement('a');
     a.download = `${DATA.checklist.result.export.filename}-${currentGrade}.png`;
-    a.href = canvas.toDataURL('image/png'); a.click();
+    a.href = canvas.toDataURL('image/png');
+    a.click();
   };
-  if (window.html2canvas) { html2canvas(box, { scale: 2, backgroundColor: '#ffffff' }).then(done); return; }
+  const run = () => html2canvas(box, { scale: 2, backgroundColor: '#ffffff' }).then(done);
+  if (window.html2canvas) return run();
+
   const sc = document.createElement('script');
   sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
-  sc.onload = () => html2canvas(box, { scale: 2, backgroundColor: '#ffffff' }).then(done);
-  sc.onerror = () => window.print();
+  sc.onload  = run;
+  sc.onerror = () => window.print();     // 못 불러오면 인쇄로 대체
   document.head.append(sc);
 }
 
-/* ════════════════════════════════════════════════════════════════
-   E. 바텀시트 기능 및 비교과 모아보기 팝업
-   ════════════════════════════════════════════════════════════════ */
-
+/* ─── 바텀시트 ───────────────────────────────────────────────── */
 function openSheet({ eyebrow, title, build }) {
-  const dlg  = $('#sheet');
   const body = slot('sheet-body');
   slot('sheet-eyebrow').textContent = eyebrow || '';
   slot('sheet-title').textContent   = title || '';
   body.textContent = '';
   if (build) build(body);
   document.documentElement.classList.add('is-locked');
-  dlg.showModal();
+  $('#sheet').showModal();
   body.focus();
 }
 
@@ -809,89 +761,47 @@ function openPathSheet(path) {
     title: `${path.num} ${path.name}`,
     build(body) {
       const basics = make('section', 'src src--basics');
-      const wWrap = make('div', 'src__group'); wWrap.append(make('p', 'src__group-label', DATA.sheetLabels.work));
-      const wUl = make('ul'); wUl.append(make('li', null, path.work)); wWrap.append(wUl);
-      
-      const cWrap = make('div', 'src__group'); cWrap.append(make('p', 'src__group-label', DATA.sheetLabels.courses));
-      const cUl = make('ul'); path.courses.forEach(c => cUl.append(make('li', null, c))); cWrap.append(cUl);
-      
-      basics.append(wWrap, cWrap);
+      basics.append(labelledList(DATA.sheetLabels.work, [path.work]));
+      basics.append(labelledList(DATA.sheetLabels.courses, path.courses));
       body.append(basics);
 
       (path.sections || []).forEach(sec => {
         const node = tpl('sheet-section');
+        node.dataset.origin = sec.origin;
         $('.src__badge', node).textContent = DATA.originLabels[sec.origin];
         $('.src__title', node).remove();
         sec.body.forEach(t => $('.src__body', node).append(make('p', null, t)));
-        (sec.groups || []).forEach(grp => {
-          const gWrap = make('div', 'src__group'); gWrap.append(make('p', 'src__group-label', grp.label));
-          const gUl = make('ul'); grp.items.forEach(i => gUl.append(make('li', null, i))); gWrap.append(gUl);
-          $('.src__groups', node).append(gWrap);
-        });
+        (sec.groups || []).forEach(g => $('.src__groups', node).append(labelledList(g.label, g.items)));
         body.append(node);
       });
     }
   });
 }
 
+/* 비교과 프로그램 모아보기 */
 function initProgramBtn() {
   const btn = $('#btn-show-programs');
   if (!btn) return;
   btn.addEventListener('click', () => {
     openSheet({
-      eyebrow: 'D-Bridge 추천',
-      title: '교내외 비교과 프로그램 모음',
+      eyebrow: '교내외 비교과',
+      title: '프로그램 모아보기',
       build(body) {
-        const ul = make('ul', 'prog-popup-list');
-        ul.style.display = 'grid';
-        ul.style.gap = '1rem';
-        ul.style.marginTop = '1rem';
-
+        const ul = make('ul', 'prog-list');
         Object.values(DATA.programs).forEach(pr => {
-          const li = make('li', 'prog-popup-item');
-          li.style.padding = '1rem';
-          li.style.border = '1px solid var(--rule)';
-          li.style.borderRadius = 'var(--radius)';
-          li.style.background = 'var(--paper)';
+          const li = tpl('program');
+          $('.prog__kind', li).textContent = pr.kind === 'campus' ? '교내' : '외부';
+          $('.prog__kind', li).dataset.kind = pr.kind;
+          $('.prog__name', li).textContent = pr.name;
 
-          const head = make('div', null);
-          head.style.display = 'flex';
-          head.style.alignItems = 'center';
-          head.style.gap = '0.5rem';
-          head.style.marginBottom = '0.5rem';
+          // 모르는 신청 시기를 지어내지 않는다
+          if (pr.when) $('.prog__when', li).textContent = pr.when;
+          else $('.prog__when', li).remove();
 
-          const kind = make('span', null, pr.kind === 'campus' ? '교내' : '외부');
-          kind.style.fontSize = '0.75rem';
-          kind.style.fontWeight = '700';
-          kind.style.padding = '0.2rem 0.5rem';
-          kind.style.borderRadius = '999px';
-          kind.style.background = pr.kind === 'campus' ? 'var(--accent-soft)' : 'transparent';
-          kind.style.border = pr.kind === 'campus' ? 'none' : '1px dashed var(--rule-2)';
-          kind.style.color = pr.kind === 'campus' ? 'var(--accent)' : 'var(--ink-2)';
+          const a = $('.prog__link', li);
+          if (pr.url) { a.href = pr.url; a.target = '_blank'; a.rel = 'noopener'; }
+          else a.remove();
 
-          const name = make('strong', null, pr.name);
-          name.style.fontSize = '0.9375rem';
-          name.style.color = 'var(--ink)';
-
-          head.append(kind, name);
-
-          const when = make('p', null, pr.when || '상시 운영');
-          when.style.fontSize = '0.8125rem';
-          when.style.color = 'var(--ink-2)';
-          when.style.marginBottom = pr.url ? '0.75rem' : '0';
-
-          li.append(head, when);
-
-          if (pr.url) {
-            const a = make('a', 'btn btn--quiet', '바로가기 ↗');
-            a.href = pr.url;
-            a.target = '_blank';
-            a.rel = 'noopener';
-            a.style.display = 'inline-block';
-            a.style.fontSize = '0.8125rem';
-            a.style.padding = '0.4rem 0.75rem';
-            li.append(a);
-          }
           ul.append(li);
         });
         body.append(ul);
@@ -900,15 +810,21 @@ function initProgramBtn() {
   });
 }
 
+/* ─── 시작 ───────────────────────────────────────────────────── */
 function init() {
-  renderHero();
-  renderPaths();
-  renderRoadmap();
-  renderChecklist();
-  renderVisits();
-  renderFooter();
-  setupReveal();
-  initProgramBtn();
+  // 한 곳이 실패해도 나머지 화면은 그린다
+  const safe = (name, fn) => {
+    try { fn(); } catch (err) { console.error(`[${name}] 렌더 실패`, err); }
+  };
+
+  safe('hero',      renderHero);
+  safe('paths',     renderPaths);
+  safe('roadmap',   renderRoadmap);
+  safe('checklist', renderChecklist);
+  safe('visits',    renderVisits);
+  safe('footer',    renderFooter);
+  safe('reveal',    setupReveal);
+  safe('programs',  initProgramBtn);
 
   $('[data-action="close-sheet"]').addEventListener('click', closeSheet);
   $('#sheet').addEventListener('close', () => document.documentElement.classList.remove('is-locked'));
