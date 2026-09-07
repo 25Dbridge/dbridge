@@ -6,13 +6,22 @@
 <title>임상병리사의 바이오 진출 로드맵 · D-Bridge</title>
 
 <meta name="description" content="동서대학교 임상병리학과 재학생 5인이 일본 고베 의료산업도시와 국내 신약개발 기업을 현장 조사하여 정리한 비임상 진로 안내">
-<meta name="theme-color" content="#101114">
+<meta name="theme-color" content="#201D2B">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="임상병리사의 바이오 진출 로드맵 · D-Bridge">
 <meta property="og:description" content="Carna Biosciences · RIKEN BDR · FBRI · 고베대학 BiCLET | 펩트론 · 지투지바이오 · 인코스팜">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:image" content="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=1200&auto=format&fit=crop">
+<meta property="og:url" content="https://25dbridge.github.io/dbridge/">
+
+<!-- ★ og-image.png 를 index.html 옆에 올린 뒤 이 주소가 맞는지 확인하세요 -->
+<meta property="og:image" content="https://25dbridge.github.io/dbridge/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- 파비콘 : 별도 파일 없이 문자 하나로 -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23201D2B'/%3E%3Cpath d='M20 44V20h9c7 0 11 4.5 11 12s-4 12-11 12z' fill='%23F6F5F8'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
@@ -22,7 +31,11 @@
 <body>
 <a class="skip-link" href="#paths">본문으로 건너뛰기</a>
 
-<!-- 상단 고정 내비게이션 -->
+<noscript>
+  <p class="noscript">이 페이지는 자바스크립트로 내용을 표시합니다. 브라우저 설정에서 자바스크립트를 켜고 새로고침해 주세요.</p>
+</noscript>
+
+<!-- 상단 고정 내비게이션 (모바일에서는 숨김) -->
 <nav class="sticky-nav">
   <div class="sticky-nav__inner">
     <span class="sticky-nav__logo">D-Bridge</span>
@@ -38,9 +51,9 @@
 <!-- 1. 첫 화면 -->
 <header class="hero" id="hero">
   <div class="hero__bg" aria-hidden="true">
-    <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=2000&auto=format&fit=crop" alt="">
+    <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=2000&auto=format&fit=crop" alt="" loading="eager" decoding="async">
   </div>
-  
+
   <div class="hero__inner">
     <h1 class="hero__question" data-render="hero-question"></h1>
     <p class="hero__answer" data-render="hero-answer"></p>
@@ -61,20 +74,20 @@
   <section class="roadmap" id="roadmap" aria-labelledby="roadmap-title">
     <h2 class="section__title" id="roadmap-title">학년별 진로 준비 로드맵</h2>
     <p class="roadmap__notice" data-render="roadmap-notice" role="note"></p>
-    <ol class="timeline" data-render="timeline"></ol>
+    <ol class="timeline" role="list" data-render="timeline"></ol>
     <div class="roadmap__closing" data-render="roadmap-closing"></div>
   </section>
 
   <!-- 4. 체크리스트 -->
   <section class="checklist" id="checklist" aria-labelledby="checklist-title">
-    <header style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:var(--sp-4); flex-wrap:wrap; gap:1rem;">
-      <h2 class="section__title" id="checklist-title" style="margin-bottom:0;">진로 준비도 자가 진단</h2>
-      <!-- 비교과 모아보기 버튼 추가 -->
-      <button type="button" class="btn btn--outline" id="btn-show-programs">💡 비교과 프로그램 모아보기</button>
+    <header class="checklist__head">
+      <h2 class="section__title" id="checklist-title">진로 준비도 자가 진단</h2>
+      <button type="button" class="btn btn--outline" id="btn-show-programs">비교과 프로그램 모아보기</button>
     </header>
-    
+
     <div class="grades" role="tablist" aria-label="학년 선택" data-render="grade-tabs"></div>
-    <form class="check" id="check-form" aria-labelledby="checklist-title">
+
+    <form class="check" id="check-form" role="tabpanel" aria-label="선택한 학년의 점검 문항">
       <fieldset class="check__group" data-group="now">
         <legend class="check__legend" data-render="legend-now"></legend>
         <ul class="check__list" data-render="items-now"></ul>
@@ -85,6 +98,7 @@
         <ul class="check__list" data-render="items-ongoing"></ul>
       </fieldset>
     </form>
+
     <div class="result" id="result" aria-live="polite">
       <h3 class="result__heading" data-render="result-heading"></h3>
       <ul class="result__list"    data-render="result-list"></ul>
@@ -96,6 +110,8 @@
         <button type="button" class="btn btn--quiet" data-action="reset">체크 지우기</button>
       </div>
     </div>
+
+    <!-- 저장·인쇄 전용. 화면에는 보이지 않습니다. -->
     <div class="export-sheet" id="export-sheet" aria-hidden="true"></div>
   </section>
 
@@ -236,9 +252,16 @@
   </li>
 </template>
 
-<noscript>
-  <p class="noscript">이 페이지는 자바스크립트로 내용을 표시합니다. 브라우저에서 자바스크립트를 켜 주세요.</p>
-</noscript>
+<template id="tpl-program">
+  <li class="prog">
+    <div class="prog__head">
+      <span class="prog__kind"></span>
+      <strong class="prog__name"></strong>
+    </div>
+    <p class="prog__when"></p>
+    <a class="prog__link btn btn--quiet">바로가기</a>
+  </li>
+</template>
 
 <script src="script.js" defer></script>
 </body>
