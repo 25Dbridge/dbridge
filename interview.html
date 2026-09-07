@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>누구를 만나 무엇을 들었나 · D-Bridge 조사 아카이브</title>
+
+<meta name="description" content="일본 고베와 국내 대전·오송에서 만난 일곱 곳의 인터뷰 기록. 동서대학교 임상병리학과 D-Bridge 팀의 조사 아카이브.">
+<meta name="theme-color" content="#101114">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="누구를 만나 무엇을 들었나 · D-Bridge 조사 아카이브">
+<meta property="og:description" content="Carna Biosciences · RIKEN BDR · FBRI · 고베대학 BiCLET | 펩트론 · 지투지바이오 · 인코스팜">
+<meta property="og:locale" content="ko_KR">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="page-interview">
+<a class="skip-link" href="#groups">본문으로 건너뛰기</a>
+
+<!-- ═══════════════════════════════════════════════
+     머리
+     ═══════════════════════════════════════════════ -->
+<header class="page-head">
+  <div class="page-head__inner">
+    <a class="page-head__back" href="index.html" data-render="back-top"></a>
+
+    <p class="page-head__eyebrow" data-render="head-eyebrow"></p>
+    <h1 class="page-head__title" data-render="head-title"></h1>
+    <p class="page-head__lead" data-render="head-lead"></p>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════
+     지역별 · 기관별 기록
+     ═══════════════════════════════════════════════ -->
+<main id="groups" data-render="groups"></main>
+
+
+<!-- ═══════════════════════════════════════════════
+     하단
+     ═══════════════════════════════════════════════ -->
+<footer class="foot">
+  <section class="foot__limit" aria-labelledby="scope-title">
+    <h2 class="foot__title" id="scope-title" data-render="foot-heading"></h2>
+    <div data-render="foot-body"></div>
+  </section>
+
+  <p class="foot__backwrap">
+    <a class="btn" href="index.html" data-render="back-bottom"></a>
+  </p>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════
+     반복 단위 템플릿
+     ═══════════════════════════════════════════════ -->
+
+<!-- 기관 카드 : 머리는 항상 보이고, 인터뷰는 펼쳐서 본다 -->
+<template id="tpl-org">
+  <article class="org">
+    <p class="org__kind"></p>
+    <h3 class="org__name"></h3>
+    <p class="org__when"></p>
+    <p class="org__saw"></p>
+
+    <details class="org__details">
+      <summary class="org__summary">
+        <span class="org__count"></span>
+      </summary>
+      <ol class="org__qa"></ol>
+    </details>
+  </article>
+</template>
+
+<!-- 문답 하나 -->
+<template id="tpl-qa">
+  <li class="qa">
+    <h4 class="qa__q"></h4>
+    <div class="qa__a"></div>
+  </li>
+</template>
+
+<noscript>
+  <p class="noscript">이 페이지는 자바스크립트로 내용을 표시합니다. 브라우저에서 자바스크립트를 켜 주세요.</p>
+</noscript>
+
+<script src="interview.js" defer></script>
+</body>
+</html>

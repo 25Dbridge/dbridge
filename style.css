@@ -196,20 +196,21 @@ main > section {
 }
 
 .hero__question {
-  font-size: clamp(2.5rem, 11.5vw, 6.5rem);
+  /* 한 줄이 11자까지 늘어나 360px 화면에서 넘치지 않도록 낮춰 잡았다 */
+  font-size: clamp(1.625rem, 7.4vw, 4rem);
   font-weight: 800;
-  line-height: 1.04;
-  letter-spacing: -.045em;
+  line-height: 1.12;
+  letter-spacing: -.04em;
 }
 .hero__line { display: block; }
 
 /* 결과보고서의 답 문장 — 질문 바로 아래에서 무게를 덜어준다 */
 .hero__answer {
-  margin-top: var(--sp-3);
-  max-width: 28rem;
-  font-size: clamp(1.0625rem, 3.6vw, 1.375rem);
+  margin-top: var(--sp-4);
+  max-width: 33rem;
+  font-size: clamp(.9375rem, 2.9vw, 1.125rem);
   font-weight: 500;
-  line-height: 1.55;
+  line-height: 1.72;
   color: var(--hero-dim);
 }
 .hero__answer b {
@@ -220,10 +221,13 @@ main > section {
 .hero__stats {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--sp-4) var(--sp-5);
+  gap: var(--sp-3);
   margin-top: var(--sp-5);
   padding-top: var(--sp-4);
   border-top: 1px solid rgba(246, 245, 248, .18);
+}
+@media (min-width: 480px) {
+  .hero__stats { gap: var(--sp-4) var(--sp-5); }
 }
 .hero__stat dt { order: 2; }
 .hero__stat dd { order: 1; margin: 0; }
@@ -234,14 +238,23 @@ main > section {
   gap: .125rem;
 }
 .hero__num {
-  font-size: clamp(2.75rem, 12vw, 4.5rem);
+  display: flex;
+  align-items: baseline;
+  gap: .0625rem;
+  font-size: clamp(2.25rem, 9.5vw, 4rem);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -.04em;
   font-variant-numeric: tabular-nums;
 }
+/* 10"인" 처럼 숫자 뒤에 붙는 단위 */
+.hero__suffix {
+  font-size: .45em;
+  font-weight: 600;
+  letter-spacing: 0;
+}
 .hero__label {
-  font-size: .875rem;
+  font-size: .8125rem;
   color: var(--hero-dim);
 }
 
@@ -261,8 +274,9 @@ main > section {
 
 /* 폰을 눕혔거나 화면이 낮을 때 — 질문·숫자를 한 단계 줄여 한 화면에 넣는다 */
 @media (max-height: 700px) {
-  .hero__question { font-size: clamp(1.75rem, 6.5vh, 3.25rem); }
-  .hero__num      { font-size: clamp(1.75rem, 6vh, 2.75rem); }
+  .hero__question { font-size: clamp(1.375rem, 5vh, 2.5rem); }
+  .hero__num      { font-size: clamp(1.625rem, 5.5vh, 2.5rem); }
+  .hero__answer   { margin-top: var(--sp-3); }
   .hero__stats    { margin-top: var(--sp-4); gap: var(--sp-3) var(--sp-4); }
   .hero__byline   { margin-top: var(--sp-4); }
 }
@@ -568,6 +582,35 @@ main > section {
   margin-top: var(--sp-3);
   font-size: .9375rem;
 }
+
+/* 학과 연구실 — 카드에는 이름만, 상세는 바텀시트에 */
+.path__lab {
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .5rem;
+  font-size: .8125rem;
+}
+.path__lab-label { color: var(--ink-3); }
+.path__lab-name  { font-weight: 700; color: var(--c, var(--ink)); }
+
+/* 아직 열리지 않은 연구실 */
+.path__lab-status {
+  padding: .0625rem .375rem;
+  border: 1px solid var(--rule-2);
+  border-radius: 999px;
+  font-size: .6875rem;
+  color: var(--ink-2);
+}
+
+/* 연계 연구실이 없는 경로는 색을 빼서 담담하게 둔다 */
+.path__lab--none .path__lab-name {
+  font-weight: 500;
+  color: var(--ink-3);
+}
 .path__majors {
   margin-top: var(--sp-3);
   display: flex;
@@ -575,10 +618,12 @@ main > section {
   gap: .375rem;
 }
 .path__majors li {
+  max-width: 100%;
   padding: .1875rem .5625rem;
   border-radius: 999px;
   background: var(--paper-2);
   font-size: .8125rem;
+  line-height: 1.5;
   color: var(--ink-2);
 }
 
@@ -949,6 +994,15 @@ a.chip:hover { border-color: var(--accent); color: var(--accent); }
   background: var(--ink-3);
 }
 
+/* 하는 일 / 연결 과목 / 학과 연구실 */
+.src--basics { padding-bottom: var(--sp-2); }
+
+/* 연계 연구실이 없다고 적는 자리 */
+.src__group--none li { color: var(--ink-2); }
+
+/* 연구실 정보 링크 */
+.src__group-link { margin-top: var(--sp-2); }
+
 /* ③번 경로 상단의 솔직한 한 줄 */
 .sheet__caveat {
   margin-bottom: var(--sp-4);
@@ -1030,6 +1084,9 @@ a.chip:hover { border-color: var(--accent); color: var(--accent); }
 }
 .method p + p { margin-top: .5rem; }
 
+.visits__more { margin-top: var(--sp-5); }
+.visits__more .btn { display: inline-block; text-decoration: none; }
+
 .foot {
   background: var(--paper-2);
   padding-block: var(--sp-6);
@@ -1063,6 +1120,8 @@ a.chip:hover { border-color: var(--accent); color: var(--accent); }
   margin-top: var(--sp-5);
   padding-top: var(--sp-4);
   border-top: 1px solid var(--rule-2);
+}
+.foot__baton p {
   font-size: .875rem;
   line-height: 1.75;
   color: var(--ink-2);
@@ -1097,4 +1156,212 @@ a.chip:hover { border-color: var(--accent); color: var(--accent); }
 
   /* 분기선은 이미 그려진 상태로 보여준다 */
   .branch-line { stroke-dashoffset: 0 !important; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   13. 인터뷰 아카이브 (interview.html)
+   ═══════════════════════════════════════════════════════════════ */
+
+.page-head {
+  background: var(--hero-bg);
+  color: var(--hero-ink);
+  padding-block: var(--sp-5) var(--sp-6);
+  padding-inline: var(--gutter);
+}
+.page-head__inner {
+  max-width: calc(var(--measure) + var(--gutter) * 2);
+  margin-inline: auto;
+}
+
+.page-head__back {
+  display: inline-block;
+  margin-bottom: var(--sp-5);
+  font-size: .875rem;
+  color: var(--hero-dim);
+  text-decoration: none;
+}
+.page-head__back:hover { color: var(--hero-ink); }
+
+.page-head__eyebrow {
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--hero-dim);
+  margin-bottom: var(--sp-2);
+}
+.page-head__title {
+  font-size: clamp(2rem, 9vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.14;
+  letter-spacing: -.04em;
+}
+.page-head__lead {
+  margin-top: var(--sp-4);
+  max-width: 32rem;
+  font-size: .9375rem;
+  line-height: 1.75;
+  color: var(--hero-dim);
+}
+
+/* ── 지역 묶음 ─────────────────────────────────────────────── */
+.group {
+  padding-block: var(--sp-6);
+  padding-inline: var(--gutter);
+  max-width: calc(var(--measure) + var(--gutter) * 2);
+  margin-inline: auto;
+}
+.group + .group { border-top: 1px solid var(--rule); }
+
+.group__head { margin-bottom: var(--sp-5); }
+.group__head .section__title { margin-bottom: var(--sp-1); }
+
+.group__period {
+  font-size: .8125rem;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.group__note {
+  margin-top: var(--sp-3);
+  font-size: .875rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+.group__list { display: grid; gap: var(--sp-3); }
+
+/* ── 기관 카드 ─────────────────────────────────────────────── */
+.org {
+  padding: var(--sp-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+}
+
+.org__kind {
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--ink-3);
+  line-height: 1.55;
+}
+.org__name {
+  margin-top: .1875rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -.03em;
+}
+.org__when {
+  margin-top: .25rem;
+  font-size: .8125rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+.org__saw {
+  margin-top: var(--sp-3);
+  font-size: .9375rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+/* 펼치기 */
+.org__details { margin-top: var(--sp-3); }
+
+.org__summary {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .625rem 0;
+  border-top: 1px solid var(--rule);
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--accent);
+  cursor: pointer;
+  list-style: none;
+}
+.org__summary::-webkit-details-marker { display: none; }
+
+.org__summary::after {
+  content: "";
+  width: .5rem;
+  height: .5rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform .2s var(--ease);
+}
+.org__details[open] .org__summary::after {
+  transform: translateY(1px) rotate(-135deg);
+}
+.org__summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.org__qa {
+  display: grid;
+  gap: var(--sp-4);
+  padding-top: var(--sp-3);
+}
+
+.qa__q {
+  font-size: .9375rem;
+  font-weight: 700;
+  line-height: 1.6;
+  padding-left: .9375rem;
+  position: relative;
+}
+.qa__q::before {
+  content: "Q";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: .8125rem;
+  color: var(--accent);
+}
+.qa__a { margin-top: .5rem; padding-left: .9375rem; }
+.qa__a p {
+  font-size: .9375rem;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+.qa__a p + p { margin-top: .5rem; }
+
+/* ── 인터뷰가 아닌 참관 기록 ───────────────────────────────── */
+.org--extra {
+  background: var(--paper-2);
+  border-style: dashed;
+}
+.org__extra-body { margin-top: var(--sp-3); }
+.org__extra-body p {
+  font-size: .9375rem;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+.org__extra-body p + p { margin-top: var(--sp-2); }
+
+/* ── 하단 ──────────────────────────────────────────────────── */
+.page-interview .foot__limit p {
+  font-size: .875rem;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+.page-interview .foot__limit p + p { margin-top: .5rem; }
+
+.foot__backwrap {
+  max-width: var(--measure);
+  margin: var(--sp-5) auto 0;
+}
+.foot__backwrap .btn {
+  display: inline-block;
+  text-decoration: none;
+}
+
+@media (min-width: 900px) {
+  .group { max-width: 60rem; }
+  .group__list { grid-template-columns: repeat(2, 1fr); align-items: start; }
+  .org--extra { grid-column: 1 / -1; }
+}
+
+@media print {
+  .page-head__back, .foot__backwrap { display: none; }
+  .org__qa { display: grid !important; }
 }
