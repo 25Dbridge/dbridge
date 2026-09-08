@@ -12,13 +12,19 @@
 <meta property="og:title" content="임상병리사의 바이오 진출 로드맵 · D-Bridge">
 <meta property="og:description" content="Carna Biosciences · RIKEN BDR · FBRI · 고베대학 BiCLET | 펩트론 · 지투지바이오 · 인코스팜">
 <meta property="og:locale" content="ko_KR">
+<meta property="og:url" content="https://25dbridge.github.io/dbridge/">
 <meta property="og:image" content="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=1200&auto=format&fit=crop">
+<meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23201D2B'/%3E%3Cpath d='M20 44V20h9c7 0 11 4.5 11 12s-4 12-11 12z' fill='%23F6F5F8'/%3E%3C/svg%3E">
 
+<!-- 방문자 수 집계 · 통계는 https://dbridge25.goatcounter.com 에서 봅니다 -->
+<script data-goatcounter="https://dbridge25.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
-<link rel="stylesheet" href="style.css?v=101">
+<link rel="stylesheet" href="style.css?v=200">
 </head>
 
 <body>
@@ -31,12 +37,11 @@
 <!-- 상단 고정 내비게이션 -->
 <nav class="sticky-nav">
   <div class="sticky-nav__inner">
-    <span class="sticky-nav__logo">D-Bridge</span>
+    <a class="sticky-nav__logo" href="#hero">D-Bridge</a>
     <ul class="sticky-nav__links">
       <li><a href="#paths">비임상 진출 경로</a></li>
       <li><a href="#roadmap">학년별 로드맵</a></li>
       <li><a href="#checklist">자가 진단</a></li>
-      <li><a href="#labs">학과 연구실</a></li>
       <li><a href="#visits">다녀온 곳</a></li>
     </ul>
   </div>
@@ -61,6 +66,9 @@
   <section class="paths" id="paths" aria-labelledby="paths-title">
     <h2 class="section__title" id="paths-title">비임상 진출 경로 3가지</h2>
     <ul class="paths__list" data-render="paths"></ul>
+    <p class="paths__more">
+      <button type="button" class="btn btn--outline" id="btn-show-labs">학과 연구실 3곳 보기</button>
+    </p>
   </section>
 
   <!-- 3. 로드맵 -->
@@ -75,7 +83,7 @@
   <section class="checklist" id="checklist" aria-labelledby="checklist-title">
     <header class="checklist__head">
       <h2 class="section__title" id="checklist-title">진로 준비도 자가 진단</h2>
-      <button type="button" class="btn btn--outline" id="btn-show-programs">💡 비교과 프로그램 모아보기</button>
+      <button type="button" class="btn btn--outline" id="btn-show-programs">비교과 프로그램 모아보기</button>
     </header>
 
     <div class="grades" role="tablist" aria-label="학년 선택" data-render="grade-tabs"></div>
@@ -105,20 +113,16 @@
     <div class="export-sheet" id="export-sheet" aria-hidden="true"></div>
   </section>
 
-  <!-- 4b. 학과 연구실 -->
-  <section class="labs" id="labs" aria-labelledby="labs-title">
-    <h2 class="section__title" id="labs-title" data-render="labs-heading"></h2>
-    <p class="labs__note" data-render="labs-note"></p>
-    <ul class="labs__list" data-render="labs"></ul>
-  </section>
-
   <!-- 5. 다녀온 곳 -->
   <section class="visits" id="visits" aria-labelledby="visits-title">
     <h2 class="section__title" id="visits-title">다녀온 곳</h2>
     <ul class="visits__list" data-render="visits"></ul>
     <div class="method" data-render="method"></div>
     <p class="visits__more">
-      <a class="btn" href="interview.html" data-render="interview-link"></a>
+      <a class="cta" href="interview.html">
+        <span class="cta__label" data-render="interview-link"></span>
+        <span class="cta__sub">기관 7곳 · 문답 28개</span>
+      </a>
     </p>
   </section>
 </main>
@@ -166,7 +170,6 @@
 
 <template id="tpl-fork">
   <li class="stage stage--fork">
-    <div class="fork__lines" aria-hidden="true"></div>
     <div class="fork__branches">
       <article class="branch branch--clinical">
         <h3 class="branch__name"></h3>
@@ -199,7 +202,7 @@
         <p class="path__work"></p>
         <ul class="path__majors"></ul>
       </div>
-      <span class="path__more">자세히 보기 &rarr;</span>
+      <span class="path__more">자세히 보기</span>
     </button>
   </li>
 </template>
@@ -207,7 +210,6 @@
 <template id="tpl-sheet-section">
   <section class="src">
     <p class="src__badge"></p>
-    <h3 class="src__title"></h3>
     <div class="src__body"></div>
     <div class="src__groups"></div>
   </section>
@@ -235,7 +237,7 @@
   <li class="empty">
     <h4 class="empty__text"></h4>
     <p class="empty__note"></p>
-    <ul class="empty__programs"></ul>
+    <div class="empty__progs"></div>
     <ul class="empty__jobs"></ul>
   </li>
 </template>
@@ -257,7 +259,7 @@
     <p class="lab__pi"></p>
     <p class="lab__focus"></p>
     <ul class="lab__paths"></ul>
-    <a class="lab__link chip">연구실 정보</a>
+    <a class="lab__link btn btn--quiet">연구실 정보</a>
   </li>
 </template>
 
@@ -272,6 +274,6 @@
   </li>
 </template>
 
-<script src="script.js?v=101" defer></script>
+<script src="script.js?v=200" defer></script>
 </body>
 </html>
