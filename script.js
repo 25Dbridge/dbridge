@@ -45,12 +45,11 @@ const DATA = {
             id: 'clinical', name: '임상', summary: '국가시험과 병원 취업',
             items: [
               '국가시험 합격과 병원 취업 준비에 집중한다.',
-              '합격 기준은 필기 40% 이상, 전 과목 총점 60% 이상, 실기 60% 이상이다.',
+              '합격 기준은 필기 매 과목 40% 이상, 전 과목 총점 60% 이상, 실기 60% 이상이다.',
               '시험 일정과 응시자격은 매년 국시원 공고로 확인한다.'
             ],
             note: '한국보건의료인국가시험원 공개 자료로 보완했습니다.',
-            link: { label: '국시원 임상병리사 안내', url: 'https://www.kuksiwon.or.kr/subcnt/c_2012/1/view.do?seq=7&itm_seq=08' },
-            opensPaths: false
+            link: { label: '국시원 임상병리사 안내', url: 'https://www.kuksiwon.or.kr/subcnt/c_2012/1/view.do?seq=7&itm_seq=08' }
           },
           {
             id: 'nonclinical', name: '비임상', summary: '기업의 연구 · 생산 · 규제 직무',
@@ -61,8 +60,7 @@ const DATA = {
             entryOptions: [
               { id: 'A', name: '취업 선행', text: '연구 보조로 먼저 입사해 실무 흐름을 파악한 뒤 대학원에 진학한다.' },
               { id: 'B', name: '진학 선행', text: '졸업 직후 대학원에 진학해 연구 성과를 확보한 후 기업에 지원한다.' }
-            ],
-            opensPaths: true
+            ]
           }
         ]
       },
@@ -185,13 +183,13 @@ const DATA = {
         emptyNote: '', programs: ['undergrad_researcher', 'prof_counsel'] },
       { id: 'A2', grades: ['g12'], group: 'now', type: 'check',
         text: '가설 수립부터 검증, 리뷰까지 실험의 한 사이클을 완수해 보았다.',
-        emptyNote: '단순히 실험을 해본 것과 한 사이클을 끝내본 실무에서 큰 차이를 만듭니다.',
+        emptyNote: '단순히 실험을 해본 것과 한 사이클을 끝내본 것은 실무에서 큰 차이를 만듭니다.',
         programs: ['capstone', 'academic_fest', 'ugrad_research_fund'] },
       { id: 'B1', grades: ['g3'], group: 'now', type: 'check',
         text: '비임상 3대 직무 경로 중 타깃으로 삼는 직무를 정했다.',
         emptyNote: '채용공고의 자격 요건을 보면 그 경로가 학사를 뽑는지 석사를 뽑는지 바로 보입니다.',
         programs: ['career_counsel', 'job_lecture', 'senior_mentoring'],
-        jobSearch: { mode: 'byPath' }, linkToSection: 'paths' },
+        jobSearch: { mode: 'byPath' } },
       { id: 'B2', grades: ['g3'], group: 'now', type: 'check',
         text: '목표 직무의 요구 학위를 파악하고 대학원 진학 여부를 판단했다.',
         emptyNote: '분석·효능평가는 석사 이상, 생산·품질은 학사로 진입 가능합니다.',
@@ -238,8 +236,7 @@ const DATA = {
       { id: 'C2', grades: ['g12', 'g3', 'g4'], group: 'ongoing', type: 'check',
         text: '공인 어학 역량 확보를 꾸준히 진행하고 있다.',
         emptyNote: '방문한 3개 기업 중 2곳이 기본 요건으로 언급한 사항입니다.',
-        programs: ['language_course'],
-        noProgram: '응시료 지원 제도는 확인되지 않았으나, 어학 점수 취득 시 교내 장학금이 운영되고 있습니다.' }
+        programs: ['language_course', 'cbt_scholarship'] }
     ],
     result: {
       headingTemplate: '지금 해볼 수 있는 것 {n}개',
@@ -266,6 +263,7 @@ const DATA = {
     study_lecture:        { name: '학습전략특강', kind: 'campus', when: '학기 중 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
     tutoring:             { name: 'BDAD DLC 학습클럽', kind: 'campus', when: '매 학기 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
     language_course:      { name: '교내 어학 강좌', kind: 'campus', when: '매 학기 초 학교 홈페이지 공지 확인', url: '' },
+    cbt_scholarship:      { name: 'CBT 레벨업 장학금', kind: 'campus', when: '매 학기 초 학교 홈페이지 공지 · 해당 학기 CBT 2회 이상 응시 시 자동 신청', url: '' },
     gmp_course:           { name: 'GMP 교육 과정 (외부 기관)', kind: 'external', when: '한국제약바이오협회 등', url: '' }
   },
 
@@ -275,16 +273,10 @@ const DATA = {
   ],
 
   visits: [
-    {
-      region: '일본 고베',
-      period: '2026.06.28 ~ 07.02',
-      places: ['Carna Biosciences', 'RIKEN BDR', 'FBRI 첨단의료진흥재단', '고베대학 BiCLET', '제20회 국제생명공학심포지엄(IBS2026) 참관']
-    },
-    {
-      region: '국내 대전·오송',
-      period: '2026.07.30 ~ 31',
-      places: ['㈜펩트론 (오송 공장·대전 본사)', '㈜지투지바이오 (오송 본사)', '㈜인코스팜 (대전 본사)']
-    }
+    { region: '일본 고베', period: '2026.06.28 ~ 07.02',
+      places: ['Carna Biosciences', 'RIKEN BDR', 'FBRI 첨단의료진흥재단', '고베대학 BiCLET', '제20회 국제생명공학심포지엄(IBS2026) 참관'] },
+    { region: '국내 대전·오송', period: '2026.07.30 ~ 31',
+      places: ['㈜펩트론 (오송 공장·대전 본사)', '㈜지투지바이오 (오송 본사)', '㈜인코스팜 (대전 본사)'] }
   ],
 
   method: {
@@ -293,7 +285,7 @@ const DATA = {
       '해외 클러스터 현장 인터뷰에서 얻은 글로벌 인사이트를 바탕으로, 국내 기업 현직자 교차 질의를 통해 검증했습니다.',
       '이 사이트는 국내 취업 현실에 맞게 검증된 내용을 기준으로 작성되었습니다.'
     ],
-    linkLabel: '일곱 곳에서 들은 이야기 보기'
+    linkLabel: '인터뷰 내용 자세히 확인하기'
   },
 
   footer: {
@@ -303,13 +295,18 @@ const DATA = {
     baton: '이 사이트는 2026년 <b>D-Bridge</b> 팀의 프로젝트 결과물입니다. 새로운 진로를 개척한 동문들의 데이터가 계속 누적되기를 기대합니다.',
     contactHeading: '문의',
     contact: [
-      { label: '학과',     value: '동서대학교 임상병리학과' },
+      { label: '학과',       value: '동서대학교 임상병리학과' },
       { label: '학과 사무실', value: '051-320-2733' },
-      { label: '홈페이지', value: '학과 홈페이지', url: 'https://uni.dongseo.ac.kr/bio/' },
-      { label: '만든 팀',  value: 'D-Bridge (2026)' }
+      { label: '홈페이지',   value: '학과 홈페이지', url: 'https://uni.dongseo.ac.kr/bio/' },
+      { label: '만든 팀',    value: 'D-Bridge (2026)' }
     ]
   }
 };
+
+
+/* ════════════════════════════════════════════════════════════════
+   화면을 그리는 코드
+   ════════════════════════════════════════════════════════════════ */
 
 const $  = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -332,6 +329,9 @@ function setRichText(node, str) {
   });
 }
 
+const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ─── 첫 화면 ────────────────────────────────────────────────── */
 function renderHero() {
   const h = DATA.hero;
   const q = slot('hero-question');
@@ -342,74 +342,67 @@ function renderHero() {
   h.stats.forEach(stat => {
     const wrap = make('div', 'hero__stat');
     const dd  = make('dd', 'hero__num');
-    const val = make('span', 'hero__val', stat.value);
-    dd.append(val);
+    dd.append(make('span', 'hero__val', REDUCE ? stat.value : '0'));
+    $('.hero__val', dd).dataset.target = stat.value;
     wrap.append(dd, make('dt', 'hero__label', stat.label));
     stats.append(wrap);
   });
 
   slot('hero-byline').textContent = h.byline;
   slot('hero-team').textContent   = h.team;
+
+  if (REDUCE) return;
+  const nums = $$('.hero__val', stats);
+  const t0 = performance.now();
+  (function frame(now) {
+    const p = Math.min(1, (now - t0) / 900);
+    const eased = 1 - Math.pow(1 - p, 3);
+    nums.forEach(n => n.textContent = Math.round(eased * Number(n.dataset.target)));
+    if (p < 1) requestAnimationFrame(frame);
+  })(t0);
 }
 
+/* ─── 세 경로 ────────────────────────────────────────────────── */
 function renderPaths() {
   const list = slot('paths');
   DATA.paths.forEach(path => {
     const li = tpl('path');
     li.dataset.path = path.id;
-    $('.path__name', li).textContent = `${path.num} ${path.name}`;
+    $('.path__name', li).textContent   = `${path.num} ${path.name}`;
     $('.path__degree', li).textContent = path.degree;
-    $('.path__work', li).textContent = path.work;
-
-    const courses = $('.path__majors', li);
-    path.courses.forEach(c => courses.append(make('li', null, c)));
-
+    $('.path__work', li).textContent   = path.work;
+    path.courses.forEach(c => $('.path__majors', li).append(make('li', null, c)));
     $('.path__btn', li).addEventListener('click', () => openPathSheet(path));
+    li.classList.add('reveal');
     list.append(li);
   });
 }
 
+/* ─── 로드맵 ─────────────────────────────────────────────────── */
 function renderRoadmap() {
   const r = DATA.roadmap;
   slot('roadmap-notice').textContent = r.notice;
-
   const list = slot('timeline');
-  r.stages.forEach(stage => {
-    if (stage.branches) {
-      const li = tpl('fork');
-      li.dataset.stage = stage.id;
-      const find = id => stage.branches.find(b => b.id === id);
-      
-      const cl = find('clinical');
-      const ncl = find('nonclinical');
-      
-      const clNode = $('.branch--clinical', li);
-      $('.branch__name', clNode).textContent = cl.name;
-      $('.branch__summary', clNode).textContent = cl.summary;
-      cl.items.forEach(t => $('.branch__items', clNode).append(make('li', null, t)));
-      
-      const nclNode = $('.branch--nonclinical', li);
-      $('.branch__name', nclNode).textContent = ncl.name;
-      $('.branch__summary', nclNode).textContent = ncl.summary;
-      ncl.items.forEach(t => $('.branch__items', nclNode).append(make('li', null, t)));
-      
-      const entry = $('.entry', nclNode);
-      ncl.entryOptions.forEach(opt => {
-        const item = tpl('entry');
-        $('.entry__label', item).textContent = opt.name;
-        $('.entry__text',  item).textContent = opt.text;
-        entry.append(item);
-      });
 
-      list.append(li);
-    } else {
+  r.stages.forEach(stage => {
+    if (!stage.branches) {
       const li = tpl('stage');
       li.dataset.stage = stage.id;
-      $('.stage__grade', li).textContent = stage.grade;
+      $('.stage__grade', li).textContent   = stage.grade;
       $('.stage__caption', li).textContent = stage.caption;
-      stage.items.forEach(text => $('.stage__items', li).append(make('li', 'stage__item', text)));
+      stage.items.forEach(t => $('.stage__items', li).append(make('li', 'stage__item', t)));
+      li.classList.add('reveal');
       list.append(li);
+      return;
     }
+
+    const li = tpl('fork');
+    li.dataset.stage = stage.id;
+    const find = id => stage.branches.find(b => b.id === id);
+    fillBranch($('.branch--clinical', li),    find('clinical'));
+    fillBranch($('.branch--nonclinical', li), find('nonclinical'));
+    li.classList.add('reveal');
+    list.append(li);
   });
 
   const closing = slot('roadmap-closing');
@@ -419,39 +412,36 @@ function renderRoadmap() {
   );
 }
 
-function renderLabs() {
-  const L = DATA.labs;
-  slot('labs-heading').textContent = L.heading;
-  slot('labs-note').textContent    = L.note;
+function fillBranch(node, data) {
+  if (!node || !data) return;
+  $('.branch__name', node).textContent    = data.name;
+  $('.branch__summary', node).textContent = data.summary;
+  data.items.forEach(t => $('.branch__items', node).append(make('li', null, t)));
 
-  const list = slot('labs');
-  list.textContent = '';
-  L.items.forEach(lab => {
-    const li = tpl('lab');
-    $('.lab__name', li).textContent  = lab.name;
-    $('.lab__full', li).textContent  = lab.full;
-    $('.lab__pi', li).textContent    = lab.pi;
-    $('.lab__focus', li).textContent = lab.focus;
+  const entry = $('.entry', node);
+  if (entry) {
+    if (data.entryOptions) {
+      data.entryOptions.forEach(opt => {
+        const item = tpl('entry');
+        $('.entry__label', item).textContent = opt.name;
+        $('.entry__text',  item).textContent = opt.text;
+        entry.append(item);
+      });
+    } else entry.remove();
+  }
 
-    if (lab.status) $('.lab__head', li).append(make('span', 'lab__status', lab.status));
-
-    const tags = $('.lab__paths', li);
-    (lab.paths || []).forEach(pid => {
-      const path = DATA.paths.find(p => p.id === pid);
-      if (!path) return;
-      const t = make('li', 'lab__tag', `${path.num} ${path.name}`);
-      t.dataset.path = pid;
-      tags.append(t);
-    });
-
-    const a = $('.lab__link', li);
-    if (lab.url) { a.href = lab.url; a.target = '_blank'; a.rel = 'noopener'; }
-    else a.remove();
-
-    list.append(li);
-  });
+  // 공개 자료로 보완한 부분은 출처를 밝히고 링크를 건다
+  if (data.note) node.append(make('p', 'branch__note', data.note));
+  if (data.link) {
+    const a = make('a', 'chip', data.link.label);
+    a.href = data.link.url; a.target = '_blank'; a.rel = 'noopener';
+    const wrap = make('p', 'branch__link');
+    wrap.append(a);
+    node.append(wrap);
+  }
 }
 
+/* ─── 다녀온 곳 · 하단 ───────────────────────────────────────── */
 function renderVisits() {
   const list = slot('visits');
   DATA.visits.forEach(v => {
@@ -459,6 +449,7 @@ function renderVisits() {
     $('.visit__region', li).textContent = v.region;
     $('.visit__period', li).textContent = v.period;
     v.places.forEach(p => $('.visit__places', li).append(make('li', null, p)));
+    li.classList.add('reveal');
     list.append(li);
   });
   const m = slot('method');
@@ -484,21 +475,60 @@ function renderFooter() {
       const a = make('a', null, row.value);
       a.href = row.url; a.target = '_blank'; a.rel = 'noopener';
       dd.append(a);
-    } else {
-      dd.textContent = row.value;
-    }
+    } else dd.textContent = row.value;
     wrap.append(make('dt', null, row.label), dd);
     dl.append(wrap);
   });
 }
 
-/* 체크리스트 */
+/* ─── 스크롤 진입 (실패해도 내용이 사라지지 않게) ────────────── */
+function setupReveal() {
+  const nodes = $$('.reveal');
+  const showAll = () => nodes.forEach(n => n.classList.add('is-in'));
+  if (REDUCE || !('IntersectionObserver' in window)) { showAll(); return; }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-in');
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+
+  nodes.forEach(n => io.observe(n));
+  setTimeout(showAll, 2500);      // 안전장치
+}
+
+/* ─── 내비게이션 현재 위치 표시 ──────────────────────────────── */
+function setupScrollSpy() {
+  const links = $$('.sticky-nav__links a');
+  if (!links.length || !('IntersectionObserver' in window)) return;
+
+  const map = new Map();
+  links.forEach(a => {
+    const sec = document.querySelector(a.getAttribute('href'));
+    if (sec) map.set(sec, a);
+  });
+
+  const setActive = (a) => links.forEach(l => l.classList.toggle('is-active', l === a));
+
+  const io = new IntersectionObserver(entries => {
+    // 화면에 걸친 섹션 중 가장 위에 있는 것을 현재 위치로 본다
+    const seen = entries.filter(e => e.isIntersecting)
+                        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+    if (seen.length) setActive(map.get(seen[0].target));
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+  map.forEach((_, sec) => io.observe(sec));
+}
+
+/* ─── 체크리스트 ─────────────────────────────────────────────── */
 const STORE_KEY = 'dbridge-check-v1';
 let checkState = {};
 let currentGrade = DATA.checklist.gradeTabs[0].id;
 
 function loadState() {
-  try { checkState = JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } 
+  try { checkState = JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }
   catch { checkState = {}; }
 }
 function saveState() {
@@ -515,10 +545,7 @@ function visibleItems(grade) {
 
 function emptyItems(grade) {
   return visibleItems(grade).filter(it => {
-    if (it.type === 'choice') {
-      const v = checkState[it.id] || it.defaultValue;
-      return it.emptyWhen.includes(v);
-    }
+    if (it.type === 'choice') return it.emptyWhen.includes(checkState[it.id] || it.defaultValue);
     return !checkState[it.id];
   });
 }
@@ -528,7 +555,11 @@ function renderChecklist() {
   const tabs = slot('grade-tabs');
   DATA.checklist.gradeTabs.forEach(g => {
     const b = make('button', 'grade-tab', g.label);
-    b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.grade = g.id;
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-controls', 'check-form');
+    b.id = `tab-${g.id}`;
+    b.dataset.grade = g.id;
     b.addEventListener('click', () => { currentGrade = g.id; paintChecklist(); });
     tabs.append(b);
   });
@@ -550,38 +581,61 @@ function renderChecklist() {
 }
 
 function paintChecklist() {
-  $$('.grade-tab').forEach(b => b.setAttribute('aria-selected', String(b.dataset.grade === currentGrade)));
-  slot('legend-now').textContent = DATA.checklist.groupLabels.now;
+  $$('.grade-tab').forEach(b => {
+    const on = b.dataset.grade === currentGrade;
+    b.setAttribute('aria-selected', String(on));
+    b.tabIndex = on ? 0 : -1;
+  });
+  $('#check-form').setAttribute('aria-labelledby', `tab-${currentGrade}`);
+
+  slot('legend-now').textContent     = DATA.checklist.groupLabels.now;
   slot('legend-ongoing').textContent = DATA.checklist.groupLabels.ongoing;
 
   const items = visibleItems(currentGrade);
   ['now', 'ongoing'].forEach(group => {
     const ul = slot(`items-${group}`);
     ul.textContent = '';
-    items.filter(it => it.group === group).forEach(it => {
-      if (it.type === 'choice') {
-        const li = tpl('choice');
-        $('.check__text', li).textContent = it.text;
-        const box = $('.choice__options', li);
-        const cur = checkState[it.id] || it.defaultValue;
-        it.options.forEach(opt => {
-          const b = make('button', 'choice__btn', opt.label);
-          b.type = 'button'; b.setAttribute('aria-pressed', String(cur === opt.value));
-          b.addEventListener('click', () => { checkState[it.id] = opt.value; saveState(); paintChecklist(); });
-          box.append(b);
-        });
-        ul.append(li);
-      } else {
-        const li = tpl('check');
-        const input = $('.check__box', li);
-        input.id = `chk-${it.id}`; input.checked = !!checkState[it.id];
-        $('.check__text', li).textContent = it.text;
-        input.addEventListener('change', () => { checkState[it.id] = input.checked; saveState(); paintResult(); });
-        ul.append(li);
-      }
-    });
+    items.filter(it => it.group === group).forEach(it => ul.append(buildCheckItem(it)));
   });
   paintResult();
+}
+
+function buildCheckItem(it) {
+  if (it.type === 'choice') {
+    const li = tpl('choice');
+    $('.check__text', li).textContent = it.text;
+    const box = $('.choice__options', li);
+    const cur = checkState[it.id] || it.defaultValue;
+    it.options.forEach(opt => {
+      const b = make('button', 'choice__btn', opt.label);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', String(cur === opt.value));
+      b.addEventListener('click', () => { checkState[it.id] = opt.value; saveState(); paintChecklist(); });
+      box.append(b);
+    });
+    return li;
+  }
+  const li = tpl('check');
+  const input = $('.check__box', li);
+  input.id = `chk-${it.id}`;
+  input.checked = !!checkState[it.id];
+  $('.check__text', li).textContent = it.text;
+  input.addEventListener('change', () => { checkState[it.id] = input.checked; saveState(); paintResult(); });
+  return li;
+}
+
+/** 프로그램 태그를 만든다. 주소가 있으면 누를 수 있게 한다. */
+function progTag(pr) {
+  const label = pr.when ? `${pr.name} (${pr.when})` : pr.name;
+  if (!pr.url) {
+    const s = make('span', 'ptag', label);
+    if (pr.kind === 'external') s.classList.add('ptag--ext');
+    return s;
+  }
+  const a = make('a', 'ptag ptag--link', label);
+  if (pr.kind === 'external') a.classList.add('ptag--ext');
+  a.href = pr.url; a.target = '_blank'; a.rel = 'noopener';
+  return a;
 }
 
 function paintResult() {
@@ -597,66 +651,27 @@ function paintResult() {
     if (it.emptyNote) $('.empty__note', li).textContent = it.emptyNote;
     else $('.empty__note', li).remove();
 
-    const progsDiv = make('div', 'export__progs');
-    const names = (it.programs || []).map(pid => DATA.programs[pid]).filter(Boolean);
-    names.forEach(pr => {
-      const pStr = pr.when ? `${pr.name} (${pr.when})` : pr.name;
-      const pEl = make('span', 'export__prog-tag', pStr);
-      progsDiv.append(pEl);
-    });
-    
-    if (it.noProgram) {
-      const pEl = make('span', 'export__prog-tag export__prog-tag--no', it.noProgram);
-      progsDiv.append(pEl);
-    }
-    
-    if (progsDiv.children.length) li.append(progsDiv);
+    const progs = $('.empty__progs', li);
+    (it.programs || []).map(pid => DATA.programs[pid]).filter(Boolean)
+      .forEach(pr => progs.append(progTag(pr)));
+    if (it.noProgram) progs.append(make('span', 'ptag ptag--none', it.noProgram));
+    if (!progs.children.length) progs.remove();
 
     const jobs = $('.empty__jobs', li);
-    if (it.jobSearch) {
-      const site = DATA.jobSites[0];
-      const jobUrl = kw => site.template.replace('{q}', encodeURIComponent(kw));
-      
-      if (it.jobSearch.mode === 'byPath') {
-        DATA.paths.forEach(p => {
-          const liJob = make('li');
-          const aJob = make('a', 'chip chip--job', `${p.num} ${p.name} 공고`);
-          aJob.href = jobUrl(p.jobKeywords[0]);
-          aJob.target = '_blank';
-          liJob.append(aJob);
-          jobs.append(liJob);
-        });
-      } else if (it.jobSearch.mode === 'keywords') {
-        it.jobSearch.keywords.forEach(kw => {
-          const liJob = make('li');
-          const aJob = make('a', 'chip chip--job', `“${kw}” 공고`);
-          aJob.href = jobUrl(kw);
-          aJob.target = '_blank';
-          liJob.append(aJob);
-          jobs.append(liJob);
-        });
-      } else if (it.jobSearch.mode === 'company') {
-        const liJob = make('li', 'job-search');
-        const input = make('input', 'job-search__input'); input.type = 'text'; input.placeholder = '기업 이름';
-        const go = make('button', 'chip chip--job', '공고 찾기'); go.type = 'button';
-        const open = () => { if (input.value.trim()) window.open(jobUrl(input.value.trim()), '_blank', 'noopener'); };
-        go.addEventListener('click', open);
-        input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); open(); } });
-        liJob.append(input, go); jobs.append(liJob);
-      }
-    }
-    
+    buildJobs(jobs, it);
     if (!jobs.children.length) jobs.remove();
+
     list.append(li);
   });
 
   const prevWrap = slot('result-preview');
   prevWrap.textContent = '';
-  if (R.preview[currentGrade]) {
+  const prev = R.preview[currentGrade];
+  if (prev) {
     prevWrap.hidden = false;
-    prevWrap.append(make('p', 'result__preview-caption', R.preview[currentGrade].caption));
+    prevWrap.append(make('p', 'result__preview-caption', prev.caption));
     const ul = make('ul');
-    R.preview[currentGrade].items.forEach(id => {
+    prev.items.forEach(id => {
       const it = DATA.checklist.items.find(x => x.id === id);
       if (it) ul.append(make('li', null, it.text));
     });
@@ -674,64 +689,103 @@ function paintResult() {
   } else done.hidden = true;
 }
 
+function buildJobs(wrap, it) {
+  if (!it.jobSearch) return;
+  const site = DATA.jobSites[0];
+  const url = kw => site.template.replace('{q}', encodeURIComponent(kw));
+  const chip = (label, href) => {
+    const a = make('a', 'chip chip--job', label);
+    a.href = href; a.target = '_blank'; a.rel = 'noopener';
+    const li = make('li'); li.append(a); return li;
+  };
+
+  if (it.jobSearch.mode === 'byPath') {
+    DATA.paths.forEach(p => wrap.append(chip(`${p.num} ${p.name} 공고`, url(p.jobKeywords[0]))));
+  } else if (it.jobSearch.mode === 'keywords') {
+    it.jobSearch.keywords.forEach(kw => wrap.append(chip(`“${kw}” 공고`, url(kw))));
+  } else if (it.jobSearch.mode === 'company') {
+    const li = make('li', 'job-search');
+    const input = make('input', 'job-search__input');
+    input.type = 'text';
+    input.placeholder = '기업 이름';
+    input.setAttribute('aria-label', '검색할 기업 이름');
+    const go = make('button', 'chip chip--job', '공고 찾기');
+    go.type = 'button';
+    const open = () => { if (input.value.trim()) window.open(url(input.value.trim()), '_blank', 'noopener'); };
+    go.addEventListener('click', open);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); open(); } });
+    li.append(input, go);
+    wrap.append(li);
+  }
+}
+
+/* ─── 이미지로 저장 ──────────────────────────────────────────── */
 function buildExport() {
-  const box = $('#export-sheet'); box.textContent = '';
-  box.append(make('p', 'export__eyebrow', `${DATA.checklist.gradeTabs.find(g => g.id === currentGrade).label} · 임상병리사의 바이오 진출 로드맵`));
+  const box = $('#export-sheet');
+  box.textContent = '';
+  const label = DATA.checklist.gradeTabs.find(g => g.id === currentGrade).label;
+  box.append(make('p', 'export__eyebrow', `${label} · 임상병리사의 바이오 진출 로드맵`));
   box.append(make('h2', 'export__title', slot('result-heading').textContent));
-  
-  const ul = make('div', 'export__list');
+
+  const wrap = make('div', 'export__list');
   emptyItems(currentGrade).forEach(it => {
-    const li = make('div', 'export__item');
-    li.append(make('h3', null, it.emptyLabel || it.text));
-    if (it.emptyNote) li.append(make('p', 'export__note', it.emptyNote));
-    
-    const progsDiv = make('div', 'export__progs');
-    const names = (it.programs || []).map(pid => DATA.programs[pid]).filter(Boolean);
-    names.forEach(pr => {
-      const pStr = pr.when ? `${pr.name} (${pr.when})` : pr.name;
-      const pEl = make('span', 'export__prog-tag', pStr);
-      progsDiv.append(pEl);
-    });
-    if (it.noProgram) {
-      const pEl = make('span', 'export__prog-tag export__prog-tag--no', it.noProgram);
-      progsDiv.append(pEl);
+    const card = make('div', 'export__item');
+    card.append(make('h3', null, it.emptyLabel || it.text));
+    if (it.emptyNote) card.append(make('p', 'export__note', it.emptyNote));
+
+    const names = (it.programs || []).map(pid => DATA.programs[pid]).filter(Boolean)
+      .map(pr => pr.when ? `${pr.name} (${pr.when})` : pr.name);
+    if (it.noProgram) names.push(it.noProgram);
+    if (names.length) {
+      const row = make('div', 'export__progs');
+      names.forEach(n => row.append(make('span', 'export__prog-tag', n)));
+      card.append(row);
     }
-    if (progsDiv.children.length) li.append(progsDiv);
-    
-    ul.append(li);
+    wrap.append(card);
   });
-  box.append(ul);
+  box.append(wrap);
   box.append(make('p', 'export__foot', 'D-Bridge · 동서대학교 임상병리학과'));
   return box;
 }
 
 function saveImage() {
+  const btn = $('[data-action="save-image"]');
   const box = buildExport();
-  const done = (canvas) => {
+  box.classList.add('is-capturing');
+
+  const finish = () => box.classList.remove('is-capturing');
+  const done = canvas => {
     const a = document.createElement('a');
     a.download = `${DATA.checklist.result.export.filename}-${currentGrade}.png`;
-    a.href = canvas.toDataURL('image/png'); a.click();
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+    finish();
+    btn.textContent = '이미지로 저장';
   };
-  
-  const run = () => html2canvas(box, { scale: 2, backgroundColor: '#ffffff' }).then(done);
+  const fail = () => { finish(); btn.textContent = '저장 실패 · 다시 시도'; };
+
+  btn.textContent = '만드는 중…';
+  const run = () => html2canvas(box, { scale: 2, backgroundColor: '#ffffff', useCORS: true })
+    .then(done).catch(fail);
+
   if (window.html2canvas) return run();
-  
   const sc = document.createElement('script');
   sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
   sc.onload = run;
+  sc.onerror = fail;
   document.head.append(sc);
 }
 
-/* 바텀시트 */
+/* ─── 바텀시트 ───────────────────────────────────────────────── */
 function openSheet({ eyebrow, title, build }) {
-  const dlg  = $('#sheet');
   const body = slot('sheet-body');
   slot('sheet-eyebrow').textContent = eyebrow || '';
   slot('sheet-title').textContent   = title || '';
   body.textContent = '';
   if (build) build(body);
+  body.scrollTop = 0;
   document.documentElement.classList.add('is-locked');
-  dlg.showModal();
+  $('#sheet').showModal();
   body.focus();
 }
 
@@ -740,12 +794,10 @@ function closeSheet() {
   document.documentElement.classList.remove('is-locked');
 }
 
-function labelledList(label, items) {
-  const wrap = make('div', 'src__group');
-  wrap.append(make('p', 'src__group-label', label));
-  const ul = make('ul');
-  items.forEach(t => ul.append(make('li', null, t)));
-  wrap.append(ul);
+function infoBlock(title, node) {
+  const wrap = make('div', 'src__info-block');
+  wrap.append(make('h4', 'src__info-title', title));
+  wrap.append(node);
   return wrap;
 }
 
@@ -755,101 +807,65 @@ function openPathSheet(path) {
     title: `${path.num} ${path.name}`,
     build(body) {
       const basics = make('section', 'src src--basics');
-      
-      const wWrap = make('div', 'src__info-block'); 
-      wWrap.append(make('h4', 'src__info-title', '💼 ' + DATA.sheetLabels.work));
-      wWrap.append(make('p', 'src__info-desc', path.work));
-      
-      const cWrap = make('div', 'src__info-block'); 
-      cWrap.append(make('h4', 'src__info-title', '🧬 ' + DATA.sheetLabels.courses));
-      const cUl = make('ul', 'src__chip-list'); 
-      path.courses.forEach(c => cUl.append(make('li', 'src__chip-item', c))); 
-      cWrap.append(cUl);
-      
-      basics.append(wWrap, cWrap);
+      basics.append(infoBlock(DATA.sheetLabels.work,
+        make('p', 'src__info-desc', path.work)));
+
+      const ul = make('ul', 'src__chip-list');
+      path.courses.forEach(c => ul.append(make('li', 'src__chip-item', c)));
+      basics.append(infoBlock(DATA.sheetLabels.courses, ul));
       body.append(basics);
 
       (path.sections || []).forEach(sec => {
         const node = tpl('sheet-section');
         node.dataset.origin = sec.origin;
-        
         $('.src__badge', node).textContent = DATA.originLabels[sec.origin];
-        $('.src__title', node).remove();
-        
         sec.body.forEach(t => $('.src__body', node).append(make('p', null, t)));
         (sec.groups || []).forEach(grp => {
-          const gWrap = make('div', 'src__group'); 
-          gWrap.append(make('p', 'src__group-label', grp.label));
-          const gUl = make('ul'); 
-          grp.items.forEach(i => gUl.append(make('li', null, i))); 
-          gWrap.append(gUl);
-          $('.src__groups', node).append(gWrap);
+          const g = make('div', 'src__group');
+          g.append(make('p', 'src__group-label', grp.label));
+          const gul = make('ul');
+          grp.items.forEach(i => gul.append(make('li', null, i)));
+          g.append(gul);
+          $('.src__groups', node).append(g);
         });
-        
         body.append(node);
       });
     }
   });
 }
 
-function initProgramBtn() {
-  const btn = $('#btn-show-programs');
+/* 학과 연구실 팝업 */
+function initLabsBtn() {
+  const btn = $('#btn-show-labs');
   if (!btn) return;
   btn.addEventListener('click', () => {
     openSheet({
-      eyebrow: 'D-Bridge 추천',
-      title: '교내외 비교과 프로그램 모음',
+      eyebrow: '동서대학교 임상병리학과',
+      title: DATA.labs.heading,
       build(body) {
-        const ul = make('ul', 'prog-popup-list');
-        ul.style.display = 'grid';
-        ul.style.gap = '1rem';
-        ul.style.marginTop = '1rem';
+        body.append(make('p', 'sheet__lead', DATA.labs.note));
+        const ul = make('ul', 'labs__list');
+        DATA.labs.items.forEach(lab => {
+          const li = tpl('lab');
+          $('.lab__name', li).textContent  = lab.name;
+          $('.lab__full', li).textContent  = lab.full;
+          $('.lab__pi', li).textContent    = lab.pi;
+          $('.lab__focus', li).textContent = lab.focus;
+          if (lab.status) $('.lab__head', li).append(make('span', 'lab__status', lab.status));
 
-        Object.values(DATA.programs).forEach(pr => {
-          const li = make('li', 'prog-popup-item');
-          li.style.padding = '1rem';
-          li.style.border = '1px solid var(--rule)';
-          li.style.borderRadius = 'var(--radius)';
-          li.style.background = 'var(--paper)';
+          const tags = $('.lab__paths', li);
+          (lab.paths || []).forEach(pid => {
+            const p = DATA.paths.find(x => x.id === pid);
+            if (!p) return;
+            const t = make('li', 'lab__tag', `${p.num} ${p.name}`);
+            t.dataset.path = pid;
+            tags.append(t);
+          });
 
-          const head = make('div', null);
-          head.style.display = 'flex';
-          head.style.alignItems = 'center';
-          head.style.gap = '0.5rem';
-          head.style.marginBottom = '0.5rem';
+          const a = $('.lab__link', li);
+          if (lab.url) { a.href = lab.url; a.target = '_blank'; a.rel = 'noopener'; }
+          else a.remove();
 
-          const kind = make('span', null, pr.kind === 'campus' ? '교내' : '외부');
-          kind.style.fontSize = '0.75rem';
-          kind.style.fontWeight = '700';
-          kind.style.padding = '0.2rem 0.5rem';
-          kind.style.borderRadius = '999px';
-          kind.style.background = pr.kind === 'campus' ? 'var(--accent-soft)' : 'transparent';
-          kind.style.border = pr.kind === 'campus' ? 'none' : '1px dashed var(--rule-2)';
-          kind.style.color = pr.kind === 'campus' ? 'var(--accent)' : 'var(--ink-2)';
-
-          const name = make('strong', null, pr.name);
-          name.style.fontSize = '0.9375rem';
-          name.style.color = 'var(--ink)';
-
-          head.append(kind, name);
-
-          const when = make('p', null, pr.when || '운영 중');
-          when.style.fontSize = '0.8125rem';
-          when.style.color = 'var(--ink-2)';
-          when.style.marginBottom = pr.url ? '0.75rem' : '0';
-
-          li.append(head, when);
-
-          if (pr.url) {
-            const a = make('a', 'btn btn--quiet', '바로가기 ↗');
-            a.href = pr.url;
-            a.target = '_blank';
-            a.rel = 'noopener';
-            a.style.display = 'inline-block';
-            a.style.fontSize = '0.8125rem';
-            a.style.padding = '0.4rem 0.75rem';
-            li.append(a);
-          }
           ul.append(li);
         });
         body.append(ul);
@@ -858,6 +874,40 @@ function initProgramBtn() {
   });
 }
 
+/* 비교과 프로그램 팝업 */
+function initProgramBtn() {
+  const btn = $('#btn-show-programs');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    openSheet({
+      eyebrow: '교내외 비교과',
+      title: '프로그램 모아보기',
+      build(body) {
+        const ul = make('ul', 'prog-list');
+        Object.values(DATA.programs).forEach(pr => {
+          const li = tpl('program');
+          const kind = $('.prog__kind', li);
+          kind.textContent = pr.kind === 'campus' ? '교내' : '외부';
+          kind.dataset.kind = pr.kind;
+          $('.prog__name', li).textContent = pr.name;
+
+          // 모르는 신청 시기를 지어내지 않는다
+          if (pr.when) $('.prog__when', li).textContent = pr.when;
+          else $('.prog__when', li).remove();
+
+          const a = $('.prog__link', li);
+          if (pr.url) { a.href = pr.url; a.target = '_blank'; a.rel = 'noopener'; }
+          else a.remove();
+
+          ul.append(li);
+        });
+        body.append(ul);
+      }
+    });
+  });
+}
+
+/* ─── 시작 ───────────────────────────────────────────────────── */
 function init() {
   const safe = (name, fn) => {
     try { fn(); } catch (err) { console.error(`[${name}] 렌더 실패`, err); }
@@ -865,15 +915,19 @@ function init() {
 
   safe('hero',      renderHero);
   safe('paths',     renderPaths);
-  safe('labs',      renderLabs);
   safe('roadmap',   renderRoadmap);
   safe('checklist', renderChecklist);
   safe('visits',    renderVisits);
   safe('footer',    renderFooter);
+  safe('labs',      initLabsBtn);
   safe('programs',  initProgramBtn);
+  safe('reveal',    setupReveal);
+  safe('spy',       setupScrollSpy);
 
   $('[data-action="close-sheet"]').addEventListener('click', closeSheet);
   $('#sheet').addEventListener('close', () => document.documentElement.classList.remove('is-locked'));
+  // 배경을 눌러도 닫힌다
+  $('#sheet').addEventListener('click', e => { if (e.target.id === 'sheet') closeSheet(); });
 }
 
 document.addEventListener('DOMContentLoaded', init);
