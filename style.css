@@ -127,6 +127,9 @@ main > section {
   margin-inline: auto;
 }
 main > section + section { border-top: 1px solid var(--rule); }
+.sim { background: var(--paper-2); max-width: none !important; }
+.sim > * { max-width: var(--wide); margin-inline: auto; }
+.sim .section__lead { max-width: var(--wide); }
 @media (min-width: 720px) { main > section { padding-block: var(--sp-7); } }
 .roadmap, .compare, .visits, .gallery { max-width: calc(var(--wide) + var(--gutter) * 2); }
 
@@ -299,6 +302,52 @@ main > .interlude + section { border-top: 0; }
   .finder__result { margin-top: 0; }
   .fr { border-top: 0; padding-top: 0; }
 }
+
+/* ─── 5b. 4년 미리 살아보기 ─────────────────────────────────── */
+.scene__card { border-radius: var(--radius-lg); overflow: hidden; background: var(--card); border: 1px solid var(--rule); box-shadow: var(--shadow); transition: opacity .35s var(--ease), transform .35s var(--ease); }
+.scene__card.is-enter { opacity: 0; transform: translateY(8px); }
+.scene__art { aspect-ratio: 16 / 9; background: var(--paper-3); overflow: hidden; }
+.scene__art img { width: 100%; height: 100%; object-fit: cover; }
+.scene__art--none { display: none; }
+.scene__body { padding: var(--sp-3); }
+.scene__head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.scene__when { font-size: .8125rem; font-weight: 700; color: var(--accent); }
+.scene__step { font-size: .75rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.scene__text { margin-top: .375rem; font-size: clamp(1.125rem, 4vw, 1.375rem); font-weight: 800; letter-spacing: -.025em; line-height: 1.35; text-wrap: balance; }
+.scene__title { margin-top: .25rem; font-size: clamp(1.25rem, 4.6vw, 1.625rem); font-weight: 800; letter-spacing: -.03em; }
+.scene__text--end { font-size: 1rem; font-weight: 500; line-height: 1.7; color: var(--ink-2); margin-top: var(--sp-2); }
+.scene__card--intro .btn { margin-top: var(--sp-3); }
+.scene__options { margin-top: var(--sp-3); display: grid; gap: .5rem; }
+.scene__opt { width: 100%; text-align: left; padding: .875rem 1rem; border-radius: var(--radius); border: 1.5px solid var(--rule-2); background: var(--paper); font-size: .9375rem; font-weight: 600; line-height: 1.4; transition: border-color .18s var(--ease), background .18s var(--ease), opacity .18s var(--ease); }
+.scene__opt:hover { border-color: var(--ink); }
+.scene__opt:disabled { opacity: .45; cursor: default; }
+.scene__opt.is-picked { opacity: 1; border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.scene__say { margin-top: var(--sp-3); padding: var(--sp-3); border-radius: var(--radius); background: var(--accent-soft); transition: opacity .3s var(--ease), transform .3s var(--ease); }
+.scene__say.is-enter { opacity: 0; transform: translateY(6px); }
+.scene__say p { font-size: .9375rem; line-height: 1.65; }
+.scene__say .btn { margin-top: var(--sp-2); }
+.scene__tags { display: flex; flex-wrap: wrap; gap: .375rem; margin-top: .625rem; }
+.scene__tag { padding: .2rem .55rem; border-radius: 999px; font-size: .75rem; font-weight: 700; }
+.scene__tag--fill { background: var(--same-soft); color: var(--same); }
+.scene__tag--miss { background: var(--diff-soft); color: var(--diff); }
+.scene__tag--fill::before { content: "+ "; }
+.scene__tag--miss::before { content: "– "; }
+.scene__cols { margin-top: var(--sp-3); display: grid; gap: var(--sp-3); }
+.scene__collabel { font-size: .75rem; font-weight: 700; color: var(--ink-3); margin-bottom: .375rem; }
+.scene__list { display: flex; flex-wrap: wrap; gap: .375rem; }
+.scene__list li { padding: .3rem .65rem; border-radius: 999px; font-size: .8125rem; font-weight: 600; }
+.scene__list--fill li { background: var(--same-soft); color: var(--same); }
+.scene__list--miss li { background: var(--diff-soft); color: var(--diff); }
+.scene__actions { margin-top: var(--sp-4); display: flex; flex-wrap: wrap; gap: .5rem; }
+@media (min-width: 720px) {
+  .scene__card { display: grid; grid-template-columns: 1fr 1.1fr; }
+  .scene__art { aspect-ratio: auto; min-height: 20rem; }
+  .scene__art--none { display: none; }
+  .scene__card:has(.scene__art--none) { grid-template-columns: 1fr; }
+  .scene__body { padding: var(--sp-4); }
+  .scene__cols { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1024px) { .sim { max-width: calc(var(--wide) + var(--gutter) * 2); } }
 
 /* ─── 6. 세 갈래 ───────────────────────────────────────────── */
 .paths__list { display: grid; gap: var(--sp-2); }

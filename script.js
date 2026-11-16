@@ -148,18 +148,20 @@ function paintFinder(animate) {
   fr.append(ul);
 
   fr.append(make('p', 'fr__label', F.evidenceLabel));
-  const ev = make('ul', 'fr__list fr__list--ev');
-  R.evidence.forEach(e => ev.append(sourced(e)));
+  const ev = make('ul', 'fr__list');
+  R.evidence.forEach(e => ev.append(make('li', null, typeof e === 'string' ? e : e.text)));
   fr.append(ev);
 
+  const cta = make('p', 'fr__cta');
   if (grade !== 'after') {
-    const cta = make('p', 'fr__cta');
     const a = make('a', 'btn', F.checklistCta);
     a.href = '#checklist';
     a.addEventListener('click', () => { currentGrade = grade; paintChecklist(); });
     cta.append(a);
-    fr.append(cta);
   }
+  const b = make('a', 'btn btn--quiet', F.simCta); b.href = '#sim';
+  cta.append(b);
+  fr.append(cta);
 
   if (animate && !REDUCE) {
     fr.classList.add('reveal');
@@ -167,6 +169,139 @@ function paintFinder(animate) {
   }
   box.append(fr);
   DB.termify(fr);
+}
+
+/* ─── 4년 미리 살아보기 ─────────────────────────────────────── */
+const sim = { i: 0, path: null, fills: new Set(), misses: new Set(), extra: new Set(), end: null, picked: null };
+
+function renderSim() {
+  const S = DATA.sim;
+  slot('sim-heading').textContent = S.heading;
+  slot('sim-lead').textContent    = S.lead;
+  simIntro();
+}
+
+function sceneImg(name) {
+  const fig = make('div', 'scene__art');
+  const img = make('img'); img.alt = ''; img.loading = 'lazy'; img.decoding = 'async';
+  img.src = `img/sim/${name}.jpg`;
+  img.addEventListener('error', () => fig.classList.add('scene__art--none'));
+  fig.append(img);
+  return fig;
+}
+
+function simIntro() {
+  const S = DATA.sim, st = slot('sim-stage');
+  st.textContent = '';
+  Object.assign(sim, { i: 0, path: null, fills: new Set(), misses: new Set(), extra: new Set(), end: null, picked: null });
+  const card = make('div', 'scene__card scene__card--intro');
+  card.append(sceneImg('intro'));
+  const body = make('div', 'scene__body');
+  body.append(make('p', 'scene__when', '1학년 봄'));
+  body.append(make('p', 'scene__text', '임상병리학과에 들어왔다. 4년 뒤 어디에 있을까.'));
+  const b = make('button', 'btn btn--accent', S.start); b.type = 'button';
+  b.addEventListener('click', () => { sim.i = 0; simStep(); });
+  body.append(b);
+  card.append(body);
+  st.append(card);
+}
+
+function simStep() {
+  const S = DATA.sim, st = slot('sim-stage');
+  const step = S.steps[sim.i];
+  if (!step) { simEnd(); return; }
+  st.textContent = '';
+  const card = make('div', 'scene__card');
+  card.append(sceneImg(step.id));
+  const body = make('div', 'scene__body');
+  const head = make('div', 'scene__head');
+  head.append(make('p', 'scene__when', step.when), make('p', 'scene__step', S.stepLabel.replace('{n}', sim.i + 1).replace('{total}', S.steps.length)));
+  body.append(head);
+  body.append(make('p', 'scene__text', step.text));
+
+  const opts = make('div', 'scene__options');
+  step.options.forEach(o => {
+    const b = make('button', 'scene__opt', o.label); b.type = 'button';
+    b.addEventListener('click', () => simChoose(step, o, card, opts));
+    opts.append(b);
+  });
+  body.append(opts);
+  card.append(body);
+  st.append(card);
+  if (!REDUCE) { card.classList.add('is-enter'); requestAnimationFrame(() => card.classList.remove('is-enter')); }
+}
+
+function simChoose(step, o, card, opts) {
+  const S = DATA.sim;
+  $$('.scene__opt', opts).forEach(b => { b.disabled = true; b.classList.toggle('is-picked', b.textContent === o.label); });
+  (o.fills || []).forEach(id => { sim.fills.add(id); sim.misses.delete(id); });
+  (o.misses || []).forEach(id => { if (!sim.fills.has(id)) sim.misses.add(id); });
+  if (o.path) sim.path = o.path;
+  if (o.missByPath && sim.path && o.missByPath[sim.path]) o.missByPath[sim.path].forEach(k => sim.extra.add(k));
+  if (o.end) sim.end = o.end;
+
+  const say = o.sayByPath ? (o.sayByPath[sim.path] || o.say || '') : (o.say || '');
+  const res = make('div', 'scene__say');
+  res.append(make('p', null, say));
+  const tags = make('div', 'scene__tags');
+  (o.fills || []).forEach(id => { const it = DATA.checklist.items.find(x => x.id === id); if (it) tags.append(make('span', 'scene__tag scene__tag--fill', it.short)); });
+  (o.misses || []).forEach(id => { const it = DATA.checklist.items.find(x => x.id === id); if (it && !sim.fills.has(id)) tags.append(make('span', 'scene__tag scene__tag--miss', it.short)); });
+  if (tags.children.length) res.append(tags);
+  const next = make('button', 'btn', S.next); next.type = 'button';
+  next.addEventListener('click', () => {
+    if (o.end) { simEnd(); return; }
+    let nextIdx = sim.i + 1;
+    if (o.skip) { const k = S.steps.findIndex(s => s.id === o.skip); if (k >= 0) nextIdx = k + 1; }
+    sim.i = nextIdx;
+    simStep();
+    $('#sim').scrollIntoView({ behavior: REDUCE ? 'auto' : 'smooth', block: 'start' });
+  });
+  res.append(next);
+  $('.scene__body', card).append(res);
+  if (!REDUCE) { res.classList.add('is-enter'); requestAnimationFrame(() => res.classList.remove('is-enter')); }
+}
+
+function simEnd() {
+  const S = DATA.sim, st = slot('sim-stage');
+  st.textContent = '';
+  const key = sim.end || sim.path || 'undecided';
+  const E = S.endings[key];
+  const card = make('div', 'scene__card scene__card--end');
+  card.append(sceneImg(`end-${key}`));
+  const body = make('div', 'scene__body');
+  body.append(make('p', 'scene__when', S.resultHeading));
+  body.append(make('h3', 'scene__title', E.title));
+  body.append(make('p', 'scene__text scene__text--end', E.line));
+
+  const byId = id => DATA.checklist.items.find(x => x.id === id);
+  const cols = make('div', 'scene__cols');
+  const col = (label, names, cls) => {
+    const w = make('div', 'scene__col');
+    w.append(make('p', 'scene__collabel', label));
+    const ul = make('ul', `scene__list ${cls}`);
+    if (!names.length) ul.append(make('li', null, S.noneLabel));
+    names.forEach(n => ul.append(make('li', null, n)));
+    w.append(ul); return w;
+  };
+  const filled = [...sim.fills].map(id => byId(id)).filter(Boolean).map(it => it.short);
+  const missed = [...sim.misses].map(id => byId(id)).filter(Boolean).map(it => it.short)
+    .concat([...sim.extra].map(k => S.extraMissLabels[k]).filter(Boolean));
+  cols.append(col(S.filledLabel, filled, 'scene__list--fill'), col(S.missedLabel, missed, 'scene__list--miss'));
+  body.append(cols);
+
+  const acts = make('div', 'scene__actions');
+  if (sim.fills.size) {
+    const ap = make('button', 'btn btn--accent', S.applyToTree); ap.type = 'button';
+    ap.addEventListener('click', () => { sim.fills.forEach(id => { const it = byId(id); if (it && it.type !== 'choice') checkState[id] = true; else if (it) checkState[id] = 'nonclinical'; }); saveState(); paintChecklist(); toast(S.applied); });
+    acts.append(ap);
+  }
+  if (missed.length) { const a = make('a', 'btn', S.toChecklist); a.href = '#checklist'; acts.append(a); }
+  const re = make('button', 'btn btn--quiet', S.restart); re.type = 'button';
+  re.addEventListener('click', () => { simIntro(); $('#sim').scrollIntoView({ block: 'start' }); });
+  acts.append(re);
+  body.append(acts);
+  card.append(body);
+  st.append(card);
 }
 
 /* ─── 세 갈래 ────────────────────────────────────────────────── */
@@ -280,8 +415,7 @@ function renderRoadmap() {
 function itemWithSrc(t) {
   const li = make('li');
   if (typeof t === 'string') { li.textContent = t; return li; }
-  li.append(document.createTextNode(t.text));
-  if (t.src) li.append(make('span', 'src-tag', `${DATA.roadmap.srcLabel} · ${t.src}`));
+  li.textContent = t.text;
   return li;
 }
 
@@ -861,6 +995,7 @@ function init() {
   safe('checklist', renderChecklist);
   safe('gallery',   renderGallery);
   safe('tree',      renderTree);
+  safe('sim',       renderSim);
   safe('open',      renderOpen);
   safe('footer',    renderFooter);
   safe('reveal',    setupReveal);

@@ -35,7 +35,7 @@
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
-<link rel="stylesheet" href="style.css?v=304">
+<link rel="stylesheet" href="style.css?v=305">
 </head>
 
 <body>
@@ -52,6 +52,7 @@
     <nav class="topbar__nav" aria-label="섹션">
       <a href="#finder">경로 찾기</a>
       <a href="#paths">세 갈래</a>
+      <a href="#sim">미리 살아보기</a>
       <a href="#roadmap">로드맵</a>
       <a href="#compare">일본·국내</a>
       <a href="#visits">다녀온 곳</a>
@@ -105,6 +106,13 @@
 
     <div class="finder__result" id="finder-result" aria-live="polite" data-render="finder-result"></div>
     </div>
+  </section>
+
+  <!-- 2b. 4년 미리 살아보기 -->
+  <section class="sim" id="sim" aria-labelledby="sim-title">
+    <h2 class="section__title" id="sim-title" data-render="sim-heading"></h2>
+    <p class="section__lead" data-render="sim-lead"></p>
+    <div class="scene" data-render="sim-stage"></div>
   </section>
 
   <!-- 3. 세 갈래 -->
@@ -421,8 +429,8 @@
   </li>
 </template>
 
-<script src="data.js?v=304"></script>
-<script src="common.js?v=304"></script>
-<script src="script.js?v=304" defer></script>
+<script src="data.js?v=305"></script>
+<script src="common.js?v=305"></script>
+<script src="script.js?v=305" defer></script>
 </body>
 </html>
