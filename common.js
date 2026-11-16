@@ -65,6 +65,9 @@ const DB = (() => {
   const TERM_RE = TERMS.length ? new RegExp('(' + TERMS.map(t => t.term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')') : null;
   const SKIP = new Set(['BUTTON', 'A', 'INPUT', 'TEXTAREA', 'SCRIPT', 'STYLE', 'H1', 'H2', 'SUMMARY', 'ABBR', 'LEGEND', 'LABEL', 'DT']);
 
+  // 작은 설명줄·라벨에는 밑줄을 붙이지 않는다
+  const NO_TERM = '.no-term, .org__kind, .org__when, .stop__kind, .stop__tags, .path__courses, .path__degree, .fr__path, .src__chip-item, .cmp__org, .tree, .scene__tags, .scene__list, .ptag, .chip';
+
   function termify(root) {
     if (!TERM_RE || !root) return;
     const seen = new Set();
@@ -72,7 +75,7 @@ const DB = (() => {
       acceptNode(n) {
         if (!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
         for (let p = n.parentNode; p && p !== root; p = p.parentNode) {
-          if (SKIP.has(p.tagName) || p.classList.contains('term') || p.classList.contains('no-term')) return NodeFilter.FILTER_REJECT;
+          if (SKIP.has(p.tagName) || p.classList.contains('term') || (p.matches && p.matches(NO_TERM))) return NodeFilter.FILTER_REJECT;
         }
         return NodeFilter.FILTER_ACCEPT;
       }
