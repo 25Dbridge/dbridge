@@ -74,6 +74,9 @@ function renderInterview() {
     wrap.append(sec);
   });
 
+  renderTopics();
+  renderViewTabs();
+
   at('foot-heading').textContent = IV.foot.heading;
   const fb = at('foot-body');
   IV.foot.body.forEach(t => fb.append(mk('p', null, t)));
@@ -88,10 +91,62 @@ function renderInterview() {
   }
 }
 
+/* 주제별 보기 — 같은 문답을 주제로 묶어 다시 보여준다 */
+function allOrgs() { return IV.groups.flatMap(g => g.orgs.map(o => ({ ...o, region: g.region }))); }
+
+function renderTopics() {
+  const wrap = at('topics');
+  IV.topics.forEach(tp => {
+    const items = [];
+    allOrgs().forEach(org => org.qa.forEach(qa => { if (qa.topic === tp.id) items.push({ org, qa }); }));
+    if (!items.length) return;
+    const sec = mk('section', 'group');
+    const head = mk('header', 'group__head');
+    head.append(mk('h2', 'section__title', tp.label));
+    head.append(mk('p', 'group__period', `${items.length}문답 · ${new Set(items.map(i => i.org.name)).size}곳`));
+    sec.append(head);
+    const list = mk('div', 'group__list');
+    items.forEach(({ org, qa }) => {
+      const card = mk('article', 'org org--qa');
+      card.append(mk('p', 'org__kind', `${org.region} · ${org.name}`));
+      card.append(mk('h3', 'qa__q org__name--q', qa.q));
+      const a = mk('div', 'qa__a');
+      qa.a.forEach(t => a.append(mk('p', null, t)));
+      card.append(a);
+      const link = mk('a', 'org__link', '기관 기록으로');
+      link.href = `#${org.id}`;
+      link.addEventListener('click', () => switchView('org'));
+      card.append(link);
+      list.append(card);
+    });
+    sec.append(list);
+    wrap.append(sec);
+  });
+}
+
+let currentView = 'org';
+function switchView(v) {
+  currentView = v;
+  at('groups').hidden = v !== 'org';
+  at('topics').hidden = v !== 'topic';
+  document.querySelectorAll('.viewbar [role="tab"]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === v)));
+}
+function renderViewTabs() {
+  const bar = at('view-tabs');
+  [['org', IV.viewLabels.byOrg], ['topic', IV.viewLabels.byTopic]].forEach(([v, label]) => {
+    const b = mk('button', 'grade-tab', label);
+    b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.view = v;
+    b.setAttribute('aria-selected', String(v === currentView));
+    b.addEventListener('click', () => { switchView(v); window.scrollTo({ top: bar.getBoundingClientRect().top + window.scrollY - 60 }); });
+    bar.append(b);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderInterview();
   DB.setupTheme();
   DB.setupShare();
   document.querySelectorAll('.group').forEach(g => DB.termify(g));
+  if (location.hash === '#topics') switchView('topic');
   DB.setupTermPopover();
 });

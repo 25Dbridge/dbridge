@@ -35,7 +35,7 @@
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
-<link rel="stylesheet" href="style.css?v=303">
+<link rel="stylesheet" href="style.css?v=304">
 </head>
 
 <body>
@@ -107,8 +107,6 @@
     </div>
   </section>
 
-  <figure class="interlude" data-stock="paths"><img alt="" loading="lazy" decoding="async"><figcaption></figcaption></figure>
-
   <!-- 3. 세 갈래 -->
   <section class="paths" id="paths" aria-labelledby="paths-title">
     <h2 class="section__title" id="paths-title" data-render="paths-heading"></h2>
@@ -130,8 +128,6 @@
     <p class="section__lead" data-render="compare-lead"></p>
     <ul class="compare__list" data-render="compare"></ul>
   </section>
-
-  <figure class="interlude" data-stock="compare"><img alt="" loading="lazy" decoding="async"><figcaption></figcaption></figure>
 
   <!-- 6. 다녀온 곳 -->
   <section class="visits" id="visits" aria-labelledby="visits-title">
@@ -162,6 +158,15 @@
   <section class="checklist" id="checklist" aria-labelledby="checklist-title">
     <h2 class="section__title" id="checklist-title" data-render="checklist-heading"></h2>
     <p class="section__lead" data-render="checklist-lead"></p>
+
+    <section class="tree" aria-labelledby="tree-title">
+      <div class="tree__head">
+        <h3 class="tree__title" id="tree-title" data-render="tree-heading"></h3>
+        <p class="tree__count" data-render="tree-count" aria-live="polite"></p>
+      </div>
+      <p class="tree__lead" data-render="tree-lead"></p>
+      <div class="tree__rows" data-render="tree-rows"></div>
+    </section>
 
     <div class="checklist__grid">
     <div class="checklist__left">
@@ -416,8 +421,8 @@
   </li>
 </template>
 
-<script src="data.js?v=303"></script>
-<script src="common.js?v=303"></script>
-<script src="script.js?v=303" defer></script>
+<script src="data.js?v=304"></script>
+<script src="common.js?v=304"></script>
+<script src="script.js?v=304" defer></script>
 </body>
 </html>

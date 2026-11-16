@@ -348,6 +348,7 @@ main > .interlude + section { border-top: 0; }
 .stage__box[open] .stage__caption::after { transform: rotate(-135deg) translateY(-1px); }
 .stage__items, .fork { margin-left: 1.8125rem; padding-bottom: var(--sp-3); }
 .stage__items li { padding: .75rem 0; font-size: .9375rem; line-height: 1.65; border-top: 1px solid var(--rule); }
+.src-tag { display: block; margin-top: .25rem; font-size: .75rem; font-weight: 600; color: var(--ink-3); }
 .stage__items li:last-child { border-bottom: 1px solid var(--rule); }
 
 .fork { display: grid; gap: var(--sp-3); padding-top: .25rem; }
@@ -539,6 +540,33 @@ a.ptag:hover { border-color: var(--accent); color: var(--accent); }
   .result { margin-top: 0; padding-top: 0; border-top: 0; position: sticky; top: calc(var(--top-h) + 1.5rem); }
 }
 
+/* 내 준비 트리 */
+.tree { margin-bottom: var(--sp-5); padding: var(--sp-3); border-radius: var(--radius-lg); background: var(--card); border: 1px solid var(--rule); }
+.tree__head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.tree__title { font-size: 1.125rem; font-weight: 800; letter-spacing: -.02em; }
+.tree__count { font-size: .8125rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tree__lead { margin-top: .25rem; font-size: .8125rem; color: var(--ink-2); }
+.tree__rows { position: relative; margin-top: var(--sp-3); padding-left: 1.25rem; }
+.tree__rows::before { content: ""; position: absolute; left: .3125rem; top: .75rem; bottom: .75rem; width: 1.5px; background: var(--rule-2); }
+.tree__row { position: relative; padding: .5rem 0; }
+.tree__row::before { content: ""; position: absolute; left: -1.25rem; top: .95rem; width: .6875rem; height: .6875rem; border-radius: 50%; background: var(--paper); border: 2px solid var(--rule-2); }
+.tree__row--ends::before { border-color: var(--ink); }
+.tree__label { font-size: .75rem; font-weight: 700; color: var(--ink-3); margin-bottom: .375rem; }
+.tree__nodes { display: flex; flex-wrap: wrap; gap: .375rem; }
+.node { padding: .5rem .75rem; min-height: 2.5rem; border-radius: 999px; border: 1.5px solid var(--rule-2); background: var(--paper); color: var(--ink-2); font-size: .8125rem; font-weight: 600; transition: background .18s var(--ease), color .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease); }
+.node[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); box-shadow: 0 0 0 4px var(--accent-soft); }
+.node[hidden] { display: none; }
+.node--end { border-style: dashed; opacity: .55; display: inline-flex; align-items: center; gap: .375rem; }
+.node--end.is-open { opacity: 1; border-style: solid; border-color: var(--p); color: var(--p); background: var(--p-soft); }
+.node--end[data-path="analysis"] { --p: var(--path-1); --p-soft: var(--path-1-soft); }
+.node--end[data-path="quality"]  { --p: var(--path-2); --p-soft: var(--path-2-soft); }
+.node--end[data-path="ra"]       { --p: var(--path-3); --p-soft: var(--path-3-soft); }
+.node__num { font-weight: 800; }
+.tree__note { margin-top: .5rem; font-size: .75rem; color: var(--ink-3); }
+@media (min-width: 1024px) {
+  .tree { grid-column: 1 / -1; }
+}
+
 /* ─── 11. 사진 ─────────────────────────────────────────────── */
 .gallery__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem; }
 .gallery__grid .photo { aspect-ratio: 1; }
@@ -681,6 +709,16 @@ a.ptag:hover { border-color: var(--accent); color: var(--accent); }
   .group__list { grid-template-columns: repeat(2, 1fr); align-items: start; }
   .org--extra { grid-column: 1 / -1; }
 }
+
+/* 인터뷰 보기 전환 */
+.viewbar { position: sticky; top: var(--top-h); z-index: 800; background: var(--paper); border-bottom: 1px solid var(--rule); }
+.viewbar__inner { max-width: calc(var(--measure) + var(--gutter) * 2); margin-inline: auto; padding: .5rem var(--gutter); display: flex; gap: .375rem; }
+.viewbar .grade-tab { flex: none; padding: .5rem 1rem; background: var(--paper-2); }
+.viewbar .grade-tab[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+.org--qa .org__name--q { margin-top: .25rem; font-size: 1rem; }
+.org--qa .qa__a { margin-top: .625rem; padding-left: 1rem; }
+.org--qa .org__link { display: inline-block; margin-top: .75rem; font-size: .8125rem; }
+@media (min-width: 900px) { .viewbar__inner { max-width: calc(var(--wide) + var(--gutter) * 2); } }
 
 /* ─── 15. 인쇄 · 모션 최소화 ───────────────────────────────── */
 @media print {

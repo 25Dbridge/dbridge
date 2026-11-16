@@ -99,11 +99,11 @@ function renderFinder() {
 function stageItemsFor(gradeId, goalId) {
   const stage = DATA.roadmap.stages.find(s => s.id === gradeId);
   if (!stage) return [];
-  if (stage.items) return stage.items;
+  if (stage.items) return stage.items.map(t => typeof t === 'string' ? t : t.text);
   // 4학년 — 비임상 갈래의 항목. 목표를 안 정했으면 임상 쪽도 같이 보여 준다.
   const non = stage.branches.find(b => b.id === 'nonclinical');
   const cli = stage.branches.find(b => b.id === 'clinical');
-  let items = [...non.items];
+  let items = non.items.map(t => typeof t === 'string' ? t : t.text);
   if (goalId === 'master') non.entryOptions.forEach(o => items.push(`${o.name} — ${o.text}`));
   else if (goalId === 'bachelor') items.push(non.entryOptions[0].text.replace('대학원에 진학한다', '필요하면 대학원 진학을 검토한다'));
   else items.push(`임상으로 간다면: ${cli.items[0]}`);
@@ -261,7 +261,7 @@ function renderRoadmap() {
     $('.stage__box', li).open = WIDE.matches || i === 0;
 
     if (stage.items) {
-      stage.items.forEach(t => $('.stage__items', li).append(make('li', null, t)));
+      stage.items.forEach(t => $('.stage__items', li).append(itemWithSrc(t)));
     } else {
       const find = id => stage.branches.find(b => b.id === id);
       fillBranch($('.branch--clinical', li),    find('clinical'));
@@ -276,10 +276,19 @@ function renderRoadmap() {
   );
 }
 
+/** 로드맵 항목: 문장 + 출처 라벨. 문자열이면 그대로 */
+function itemWithSrc(t) {
+  const li = make('li');
+  if (typeof t === 'string') { li.textContent = t; return li; }
+  li.append(document.createTextNode(t.text));
+  if (t.src) li.append(make('span', 'src-tag', `${DATA.roadmap.srcLabel} · ${t.src}`));
+  return li;
+}
+
 function fillBranch(node, data) {
   $('.branch__name', node).textContent    = data.name;
   $('.branch__summary', node).textContent = data.summary;
-  data.items.forEach(t => $('.branch__items', node).append(make('li', null, t)));
+  data.items.forEach(t => $('.branch__items', node).append(itemWithSrc(t)));
   const entry = $('.entry', node);
   if (entry) {
     if (data.entryOptions) data.entryOptions.forEach(o => entry.append(make('dt', null, o.name), make('dd', null, o.text)));
@@ -434,7 +443,7 @@ function renderMethod() {
 const STORE_KEY = 'dbridge-check-v1';
 let checkState = store.get(STORE_KEY, {});
 let currentGrade = DATA.checklist.gradeTabs[0].id;
-const saveState = () => { store.set(STORE_KEY, checkState); markSaved(); };
+const saveState = () => { store.set(STORE_KEY, checkState); markSaved(); paintTree(); };
 
 function markSaved() {
   const n = slot('check-saved');
@@ -632,6 +641,78 @@ function openProgramSheet() {
   });
 }
 
+/* ─── 내 준비 트리 ───────────────────────────────────────────── */
+function renderTree() {
+  const T = DATA.checklist.tree;
+  slot('tree-heading').textContent = T.heading;
+  slot('tree-lead').textContent    = T.lead;
+  const wrap = slot('tree-rows');
+  const byId = id => DATA.checklist.items.find(x => x.id === id);
+
+  T.rows.forEach(row => {
+    const r = make('div', 'tree__row');
+    r.append(make('p', 'tree__label', row.label));
+    const nodes = make('div', 'tree__nodes');
+    row.ids.forEach(id => {
+      const it = byId(id); if (!it) return;
+      const b = make('button', 'node', it.short || it.text);
+      b.type = 'button'; b.dataset.id = id;
+      b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => {
+        if (it.type === 'choice') {
+          // 선택형은 체크리스트에서 고르도록 그 학년으로 이동
+          currentGrade = it.grades[0]; paintChecklist();
+          $('#check-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+        if (checkState[id]) delete checkState[id]; else checkState[id] = true;
+        saveState(); paintChecklist();
+      });
+      nodes.append(b);
+    });
+    r.append(nodes);
+    wrap.append(r);
+  });
+
+  const ends = make('div', 'tree__row tree__row--ends');
+  ends.append(make('p', 'tree__label', T.endsLabel));
+  const en = make('div', 'tree__nodes');
+  DATA.paths.forEach(p => {
+    const b = make('button', 'node node--end'); b.type = 'button';
+    b.dataset.path = p.id; b.setAttribute('aria-haspopup', 'dialog');
+    b.append(make('span', 'node__num', p.num), document.createTextNode(p.name));
+    b.addEventListener('click', () => openPathSheet(p));
+    en.append(b);
+  });
+  ends.append(en, make('p', 'tree__note', T.endsNote));
+  wrap.append(ends);
+  paintTree();
+}
+
+function paintTree() {
+  const T = DATA.checklist.tree; if (!T) return;
+  const byId = id => DATA.checklist.items.find(x => x.id === id);
+  const lit = id => {
+    const it = byId(id); if (!it) return false;
+    if (it.type === 'choice') return !it.emptyWhen.includes(checkState[id] || it.defaultValue);
+    return !!checkState[id];
+  };
+  let n = 0, total = 0;
+  $$('.tree .node:not(.node--end)').forEach(b => {
+    const it = byId(b.dataset.id);
+    const hidden = it.showIf && !it.showIf.valueIn.includes(checkState[it.showIf.item]);
+    b.hidden = !!hidden;
+    if (hidden) return;
+    total++;
+    const on = lit(b.dataset.id); if (on) n++;
+    b.setAttribute('aria-pressed', String(on));
+  });
+  const g4 = T.rows.find(r => r.label === '4학년');
+  const g4done = g4 && g4.ids.every(id => { const it = byId(id); const hidden = it.showIf && !it.showIf.valueIn.includes(checkState[it.showIf.item]); return hidden || lit(id); });
+  $$('.tree .node--end').forEach(b => b.classList.toggle('is-open', !!g4done));
+  slot('tree-count').textContent = T.countTemplate.replace('{n}', n).replace('{total}', total);
+}
+
 /* 이미지로 저장 */
 function buildExport() {
   const box = $('#export-sheet');
@@ -684,18 +765,6 @@ function renderGallery() {
   DATA.photos.items.forEach(ph => grid.append(photoNode(ph)));
 }
 
-/* 섹션 사이 참고 사진 띠 — 현장 사진과 섞이지 않도록 출처를 바로 아래 적는다 */
-function renderInterludes() {
-  const S = DATA.photos.stock || {};
-  $$('.interlude').forEach(fig => {
-    const st = S[fig.dataset.stock];
-    if (!st) { fig.remove(); return; }
-    const img = $('img', fig);
-    img.src = st.file; img.alt = st.alt || '';
-    img.addEventListener('error', () => fig.remove());
-    $('figcaption', fig).textContent = st.credit;
-  });
-}
 function openLightbox(ph) {
   const dlg = $('#lightbox');
   const img = slot('lightbox-img');
@@ -791,7 +860,7 @@ function init() {
   safe('method',    renderMethod);
   safe('checklist', renderChecklist);
   safe('gallery',   renderGallery);
-  safe('interlude', renderInterludes);
+  safe('tree',      renderTree);
   safe('open',      renderOpen);
   safe('footer',    renderFooter);
   safe('reveal',    setupReveal);
