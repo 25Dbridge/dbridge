@@ -894,8 +894,6 @@ function renderOpen() {
   slot('open-limits-label').textContent    = O.limitsLabel;
   const dl = slot('open-limits');
   O.limits.forEach(l => { const w = make('div'); w.append(make('dt', null, l.title), make('dd', null, l.body)); dl.append(w); });
-  slot('baton-heading').textContent = O.batonHeading;
-  setRichText(slot('baton'), O.baton);
 }
 
 function renderFooter() {
@@ -968,7 +966,6 @@ function init() {
   safe('visits',    renderVisits);
   safe('method',    renderMethod);
   safe('checklist', renderChecklist);
-  safe('gallery',   renderGallery);
   safe('tree',      renderTree);
   safe('sim',       renderSim);
   safe('open',      renderOpen);

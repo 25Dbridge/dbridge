@@ -14,14 +14,14 @@ const DATA = {
   site: {
     url: 'https://25dbridge.github.io/dbridge/',
     title: '임상병리사의 바이오 진출 로드맵',
-    shareText: '병원 밖에도 길이 있을까 — 동서대 임상병리학과 D-Bridge가 일본·국내 일곱 곳을 다녀와 정리한 진로 로드맵'
+    shareText: '병원 밖에도 길이 있을까? 있었다. 세 갈래였다. — 동서대 임상병리학과 D-Bridge가 일본·국내 일곱 곳을 다녀와 정리한 진로 로드맵'
   },
 
   /* ─── 첫 화면 ─────────────────────────────────────────────── */
   hero: {
     question: '병원 밖에도\n길이 있을까',
-    answer: '일곱 곳에서 현직자 열 명에게 직접 물어봤습니다.',
-    lead: '임상병리학과 2학년 다섯 명이 2026년 여름, 일본 고베와 국내 대전·오송을 다녀와 정리했습니다.',
+    answer: '있었다. 세 갈래였다.',
+    lead: '임상병리학과 2학년 다섯 명이 2026년 여름, 일본 고베와 국내 대전·오송의 일곱 곳에서 현직자 열 명에게 직접 물어보고 정리했습니다.',
     stats: [
       { value: 7,  label: '방문 기관' },
       { value: 10, label: '만난 현직자' },
@@ -581,7 +581,7 @@ const DATA = {
     capstone:             { name: '캡스톤디자인 지원 프로그램', kind: 'campus', when: '매 학기 초 학교 공지에서 모집', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=MN2000197' },
     academic_fest:        { name: '바이오헬스융합대학 학술제 엑스포', kind: 'campus', when: '11월경', url: '' },
     ugrad_research_fund:  { name: '학부생 연구지원', kind: 'campus', when: 'MYDEX 로그인 후 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    job_lecture:          { name: '앵커 취업스쿨 — 기업 탐방 및 직무 특강', kind: 'campus', when: '7월 말 · MYDEX 로그인 후 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    job_lecture:          { name: '앵커 취업스쿨 — 기업 탐방 및 직무 특강', kind: 'campus', when: '상시 운영 · 공고가 나면 MYDEX에서 신청', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
     senior_mentoring:     { name: '임상병리사 취업특강', kind: 'campus', when: '상시 운영 · 공고가 나면 MYDEX에서 신청', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
     career_counsel:       { name: '취업지원센터 진로 상담', kind: 'campus', when: '상시 · 051-320-2070', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=research&mode=view&code=028' },
     grad_briefing:        { name: '일반대학원 학·석사 연계과정 안내', kind: 'campus', when: '1월 · 7월 첫째 주 · 학과 공지 게시판', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa' },
@@ -639,9 +639,7 @@ const DATA = {
       { title: '지금도 일하고 있는지', body: '국내 두 기업에서는 임상병리 전공자가 지금도 일하는지 "그럴 것 같다"는 답만 들었습니다. 직접 확인해야 합니다.' },
       { title: '병원과 기업, 길이 나뉘어 있나', body: '국내에서도 병원 취업과 기업 취업이 처음부터 나뉜다는 판단은 한 기업 담당자의 말에서 나왔습니다. 숫자로 더 확인해야 합니다.' },
       { title: '조사 범위', body: '모두 펩타이드 분야의 중소 규모 기업이고 대전·오송에 몰려 있습니다. 대형 제약사, CDMO, 다른 지역은 가보지 못했습니다.' }
-    ],
-    batonHeading: '이어달리기',
-    baton: '이 사이트는 2026년 <b>D-Bridge</b> 팀에서 끝나지 않고, 다음 기수가 탐방 내용을 이어서 채우도록 만들었습니다.'
+    ]
   },
 
   /* ─── 하단 ────────────────────────────────────────────────── */

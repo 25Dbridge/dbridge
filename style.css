@@ -227,7 +227,7 @@ main > section + section { border-top: 1px solid var(--rule); }
 .hero__inner { position: relative; z-index: 1; width: 100%; max-width: calc(var(--wide) + var(--gutter) * 2); margin-inline: auto; padding: var(--sp-6) var(--gutter) var(--sp-5); }
 .hero__question { font-size: clamp(2rem, 9vw, 4.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -.045em; }
 .hero__line { display: block; }
-.hero__answer { margin-top: var(--sp-4); max-width: 30rem; font-size: clamp(1.125rem, 3.6vw, 1.5rem); font-weight: 700; line-height: 1.45; letter-spacing: -.02em; }
+.hero__answer { margin-top: var(--sp-3); max-width: 30rem; font-size: clamp(1.625rem, 6.4vw, 2.75rem); font-weight: 800; line-height: 1.2; letter-spacing: -.04em; color: #c9bfff; }
 .hero__lead { margin-top: var(--sp-3); max-width: 34rem; font-size: .9375rem; line-height: 1.75; color: var(--hero-dim); }
 .hero__cta { margin-top: var(--sp-4); }
 .btn--light { background: var(--hero-ink); color: var(--hero-bg); }
