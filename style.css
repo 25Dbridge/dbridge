@@ -131,7 +131,7 @@ main > section + section { border-top: 1px solid var(--rule); }
 .sim > * { max-width: var(--wide); margin-inline: auto; }
 .sim .section__lead { max-width: var(--wide); }
 @media (min-width: 720px) { main > section { padding-block: var(--sp-7); } }
-.roadmap, .compare, .visits, .gallery { max-width: calc(var(--wide) + var(--gutter) * 2); }
+.roadmap, .visits, .gallery { max-width: calc(var(--wide) + var(--gutter) * 2); }
 
 .section__title {
   font-size: clamp(1.625rem, 5.6vw, 2.5rem); font-weight: 800; letter-spacing: -.035em;
@@ -229,7 +229,6 @@ main > section + section { border-top: 1px solid var(--rule); }
 .hero__line { display: block; }
 .hero__answer { margin-top: var(--sp-4); max-width: 30rem; font-size: clamp(1.125rem, 3.6vw, 1.5rem); font-weight: 700; line-height: 1.45; letter-spacing: -.02em; }
 .hero__lead { margin-top: var(--sp-3); max-width: 34rem; font-size: .9375rem; line-height: 1.75; color: var(--hero-dim); }
-.hero__finding { margin-top: var(--sp-3); max-width: 30rem; font-size: 1rem; font-weight: 600; line-height: 1.6; color: var(--hero-ink); }
 .hero__cta { margin-top: var(--sp-4); }
 .btn--light { background: var(--hero-ink); color: var(--hero-bg); }
 .hero__stats { display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-5); margin-top: var(--sp-5); padding-top: var(--sp-3); border-top: 1px solid rgba(246,245,248,.18); }
@@ -423,8 +422,8 @@ main > .interlude + section { border-top: 0; }
 .fork { display: grid; gap: var(--sp-3); padding-top: .25rem; }
 .branch { position: relative; padding: var(--sp-3); border-radius: var(--radius-lg); background: var(--card); border: 1.5px solid var(--rule-2); }
 .branch::before { position: absolute; top: -.6875rem; left: var(--sp-3); padding: .125rem .5625rem; border-radius: 999px; font-size: .6875rem; font-weight: 700; letter-spacing: .01em; }
-.branch--clinical::before { content: "여기서 끝나는 갈래"; background: var(--paper-3); color: var(--ink-2); }
-.branch--nonclinical::before { content: "세 갈래로 이어지는 갈래"; background: var(--ink); color: var(--paper); }
+.branch--clinical::before { content: "병원으로 가는 길"; background: var(--paper-3); color: var(--ink-2); }
+.branch--nonclinical::before { content: "세 갈래로 이어지는 길"; background: var(--ink); color: var(--paper); }
 .branch--clinical { border-style: dashed; background: var(--paper-2); }
 .branch--nonclinical { border-color: var(--ink); }
 .branch__name { font-size: 1.125rem; font-weight: 800; letter-spacing: -.02em; }
@@ -447,29 +446,8 @@ main > .interlude + section { border-top: 0; }
 
 /* ─── 8. 일본 · 국내 ───────────────────────────────────────── */
 .compare__list { display: grid; gap: .5rem; }
-.cmp__box { border: 1px solid var(--rule); border-radius: var(--radius-lg); background: var(--card); overflow: hidden; }
-.cmp__box[open] { border-color: var(--rule-2); }
-.cmp__head { display: flex; align-items: center; gap: .75rem; padding: 1rem var(--sp-3); }
-.cmp__title { flex: 1; font-size: 1.0625rem; font-weight: 700; letter-spacing: -.015em; }
-.cmp__verdict { flex: none; padding: .2rem .625rem; border-radius: 999px; font-size: .75rem; font-weight: 700; }
-.cmp[data-verdict="same"] .cmp__verdict { background: var(--same-soft); color: var(--same); }
-.cmp[data-verdict="diff"] .cmp__verdict { background: var(--diff-soft); color: var(--diff); }
-.cmp__head::after { content: ""; flex: none; width: .45rem; height: .45rem; border-right: 1.5px solid var(--ink-3); border-bottom: 1.5px solid var(--ink-3); transform: rotate(45deg) translateY(-2px); transition: transform .2s var(--ease); }
-.cmp__box[open] .cmp__head::after { transform: rotate(-135deg) translateY(-1px); }
-.cmp__cols { display: grid; border-top: 1px solid var(--rule); }
-.cmp__col { padding: var(--sp-3); }
-.cmp__col + .cmp__col { border-top: 1px solid var(--rule); }
-.cmp__colname { font-size: .75rem; font-weight: 700; color: var(--ink-3); margin-bottom: .375rem; }
-.cmp__col--kr .cmp__colname { color: var(--accent); }
-.cmp__text { font-size: .9375rem; line-height: 1.65; }
-.cmp__org { margin-top: .625rem; font-size: .8125rem; color: var(--ink-3); }
-.cmp__team { padding: .875rem var(--sp-3); border-top: 1px dashed var(--rule-2); background: var(--paper-2); font-size: .875rem; line-height: 1.6; color: var(--ink-2); }
-.cmp__team-label { display: block; font-size: .75rem; font-weight: 700; color: var(--ink-3); margin-bottom: .125rem; }
-.cmp__team:empty { display: none; }
 @media (min-width: 640px) {
-  .cmp__cols { grid-template-columns: 1fr 1fr; }
-  .cmp__col + .cmp__col { border-top: 0; border-left: 1px solid var(--rule); }
-}
+    }
 
 /* ─── 9. 다녀온 곳 ─────────────────────────────────────────── */
 .filters { display: grid; gap: .75rem; margin-bottom: var(--sp-4); }
@@ -643,7 +621,6 @@ main > .interlude + section { border-top: 0; }
 @media (min-width: 720px) { .gallery__grid { grid-template-columns: repeat(4, 1fr); gap: .75rem; } }
 
 /* ─── 12. 남은 과제 · 하단 ─────────────────────────────────── */
-@media (min-width: 1024px) { .open { max-width: calc(var(--wide) + var(--gutter) * 2); } .open__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-6); align-items: start; } }
 .open__sub { font-size: .8125rem; font-weight: 700; color: var(--ink-2); margin: var(--sp-4) 0 var(--sp-2); }
 .limits { display: grid; gap: 0; border-top: 1px solid var(--rule); }
 .limits > div { padding: var(--sp-3) 0; border-bottom: 1px solid var(--rule); }
@@ -652,9 +629,6 @@ main > .interlude + section { border-top: 0; }
 @media (min-width: 720px) and (max-width: 1023px) {
   .limits { grid-template-columns: 1fr 1fr; column-gap: var(--sp-4); }
 }
-.questions { display: grid; gap: .625rem; }
-.questions li { position: relative; padding: .875rem 1rem .875rem 2.5rem; border-radius: var(--radius); background: var(--paper-2); font-size: .9375rem; line-height: 1.6; }
-.questions li::before { content: "?"; position: absolute; left: 1rem; top: .8rem; font-weight: 800; color: var(--accent); }
 .baton { margin-top: var(--sp-4); padding: var(--sp-3); border-radius: var(--radius-lg); border: 1.5px solid var(--ink); }
 .baton .open__sub { margin-top: 0; }
 .baton p { font-size: .9375rem; line-height: 1.7; }
@@ -793,8 +767,7 @@ main > .interlude + section { border-top: 0; }
 /* ─── 15. 인쇄 · 모션 최소화 ───────────────────────────────── */
 @media print {
   .topbar, .tabbar, .toast, .sheet, .lightbox, .foot__share { display: none !important; }
-  .stage__box, .cmp__box, .stop__box, .org__details { display: block; }
-  body { padding-bottom: 0; }
+  .stage__box,   body { padding-bottom: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

@@ -35,7 +35,7 @@
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
-<link rel="stylesheet" href="style.css?v=307">
+<link rel="stylesheet" href="style.css?v=309">
 </head>
 
 <body>
@@ -50,11 +50,10 @@
   <div class="topbar__inner">
     <a class="topbar__logo" href="#hero" aria-label="맨 위로">D-Bridge</a>
     <nav class="topbar__nav" aria-label="섹션">
-      <a href="#finder">경로 찾기</a>
-      <a href="#paths">세 갈래</a>
+      <a href="#finder">내 길 찾기</a>
+      <a href="#paths">세 갈래 길</a>
       <a href="#sim">미리 살아보기</a>
       <a href="#roadmap">로드맵</a>
-      <a href="#compare">일본·국내</a>
       <a href="#visits">다녀온 곳</a>
       <a href="#checklist">자가 진단</a>
       <a href="#open">남은 과제</a>
@@ -78,7 +77,6 @@
     <h1 class="hero__question" data-render="hero-question"></h1>
     <p class="hero__answer" data-render="hero-answer"></p>
     <p class="hero__lead" data-render="hero-lead"></p>
-    <p class="hero__finding" data-render="hero-finding"></p>
     <p class="hero__cta"><a class="btn btn--light" href="#finder" data-render="hero-cta"></a></p>
     <dl class="hero__stats" data-render="hero-stats"></dl>
     <p class="hero__project" data-render="hero-project"></p>
@@ -127,14 +125,6 @@
     <h2 class="section__title" id="roadmap-title" data-render="roadmap-heading"></h2>
     <p class="roadmap__notice" data-render="roadmap-notice" role="note"></p>
     <ol class="timeline" data-render="timeline"></ol>
-    <div class="roadmap__closing" data-render="roadmap-closing"></div>
-  </section>
-
-  <!-- 5. 일본과 국내 -->
-  <section class="compare" id="compare" aria-labelledby="compare-title">
-    <h2 class="section__title" id="compare-title" data-render="compare-heading"></h2>
-    <p class="section__lead" data-render="compare-lead"></p>
-    <ul class="compare__list" data-render="compare"></ul>
   </section>
 
   <!-- 6. 다녀온 곳 -->
@@ -220,16 +210,8 @@
     <h2 class="section__title" id="open-title" data-render="open-heading"></h2>
     <p class="section__lead" data-render="open-lead"></p>
 
-    <div class="open__grid">
-      <div>
-        <h3 class="open__sub" data-render="open-limits-label"></h3>
-        <dl class="limits" data-render="open-limits"></dl>
-      </div>
-      <div>
-        <h3 class="open__sub" data-render="open-questions-label"></h3>
-        <ul class="questions" data-render="open-questions"></ul>
-      </div>
-    </div>
+    <h3 class="open__sub" data-render="open-limits-label"></h3>
+    <dl class="limits" data-render="open-limits"></dl>
 
     <div class="baton">
       <h3 class="open__sub" data-render="baton-heading"></h3>
@@ -258,9 +240,9 @@
 
 <!-- 휴대폰 하단 탭 -->
 <nav class="tabbar" aria-label="섹션 이동">
-  <a href="#finder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 12h8l4-4 4 4M12 12v7"/></svg><span>경로 찾기</span></a>
+  <a href="#finder"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 12h8l4-4 4 4M12 12v7"/></svg><span>내 길 찾기</span></a>
   <a href="#roadmap"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4v16M6 7h12l-3 3 3 3H6"/></svg><span>로드맵</span></a>
-  <a href="#compare"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h7v12H3zM14 6h7v12h-7z"/></svg><span>일본·국내</span></a>
+  <a href="#sim"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5zM9 9l6 3-6 3z"/></svg><span>미리 살아보기</span></a>
   <a href="#visits"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg><span>다녀온 곳</span></a>
   <a href="#checklist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg><span>자가 진단</span></a>
 </nav>
@@ -351,29 +333,6 @@
   </li>
 </template>
 
-<template id="tpl-compare">
-  <li class="cmp">
-    <details class="cmp__box">
-      <summary class="cmp__head">
-        <span class="cmp__title"></span>
-        <span class="cmp__verdict"></span>
-      </summary>
-      <div class="cmp__cols">
-        <div class="cmp__col cmp__col--jp">
-          <p class="cmp__colname"></p>
-          <p class="cmp__text"></p>
-          <p class="cmp__org"></p>
-        </div>
-        <div class="cmp__col cmp__col--kr">
-          <p class="cmp__colname"></p>
-          <p class="cmp__text"></p>
-          <p class="cmp__org"></p>
-        </div>
-      </div>
-      <p class="cmp__team"></p>
-    </details>
-  </li>
-</template>
 
 <template id="tpl-stop">
   <li class="stop">
@@ -429,8 +388,8 @@
   </li>
 </template>
 
-<script src="data.js?v=307"></script>
-<script src="common.js?v=307"></script>
-<script src="script.js?v=307" defer></script>
+<script src="data.js?v=309"></script>
+<script src="common.js?v=309"></script>
+<script src="script.js?v=309" defer></script>
 </body>
 </html>

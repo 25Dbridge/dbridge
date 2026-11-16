@@ -38,7 +38,6 @@ function renderHero() {
   h.question.split('\n').forEach(line => q.append(make('span', 'hero__line', line)));
   slot('hero-answer').textContent  = h.answer;
   slot('hero-lead').textContent    = h.lead;
-  slot('hero-finding').textContent = h.finding;
   slot('hero-cta').textContent     = h.cta;
   slot('hero-project').textContent = h.project;
   slot('hero-team').textContent    = h.team;
@@ -413,10 +412,7 @@ function renderRoadmap() {
     list.append(li);
   });
 
-  slot('roadmap-closing').append(
-    make('p', 'roadmap__quote', r.closing.quote),
-    make('p', 'roadmap__line',  r.closing.line)
-  );
+
 }
 
 /** 로드맵 항목: 문장 + 출처 라벨. 문자열이면 그대로 */
@@ -442,31 +438,6 @@ function fillBranch(node, data) {
     wrap.append(extLink('chip', data.link.label, data.link.url));
     node.append(wrap);
   }
-}
-
-/* ─── 일본 · 국내 ────────────────────────────────────────────── */
-function renderCompare() {
-  const C = DATA.compare;
-  slot('compare-heading').textContent = C.heading;
-  slot('compare-lead').textContent    = C.lead;
-  const list = slot('compare');
-  C.items.forEach(it => {
-    const li = tpl('compare');
-    li.dataset.verdict = it.verdict;
-    $('.cmp__title', li).textContent   = it.title;
-    $('.cmp__verdict', li).textContent = C.verdictLabels[it.verdict];
-    const [jp, kr] = $$('.cmp__col', li);
-    $('.cmp__colname', jp).textContent = C.colJp;
-    $('.cmp__text', jp).textContent    = it.jp;
-    $('.cmp__org', jp).textContent     = it.jpOrg;
-    $('.cmp__colname', kr).textContent = C.colKr;
-    $('.cmp__text', kr).textContent    = it.kr;
-    $('.cmp__org', kr).textContent     = `${C.orgsLabel}: ${it.krOrgs.join(', ')}`;
-    const team = $('.cmp__team', li);
-    if (it.team) team.append(make('span', 'cmp__team-label', C.teamLabel), document.createTextNode(it.team));
-    else team.remove();
-    list.append(li);
-  });
 }
 
 /* ─── 다녀온 곳 ──────────────────────────────────────────────── */
@@ -921,11 +892,8 @@ function renderOpen() {
   slot('open-heading').textContent         = O.heading;
   slot('open-lead').textContent            = O.lead;
   slot('open-limits-label').textContent    = O.limitsLabel;
-  slot('open-questions-label').textContent = O.questionsLabel;
   const dl = slot('open-limits');
   O.limits.forEach(l => { const w = make('div'); w.append(make('dt', null, l.title), make('dd', null, l.body)); dl.append(w); });
-  const ul = slot('open-questions');
-  O.questions.forEach(q => ul.append(make('li', null, q)));
   slot('baton-heading').textContent = O.batonHeading;
   setRichText(slot('baton'), O.baton);
 }
@@ -949,7 +917,7 @@ function renderFooter() {
 
 /* ─── 스크롤 진입 · 현재 위치 ────────────────────────────────── */
 function setupReveal() {
-  const nodes = $$('main > section > .section__title, .path, .stage, .cmp, .stop, .limits > div');
+  const nodes = $$('main > section > .section__title, .path, .stage, .stop, .limits > div');
   nodes.forEach(n => n.classList.add('reveal'));
   const showAll = () => nodes.forEach(n => n.classList.add('is-in'));
   if (REDUCE || !('IntersectionObserver' in window)) { showAll(); return; }
@@ -997,7 +965,6 @@ function init() {
   safe('finder',    renderFinder);
   safe('paths',     renderPaths);
   safe('roadmap',   renderRoadmap);
-  safe('compare',   renderCompare);
   safe('visits',    renderVisits);
   safe('method',    renderMethod);
   safe('checklist', renderChecklist);
