@@ -98,7 +98,7 @@ const DATA = {
      ───────────────────────────────────────────────────────── */
   sim: {
     heading: '4년 미리 살아보기',
-    lead: '여덟 번 고르면 4년이 지나갑니다. 정답은 없고, 고른 대로 채워진 것과 비어 있는 것이 남습니다.',
+    lead: '하나씩 고르다 보면 4년이 지나갑니다. 정답은 없고, 고른 대로 채워진 것과 비어 있는 것이 남습니다.',
     start: '시작하기',
     next: '다음',
     restart: '다시 살아보기',
@@ -176,7 +176,7 @@ const DATA = {
       quality:   { title: '② 생산 · 품질로 갔다.', line: '병원 검사는 결과가 나올 때까지 다시 해볼 수 있지만, 의약품 제조는 한 번의 분석이 원칙이다. 이 차이를 몸에 익히는 것이 일의 시작이다.' },
       ra:        { title: '③ 인허가 · 임상시험 · 사업개발로 갔다.', line: '식약처 품목허가 서류를 준비하는 일이라 의학 지식이 그대로 쓰인다. 소규모 기업에서는 맡는 일의 범위가 정해져 있지 않다.' },
       undecided: { title: '아직 길을 정하지 않았다.', line: '괜찮다. 3학년 전까지는 준비가 같다. 다만 길을 정해야 대학원에 갈지 판단할 수 있다.' },
-      clinical:  { title: '병원으로 갔다.', line: '국가시험을 준비한다. 병원 밖 이야기는 여기까지다. 시험 일정은 매년 국시원 공고로 확인한다.' }
+      clinical:  { title: '병원으로 갔다.', line: '국가시험을 준비한다. 시험 일정은 매년 국시원 공고로 확인한다. 기업 쪽 길이 궁금하면 다시 살아보며 다른 선택을 해 보자.' }
     }
   },
 
@@ -263,7 +263,7 @@ const DATA = {
         id: 'g12', grade: '1·2학년', caption: '기초 다지기',
         items: [
           { text: '학부 실험실에 들어가 기초 연구에 참여한다.', src: '지투지바이오' },
-          { text: '가설을 세우고 확인하고 결과를 정리하기까지, 실험을 처음부터 끝까지 한 번 해 본다.', src: '지투지바이오' },
+          { text: '가설 세우기부터 결과 정리까지, 실험 하나를 처음부터 끝까지 해 본다.', src: '지투지바이오' },
           { text: '전공 과목 학점을 관리한다. 채용 서류에 성적증명서가 들어간다.', src: '펩트론 대전' },
           { text: '영어를 시작한다. 국내 3개 기업 중 2곳이 기본 요건으로 말했다.', src: '지투지바이오, 펩트론 대전' }
         ]
@@ -271,8 +271,8 @@ const DATA = {
       {
         id: 'g3', grade: '3학년', caption: '길 정하기',
         items: [
-          { text: '세 갈래 길 중 목표로 할 일을 정한다.', src: '팀 정리' },
-          { text: '목표에 따라 대학원에 갈지 판단한다. 분석·효능평가는 석사 이상, 생산·품질은 학사로 들어갈 수 있다.', src: '펩트론 오송, 인코스팜' },
+          { text: '세 갈래 중 내가 갈 길을 하나 정한다.', src: '팀 정리' },
+          { text: '고른 길에 따라 대학원에 갈지 판단한다. 분석·효능평가는 석사 이상, 생산·품질은 학사로 들어갈 수 있다.', src: '펩트론 오송, 인코스팜' },
           { text: '현장실습에 참여한다. 현장에서 용어와 회의 내용을 따라가기 어려웠다는 말이 있었으니, 실무 용어와 분석 기술을 미리 익혀 둔다.', src: '팀 정리' },
           { text: '생산·품질이 목표라면 외부 기관의 GMP 교육을 들어 볼 만하다. 꼭 필요한 자격은 아니지만 이 일을 이해하고 있다는 걸 보여 줄 수 있다.', src: '고베대학 BiCLET, 팀 해석' },
           { text: '복수전공이나 융합 과목으로 전공의 폭을 넓힌다.', src: '국내 인터뷰 1건' }
@@ -506,24 +506,24 @@ const DATA = {
         text: '학부 실험실에 들어가 있거나, 들어가는 방법을 알아본 적이 있다.',
         emptyNote: '', programs: ['undergrad_researcher', 'prof_counsel'] },
       { id: 'A2', short: '실험 끝까지', grades: ['g12'], group: 'now', type: 'check',
-        text: '가설을 세우고 확인하고 결과를 정리하기까지, 실험을 처음부터 끝까지 해 보았다.',
+        text: '가설 세우기부터 결과 정리까지, 실험 하나를 처음부터 끝까지 해 보았다.',
         emptyNote: '실험을 돕는 것과 처음부터 끝까지 해 보는 것은 다릅니다.',
         programs: ['capstone', 'academic_fest', 'ugrad_research_fund'] },
       { id: 'B1', short: '목표 정하기', grades: ['g3'], group: 'now', type: 'check',
-        text: '세 갈래 길 중 목표로 할 일을 정했다.',
+        text: '세 갈래 중 내가 갈 길을 하나 정했다.',
         emptyNote: '채용공고의 자격 요건을 보면 그 길이 학사를 뽑는지 석사를 뽑는지 바로 보입니다.',
         programs: ['career_counsel', 'job_lecture', 'senior_mentoring'],
         jobSearch: { mode: 'byPath' } },
       { id: 'B2', short: '대학원 여부', grades: ['g3'], group: 'now', type: 'check',
-        text: '목표로 한 일에 필요한 학위를 알아보고 대학원에 갈지 정했다.',
+        text: '내가 갈 길에 필요한 학위를 알아보고 대학원에 갈지 정했다.',
         emptyNote: '분석·효능평가는 석사 이상, 생산·품질은 학사로 들어갈 수 있습니다.',
         programs: ['grad_briefing', 'prof_counsel', 'grad_counsel'] },
       { id: 'B3', short: '현장 용어', grades: ['g3'], group: 'now', type: 'check',
-        text: '목표로 한 일에서 쓰는 용어와 기술을 미리 찾아본 적이 있다.',
+        text: '그 길에서 쓰는 용어와 기술을 미리 찾아본 적이 있다.',
         emptyNote: '현장에서 용어와 회의 내용을 따라가기 어려웠다는 이야기가 있었습니다.',
         programs: ['job_lecture', 'senior_mentoring'] },
       { id: 'B4', short: '외부 교육', grades: ['g3'], group: 'now', type: 'check',
-        text: '목표로 한 길에 도움이 되는 외부 교육을 알아본 적이 있다.',
+        text: '그 길에 도움이 되는 외부 교육을 알아본 적이 있다.',
         emptyNote: '생산·품질이 목표라면 GMP 교육입니다.',
         programs: ['gmp_course'],
         noProgram: '교내에서 이런 교육이나 자격증을 지원하는 제도는 찾지 못했습니다.' },
@@ -578,11 +578,11 @@ const DATA = {
      ───────────────────────────────────────────────────────── */
   programs: {
     undergrad_researcher: { name: '임상병리학과 연구회', kind: 'campus', when: '학과 공지 게시판에서 모집 공고 확인', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa' },
-    capstone:             { name: '캡스톤디자인 지원 프로그램', kind: 'campus', when: '매 학기 초 모집 공고 (학교 공지 → 모집)', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=MN2000197' },
+    capstone:             { name: '캡스톤디자인 지원 프로그램', kind: 'campus', when: '매 학기 초 학교 공지에서 모집', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=MN2000197' },
     academic_fest:        { name: '바이오헬스융합대학 학술제 엑스포', kind: 'campus', when: '11월경', url: '' },
     ugrad_research_fund:  { name: '학부생 연구지원', kind: 'campus', when: 'MYDEX 로그인 후 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
     job_lecture:          { name: '앵커 취업스쿨 — 기업 탐방 및 직무 특강', kind: 'campus', when: '7월 말 · MYDEX 로그인 후 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    senior_mentoring:     { name: '전공과 진로설계 — 선배가 들려주는 임상병리사의 첫걸음', kind: 'campus', when: '4월 말 · MYDEX 로그인 후 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    senior_mentoring:     { name: '임상병리사 취업특강', kind: 'campus', when: '상시 운영 · 공고가 나면 MYDEX에서 신청', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
     career_counsel:       { name: '취업지원센터 진로 상담', kind: 'campus', when: '상시 · 051-320-2070', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=research&mode=view&code=028' },
     grad_briefing:        { name: '일반대학원 학·석사 연계과정 안내', kind: 'campus', when: '1월 · 7월 첫째 주 · 학과 공지 게시판', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa' },
     grad_counsel:         { name: '취업지원센터 진학 상담', kind: 'campus', when: '상시 · 051-320-2070', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=research&mode=view&code=028' },

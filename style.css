@@ -296,7 +296,7 @@ main > .interlude + section { border-top: 0; }
 }
 @media (min-width: 1024px) {
   .finder { max-width: calc(var(--wide) + var(--gutter) * 2); }
-  .finder__grid { display: grid; grid-template-columns: 17rem 1fr; gap: var(--sp-6); align-items: start; }
+  .finder__grid { display: grid; grid-template-columns: 22rem 1fr; gap: var(--sp-6); align-items: start; }
   .finder__pick { grid-template-columns: 1fr; position: sticky; top: calc(var(--top-h) + 1.5rem); }
   .finder__result { margin-top: 0; }
   .fr { border-top: 0; padding-top: 0; }
