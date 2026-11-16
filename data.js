@@ -27,6 +27,8 @@ const DATA = {
       { value: 10, label: '만난 현직자' },
       { value: 3,  label: '진로 갈래' }
     ],
+    finding: '일본에서 들은 답 여덟 개를 국내에서 다시 물었더니, 다섯은 같았고 셋은 달랐습니다.',
+    cta: '내 경로 찾기',
     project: 'GELS 챌린저 · 전공의 경계를 넘어 진로의 가능성을 넓히다',
     team: 'D-Bridge — 정시우, 박윤서, 오수진, 김민지, 이예진 (동서대학교 임상병리학과) · 지도교수 김동원'
   },
@@ -50,7 +52,7 @@ const DATA = {
     ],
     results: {
       bachelor: {
-        headline: '학사로 들어갈 수 있는 갈래는 둘입니다.',
+        headline: '인터뷰에서 학사 진입이 확인된 갈래는 둘입니다.',
         paths: ['quality', 'ra'],
         evidence: [
           { org: '펩트론 오송', text: '생산팀은 전문학사·학사 출신이 다수다. 오송의 생산·품질관리·품질보증은 제약공학·화학공학 학사 기준으로 들어갈 수 있다.' },
@@ -59,7 +61,7 @@ const DATA = {
         ]
       },
       master: {
-        headline: '석사 이상이면 분석·효능평가까지 열립니다.',
+        headline: '석사 이상이면 분석·효능평가까지 선택지에 들어옵니다.',
         paths: ['analysis', 'ra'],
         evidence: [
           { org: '펩트론 오송', text: 'DDS연구센터, 비임상, 연구본부는 대부분 석사 이상이다.' },
@@ -71,8 +73,8 @@ const DATA = {
         headline: '아직 정하지 않아도 됩니다. 3학년 전까지는 준비가 같습니다.',
         paths: ['analysis', 'quality', 'ra'],
         evidence: [
-          '세 갈래 어디서나 반복해서 나온 준비는 학부 실험실, 말과 글로 설명하는 능력, 영어, 전공 학점이었다. (지투지바이오, 펩트론 대전)',
-          '3학년에 갈래를 정해야 대학원 진학 여부를 판단할 수 있다. 분석·효능평가는 석사 이상, 생산·품질은 학사로 들어갈 수 있다.'
+          { org: '지투지바이오, 펩트론 대전', text: '국내 인터뷰에서 반복해서 나온 준비는 학부 실험실, 말과 글로 설명하는 능력, 영어, 전공 학점이었다.' },
+          { org: '펩트론 오송, 인코스팜', text: '3학년에 갈래를 정해야 대학원 진학 여부를 판단할 수 있다. 분석·효능평가는 석사 이상, 생산·품질은 학사로 들어간 사례가 확인됐다.' }
         ]
       }
     },
@@ -94,7 +96,7 @@ const DATA = {
   pathsLead: '일곱 곳의 인터뷰에서 반복해서 나온 구분입니다. 학위 경계선과 직무 범위가 기관을 바꿔도 같은 방식으로 갈렸습니다.',
   paths: [
     {
-      id: 'analysis', num: '①', name: '분석 · 효능평가', degree: '석사 이상 권장',
+      id: 'analysis', num: '①', name: '분석 · 효능평가', degree: '석사 이상 권장', basis: '국내 2곳 · 일본 1곳에서 확인',
       work: 'ex vivo 효능평가, 기기분석, 동물실험',
       courses: ['조직학(2-2)', '세포생물학(2-1)', '임상화학및실험(기기분석)'],
       jobKeywords: ['효능평가', '비임상', '전임상'],
@@ -108,7 +110,7 @@ const DATA = {
       }]
     },
     {
-      id: 'quality', num: '②', name: '생산 · 품질 (QC·QA)', degree: '학사 · 전문학사 진입 가능',
+      id: 'quality', num: '②', name: '생산 · 품질 (QC·QA)', degree: '학사 · 전문학사 진입 가능', basis: '국내 1곳 · 일본 1곳에서 확인',
       work: 'GMP 환경의 품질관리(QC), 품질보증(QA), 무균 공정 생산',
       courses: ['임상화학및실험1·2(기기분석)', '임상미생물학및실험1·2(무균 조작)'],
       jobKeywords: ['QC', '품질관리 제약', 'GMP'],
@@ -122,7 +124,7 @@ const DATA = {
       }]
     },
     {
-      id: 'ra', num: '③', name: '규제 · 임상 · 사업개발', degree: '학사 이상',
+      id: 'ra', num: '③', name: '규제 · 임상 · 사업개발', degree: '학사 이상', basis: '국내 2곳에서 확인',
       work: '식약처 품목허가 대응(RA), 임상시험 운영, 기술이전과 라이선싱',
       courses: ['병리학', '면역학(3-1)', '문서 작성과 외국어'],
       jobKeywords: ['RA 인허가', '임상시험 CRA'],
@@ -134,22 +136,32 @@ const DATA = {
             'RA는 식약처 품목허가와 가이드라인에 맞춰 문서를 준비하는 일이라 의학 지식이 직접 쓰인다.',
             { org: '지투지바이오', text: '소규모 기업에서는 제형 연구자가 몇 년간 사업개발을 함께 맡기도 했다. 맡는 일의 범위가 정해져 있지 않다.' }
           ]
-        },
-        {
-          origin: 'public',
-          body: [
-            'RA는 약사만 할 수 있는 일로 알려져 있지만, 비약사 신입을 뽑은 사례가 있습니다. 다만 대형 제약사는 약사 면허 소지자를 선호하는 편이라, 소규모 기업에서 실무 경력을 먼저 쌓는 경로가 현실적입니다.'
-          ],
-          groups: [
-            { label: '하는 일', items: ['허가자료 작성·검토와 규제기관 제출', '허가 유지·변경 관리', 'GMP·GCP 실사 지원', '표시자재 관리'] },
-            { label: '필요한 것', items: ['허가 규정 이해', '문서를 꼼꼼히 보는 습관', '말과 글로 설명하는 능력', '다른 부서와의 협업', '외국어(영어)'] },
-            { label: '준비', items: ['따로 자격증은 없습니다. 문서 작업이 많아 워드·엑셀을 잘 다루는 것이 중요합니다.', '의약품 규제업무 전문가 양성과정, 한국제약바이오협회 RA 기본교육(온라인) 같은 과정이 있습니다.'] }
-          ]
         }
       ]
     }
   ],
-  sheetLabels: { work: '하는 일', courses: '연결되는 전공 과목', jobs: '채용공고 찾아보기' },
+  sheetLabels: { work: '하는 일', courses: '연결되는 전공 과목', jobs: '채용공고 찾아보기', basis: '근거' },
+
+  /* ─── 용어 풀이 ────────────────────────────────────────────
+     본문에서 처음 나오는 자리에 점선 밑줄이 붙고, 누르면 풀이가 뜹니다.
+     term 은 본문에 적힌 글자와 똑같아야 합니다.
+     ───────────────────────────────────────────────────────── */
+  glossary: [
+    { term: 'GMP', text: '의약품 제조·품질관리 기준. 약을 정해진 절차대로 만들고 그 기록을 남겨야 한다는 규칙입니다.' },
+    { term: 'QC·QA', text: '품질관리(QC)는 제품을 검사하는 일, 품질보증(QA)은 그 검사와 절차가 제대로 돌아가는지 관리하는 일입니다.' },
+    { term: 'RA', text: '인허가(Regulatory Affairs). 식약처 같은 규제기관에 허가를 받기 위한 서류를 준비하고 대응하는 일입니다.' },
+    { term: 'CDMO', text: '다른 회사의 의약품을 대신 개발하고 생산해 주는 회사입니다.' },
+    { term: 'ex vivo', text: '몸에서 떼어낸 조직이나 세포를 몸 밖에서 그대로 써서 하는 실험입니다.' },
+    { term: '바이오어세이', text: '약이 세포나 조직에 어떤 효과를 내는지 생물학적으로 측정하는 실험입니다.' },
+    { term: '파이프라인', text: '회사가 개발 중인 신약 후보들의 목록입니다.' },
+    { term: 'IVIVC', text: '체외 실험 결과와 체내(동물·사람) 결과 사이의 상관관계입니다.' },
+    { term: 'DDS', text: '약물전달시스템. 약이 몸속에서 원하는 속도와 위치로 전달되게 만드는 기술입니다.' },
+    { term: '오가노이드', text: '줄기세포를 키워 만든 작은 장기 모형입니다.' },
+    { term: '라이선싱', text: '기술이나 신약 후보를 다른 회사에 팔거나 사 오는 계약입니다.' },
+    { term: '비임상', text: '사람에게 쓰기 전에 세포와 동물로 하는 시험 단계입니다. 이 사이트에서는 병원 밖(기업) 진로를 가리키는 말로도 씁니다.' },
+    { term: '인산화효소', text: '세포 안에서 신호를 전달하는 효소(Kinase). 암 등의 약 표적이 됩니다.' },
+    { term: 'PD-1', text: '면역세포 표면의 단백질로, 면역 반응을 조절하는 스위치 역할을 합니다.' }
+  ],
   originLabels: { field: '현장에서 직접 들은 것', public: '공개 자료로 보탠 것' },
 
   /* ─── 학년별 로드맵 ───────────────────────────────────────── */
@@ -537,21 +549,21 @@ const DATA = {
      when — 신청 시기. 모르면 비워 둡니다(표시되지 않음).
      ───────────────────────────────────────────────────────── */
   programs: {
-    undergrad_researcher: { name: '임상병리학과 연구회', kind: 'campus', when: '학과 공지로 모집', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa&mode=view&idx=34132' },
-    capstone:             { name: '캡스톤디자인 지원 프로그램', kind: 'campus', when: '매 학기', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=MN2000197&mode=view&idx=103053' },
+    undergrad_researcher: { name: '임상병리학과 연구회', kind: 'campus', when: '학과 공지 게시판에서 모집 공고 확인', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa' },
+    capstone:             { name: '캡스톤디자인 지원 프로그램', kind: 'campus', when: '매 학기 초 모집 공고 (학교 공지 → 모집)', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=MN2000197' },
     academic_fest:        { name: '바이오헬스융합대학 학술제 엑스포', kind: 'campus', when: '11월경', url: '' },
-    ugrad_research_fund:  { name: '학부생 연구지원 (MYDEX)', kind: 'campus', when: '', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    job_lecture:          { name: '앵커 취업스쿨 — 기업 탐방 및 직무 특강', kind: 'campus', when: '7월 말', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    senior_mentoring:     { name: '전공과 진로설계 — 선배가 들려주는 임상병리사의 첫걸음', kind: 'campus', when: '4월 말', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    career_counsel:       { name: '취업지원센터 진로 상담', kind: 'campus', when: '상시 · 051-320-4600', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=research&mode=view&code=028' },
-    grad_briefing:        { name: '일반대학원 학·석사 연계과정 안내', kind: 'campus', when: '1월 · 7월 첫째 주', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa&mode=view&idx=34142' },
-    grad_counsel:         { name: '취업지원센터 진학 상담', kind: 'campus', when: '상시 · 051-320-4600', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=research&mode=view&code=028' },
+    ugrad_research_fund:  { name: '학부생 연구지원', kind: 'campus', when: 'MYDEX 로그인 후 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    job_lecture:          { name: '앵커 취업스쿨 — 기업 탐방 및 직무 특강', kind: 'campus', when: '7월 말 · MYDEX 로그인 후 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    senior_mentoring:     { name: '전공과 진로설계 — 선배가 들려주는 임상병리사의 첫걸음', kind: 'campus', when: '4월 말 · MYDEX 로그인 후 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    career_counsel:       { name: '취업지원센터 진로 상담', kind: 'campus', when: '상시 · 051-320-2070', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=research&mode=view&code=028' },
+    grad_briefing:        { name: '일반대학원 학·석사 연계과정 안내', kind: 'campus', when: '1월 · 7월 첫째 주 · 학과 공지 게시판', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa' },
+    grad_counsel:         { name: '취업지원센터 진학 상담', kind: 'campus', when: '상시 · 051-320-2070', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=research&mode=view&code=028' },
     prof_counsel:         { name: '지도교수 상담', kind: 'campus', when: '학과 사무실 051-320-2733', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=professor' },
-    double_major:         { name: '부·복수전공 신청', kind: 'campus', when: '매 학기 개강 2개월 전', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa&mode=view&idx=34133' },
-    writing_clinic:       { name: '기초 글쓰기 클리닉', kind: 'campus', when: '매 학기 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    mock_interview:       { name: 'RISE 취업스쿨 — 모의면접 특강', kind: 'campus', when: '학기 중 1~2회 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    study_lecture:        { name: '학습전략특강', kind: 'campus', when: '학기 중 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
-    tutoring:             { name: 'BDAD DLC 학습클럽', kind: 'campus', when: '매 학기 · MYDEX에서 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    double_major:         { name: '부·복수전공 신청', kind: 'campus', when: '매 학기 개강 2개월 전 · 학과 공지 게시판', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa' },
+    writing_clinic:       { name: '기초 글쓰기 클리닉', kind: 'campus', when: '매 학기 · MYDEX 로그인 후 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    mock_interview:       { name: 'RISE 취업스쿨 — 모의면접 특강', kind: 'campus', when: '학기 중 1~2회 · MYDEX 로그인 후 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    study_lecture:        { name: '학습전략특강', kind: 'campus', when: '학기 중 · MYDEX 로그인 후 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
+    tutoring:             { name: 'BDAD DLC 학습클럽', kind: 'campus', when: '매 학기 · MYDEX 로그인 후 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
     language_course:      { name: '교내 어학 강좌', kind: 'campus', when: '매 학기 초 학교 홈페이지 공지 확인', url: '' },
     cbt_scholarship:      { name: 'CBT 레벨업 장학금', kind: 'campus', when: '매 학기 초 공지 · 해당 학기 CBT 2회 이상 응시하면 자동 신청', url: '' },
     gmp_course:           { name: 'GMP 교육 과정 (외부 기관)', kind: 'external', when: '한국제약바이오협회 등', url: '' }
@@ -577,13 +589,19 @@ const DATA = {
   photos: {
     hero: 'img/hero.jpg',
     items: [
+      // 팀이 찍은 방문 사진은 org 를 적어 넣습니다. 기관 카드와 갤러리에 같이 나옵니다.
       // { org: 'carna', file: 'img/visits/0629-carna-1.jpg', caption: 'Carna Biosciences 연구시설 견학' },
+
+      // org 가 없는 사진은 갤러리에만 나옵니다. (Unsplash, 출처 표기 의무 없음)
+      { file: 'img/stock/microscope.jpg', caption: '실험실 현미경 (사진: Ousa Chea, Unsplash)' },
+      { file: 'img/stock/pipette.jpg',    caption: '피펫으로 시료를 옮기는 장면 (사진: CDC, Unsplash)' }
     ]
   },
   gallery: {
     heading: '현장 사진',
     lead: '각 기관의 촬영 허용 범위 안에서 기록했습니다. 촬영이 제한된 구역은 찍지 않았습니다.',
-    empty: '사진을 정리하는 중입니다.'
+    empty: '사진을 정리하는 중입니다.',
+    note: '팀이 찍은 현장 사진은 정리 중입니다. 지금 보이는 사진은 분위기를 위한 참고 사진입니다.'
   },
 
   /* ─── 남은 과제 ───────────────────────────────────────────── */
@@ -621,7 +639,8 @@ const DATA = {
       { label: '지도교수',  value: '김동원' }
     ],
     shareButton: '이 페이지 공유하기',
-    copied: '링크를 복사했습니다'
+    copied: '링크를 복사했습니다',
+    credits: '사진: PJH(첫 화면), Ousa Chea, CDC — Unsplash License'
   },
 
   /* ═══════════════════════════════════════════════════════════
@@ -695,7 +714,7 @@ const DATA = {
                 a: ['진입에서 가장 중요한 것은 면허나 학위가 아니라 GMP 개념을 스스로 체득하려는 의지라고 했습니다.',
                     '바이오어세이 분야는 화합물마다 실험 설계가 필수인 블루 오션입니다. 실험 설계력 자체가 진입장벽이자 차별화 요소가 됩니다.'] },
               { q: '임상검사 전공자가 제약 분야로 가는 경로가 있습니까?',
-                a: ['일본은 임상검사와 제약의 취업 트랙이 처음부터 나뉘어 있습니다. 현실적인 경로로 CDMO(수탁 개발·제조)를 통한 진입을 들었습니다. 한국의 삼성바이오로직스·셀트리온 등이 여기에 해당합니다.',
+                a: ['일본은 임상검사와 제약의 취업 트랙이 처음부터 나뉘어 있습니다. 현실적인 경로로 CDMO(수탁 개발·제조)를 통한 진입을 들었습니다. 한국의 삼성바이오로직스·셀트리온 등을 예로 들었습니다. (인터뷰이의 표현을 그대로 옮긴 것으로, 기업 분류는 팀이 확인하지 않았습니다.)',
                     '국내에도 참고할 만한 교육 프로그램이 있다는 이야기를 덧붙였습니다.'] }
             ]
           },
@@ -713,7 +732,7 @@ const DATA = {
                     '이후 해외에서 포스트닥 과정을 거쳐 독립 연구실을 운영하다 귀국했습니다.'] },
               { q: '지금 어떤 연구를 하고 계십니까?',
                 a: ['PD-1 활성화 항체를 이용한 자가면역질환 치료제가 임상 1상 진행 중입니다.',
-                    '임상 1상에 들어간 신약이 최종 승인까지 이어질 확률은 수십 분의 1 수준이라는 이야기도 함께 들었습니다. 그만큼 오래 걸리고 인력이 꾸준히 필요한 산업이라는 뜻입니다.'] },
+                    '임상 1상에 들어간 신약이 최종 승인까지 이어질 확률은 수십 분의 1 수준이라는 이야기도 함께 들었습니다. (인터뷰이의 표현이며, 팀이 통계로 확인한 수치는 아닙니다.) 그만큼 오래 걸리고 인력이 꾸준히 필요한 산업이라는 뜻입니다.'] },
               { q: '학생에게 조언을 해주신다면?',
                 a: ['대학을 떠나기 전에 다른 분야를 경험해 보라는 말을 거듭 강조했습니다. 그래야 평생 가져갈 좋은 직업이나 좋은 취미를 찾을 수 있다는 이유였습니다.'] }
             ]

@@ -7,17 +7,10 @@
    ═══════════════════════════════════════════════════════════════ */
 
 /* ─── 도구 ───────────────────────────────────────────────────── */
-const $  = (sel, root = document) => root.querySelector(sel);
-const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+const { $, $$, store, make, toast } = DB;
 const slot = (name, root = document) => root.querySelector(`[data-render="${name}"]`);
 const tpl  = (name) => $(`#tpl-${name}`).content.firstElementChild.cloneNode(true);
 
-function make(tag, className, text) {
-  const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (text != null) node.textContent = text;
-  return node;
-}
 function setRichText(node, str) {
   node.textContent = '';
   str.split(/(<b>.*?<\/b>)/g).forEach(part => {
@@ -31,56 +24,12 @@ function extLink(className, text, url) {
   a.href = url; a.target = '_blank'; a.rel = 'noopener';
   return a;
 }
-const store = {
-  get(k, fallback) { try { const v = localStorage.getItem(k); return v == null ? fallback : JSON.parse(v); } catch { return fallback; } },
-  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
-};
 const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const WIDE   = window.matchMedia('(min-width: 720px)');
 const pathById = id => DATA.paths.find(p => p.id === id);
 
-let toastTimer;
-function toast(msg) {
-  const t = $('#toast');
-  t.textContent = msg; t.hidden = false;
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { t.hidden = true; }, 2200);
-}
-
-/* ─── 다크 모드 ─────────────────────────────────────────────── */
-function setupTheme() {
-  const root = document.documentElement;
-  const btn = $('[data-action="theme"]');
-  const sys = window.matchMedia('(prefers-color-scheme: dark)');
-  const apply = () => {
-    const saved = store.get('dbridge-theme', null);
-    const dark = saved ? saved === 'dark' : sys.matches;
-    root.dataset.theme = dark ? 'dark' : 'light';
-    btn.setAttribute('aria-label', dark ? '밝은 화면으로 바꾸기' : '어두운 화면으로 바꾸기');
-    $('meta[name="theme-color"]').setAttribute('content', dark ? '#0F0D14' : '#201D2B');
-  };
-  apply();
-  sys.addEventListener('change', () => { if (!store.get('dbridge-theme', null)) apply(); });
-  btn.addEventListener('click', () => {
-    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    store.set('dbridge-theme', next);
-    apply();
-  });
-}
-
-/* ─── 공유 ───────────────────────────────────────────────────── */
-function setupShare() {
-  const data = { title: DATA.site.title, text: DATA.site.shareText, url: DATA.site.url };
-  const share = async () => {
-    if (navigator.share) {
-      try { await navigator.share(data); return; } catch (e) { if (e.name === 'AbortError') return; }
-    }
-    try { await navigator.clipboard.writeText(data.url); toast(DATA.footer.copied); }
-    catch { window.prompt('주소를 복사하세요', data.url); }
-  };
-  $$('[data-action="share"]').forEach(b => b.addEventListener('click', share));
-  slot('share-button').textContent = DATA.footer.shareButton;
-}
+/* ─── 공유 버튼 문구 ─────────────────────────────────────────── */
+function renderShareLabel() { slot('share-button').textContent = DATA.footer.shareButton; }
 
 /* ─── 첫 화면 ────────────────────────────────────────────────── */
 function renderHero() {
@@ -89,6 +38,8 @@ function renderHero() {
   h.question.split('\n').forEach(line => q.append(make('span', 'hero__line', line)));
   slot('hero-answer').textContent  = h.answer;
   slot('hero-lead').textContent    = h.lead;
+  slot('hero-finding').textContent = h.finding;
+  slot('hero-cta').textContent     = h.cta;
   slot('hero-project').textContent = h.project;
   slot('hero-team').textContent    = h.team;
 
@@ -215,6 +166,7 @@ function paintFinder(animate) {
     requestAnimationFrame(() => requestAnimationFrame(() => fr.classList.add('is-in')));
   }
   box.append(fr);
+  DB.termify(fr);
 }
 
 /* ─── 세 갈래 ────────────────────────────────────────────────── */
@@ -230,6 +182,7 @@ function renderPaths() {
     $('.path__degree', li).textContent  = path.degree;
     $('.path__work', li).textContent    = path.work;
     $('.path__courses', li).textContent = path.courses.join(' · ');
+    $('.path__basis', li).textContent   = path.basis || '';
     $('.path__btn', li).addEventListener('click', () => openPathSheet(path));
     list.append(li);
   });
@@ -243,6 +196,7 @@ function openPathSheet(path) {
     build(body) {
       const basics = make('section', 'src src--basics');
       basics.append(infoBlock(L.work, make('p', 'src__info-desc', path.work)));
+      if (path.basis) basics.append(infoBlock(L.basis, make('p', 'src__info-desc', path.basis)));
       const ul = make('ul', 'src__chip-list');
       path.courses.forEach(c => ul.append(make('li', 'src__chip-item', c)));
       basics.append(infoBlock(L.courses, ul));
@@ -410,6 +364,7 @@ function renderVisits() {
   };
   filterRow(slot('visits-countries'), V.countries, 'country');
   filterRow(slot('visits-types'),     V.types,     'type');
+  requestAnimationFrame(applyVisitFilter);
 
   const typeLabel = id => (V.types.find(t => t.id === id) || {}).label || '';
   const list = slot('stops');
@@ -449,6 +404,14 @@ function renderVisits() {
 }
 
 function applyVisitFilter() {
+  // 고른 국가에 없는 기관 유형은 흐리게 해서 빈 결과를 미리 막는다
+  const stops = DATA.visits.stops;
+  $$('[data-render="visits-types"] .fopt').forEach((b, i) => {
+    const id = DATA.visits.types[i].id;
+    const any = id === 'all' || stops.some(s => (visitFilter.country === 'all' || s.country === visitFilter.country) && s.type === id);
+    b.disabled = !any;
+    if (!any && visitFilter.type === id) { visitFilter.type = 'all'; $$('[data-render="visits-types"] .fopt').forEach(x => x.setAttribute('aria-pressed', String(x === $$('[data-render="visits-types"] .fopt')[0]))); }
+  });
   let shown = 0;
   $$('.stop').forEach(li => {
     const ok = (visitFilter.country === 'all' || li.dataset.country === visitFilter.country)
@@ -712,7 +675,7 @@ function saveImage() {
   const run = () => html2canvas(box, { scale: 2, backgroundColor: '#ffffff', useCORS: true }).then(done).catch(fail);
   if (window.html2canvas) return run();
   const sc = document.createElement('script');
-  sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+  sc.src = 'vendor/html2canvas.min.js';
   sc.onload = run; sc.onerror = fail;
   document.head.append(sc);
 }
@@ -725,6 +688,7 @@ function renderGallery() {
   const grid = slot('gallery');
   if (!DATA.photos.items.length) { grid.append(make('li', 'gallery__empty', G.empty)); return; }
   DATA.photos.items.forEach(ph => grid.append(photoNode(ph)));
+  if (G.note && !DATA.photos.items.some(p => p.org)) slot('gallery-lead').textContent = `${G.lead} ${G.note}`;
 }
 function openLightbox(ph) {
   const dlg = $('#lightbox');
@@ -754,6 +718,7 @@ function renderFooter() {
   slot('note-heading').textContent    = f.noteHeading;
   slot('note-body').textContent       = f.note;
   slot('contact-heading').textContent = f.contactHeading;
+  if (f.credits) slot('credits').textContent = f.credits;
   const dl = slot('contact-list');
   f.contact.forEach(row => {
     if (!row.value) return;
@@ -797,6 +762,7 @@ function openSheet({ eyebrow, title, build }) {
   slot('sheet-title').textContent   = title || '';
   body.textContent = '';
   if (build) build(body);
+  DB.termify(body);
   body.scrollTop = 0;
   document.documentElement.classList.add('is-locked');
   $('#sheet').showModal();
@@ -807,8 +773,9 @@ function closeSheet() { $('#sheet').close(); }
 /* ─── 시작 ───────────────────────────────────────────────────── */
 function init() {
   const safe = (name, fn) => { try { fn(); } catch (err) { console.error(`[${name}] 렌더 실패`, err); } };
-  safe('theme',     setupTheme);
-  safe('share',     setupShare);
+  safe('theme',     DB.setupTheme);
+  safe('share',     DB.setupShare);
+  safe('sharelbl',  renderShareLabel);
   safe('hero',      renderHero);
   safe('finder',    renderFinder);
   safe('paths',     renderPaths);
@@ -822,6 +789,8 @@ function init() {
   safe('footer',    renderFooter);
   safe('reveal',    setupReveal);
   safe('spy',       setupScrollSpy);
+  // 용어 풀이: 섹션마다 첫 등장에만 밑줄
+  safe('terms',     () => { $$('main > section, .hero__inner').forEach(sec => DB.termify(sec)); DB.setupTermPopover(); });
 
   const sheet = $('#sheet');
   $('[data-action="close-sheet"]').addEventListener('click', closeSheet);

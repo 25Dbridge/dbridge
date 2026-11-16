@@ -35,7 +35,7 @@
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
-<link rel="stylesheet" href="style.css?v=301">
+<link rel="stylesheet" href="style.css?v=302">
 </head>
 
 <body>
@@ -77,6 +77,8 @@
     <h1 class="hero__question" data-render="hero-question"></h1>
     <p class="hero__answer" data-render="hero-answer"></p>
     <p class="hero__lead" data-render="hero-lead"></p>
+    <p class="hero__finding" data-render="hero-finding"></p>
+    <p class="hero__cta"><a class="btn btn--light" href="#finder" data-render="hero-cta"></a></p>
     <dl class="hero__stats" data-render="hero-stats"></dl>
     <p class="hero__project" data-render="hero-project"></p>
     <p class="hero__team" data-render="hero-team"></p>
@@ -219,6 +221,7 @@
       <h2 class="foot__title" id="contact-title" data-render="contact-heading"></h2>
       <dl class="contact" data-render="contact-list"></dl>
     </section>
+    <p class="foot__credits" data-render="credits"></p>
     <p class="foot__share">
       <button type="button" class="btn btn--quiet" data-action="share" data-render="share-button"></button>
     </p>
@@ -258,6 +261,13 @@
 
 <p class="toast" id="toast" role="status" aria-live="polite" hidden></p>
 
+<!-- 용어 풀이 말풍선 -->
+<div class="termpop" id="termpop" role="dialog" aria-label="용어 풀이" hidden>
+  <p class="termpop__term"></p>
+  <p class="termpop__text"></p>
+  <button type="button" class="termpop__close" aria-label="닫기"></button>
+</div>
+
 <!-- 반복 단위 템플릿 -->
 <template id="tpl-path">
   <li class="path">
@@ -268,6 +278,7 @@
         <span class="path__degree"></span>
         <span class="path__work"></span>
         <span class="path__courses"></span>
+        <span class="path__basis"></span>
       </span>
       <span class="path__more">자세히</span>
     </button>
@@ -390,7 +401,8 @@
   </li>
 </template>
 
-<script src="data.js?v=301"></script>
-<script src="script.js?v=301" defer></script>
+<script src="data.js?v=302"></script>
+<script src="common.js?v=302"></script>
+<script src="script.js?v=302" defer></script>
 </body>
 </html>

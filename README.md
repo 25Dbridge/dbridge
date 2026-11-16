@@ -14,17 +14,20 @@
 | `index.html` | 메인 페이지 틀 |
 | `interview.html` | 인터뷰 아카이브 틀 |
 | `style.css` | 디자인 (밝은 화면·어두운 화면) |
-| `script.js` | 메인 페이지 동작 (경로 찾기, 비교, 타임라인, 체크리스트, 공유…) |
+| `script.js` | 메인 페이지 동작 (경로 찾기, 비교, 타임라인, 체크리스트…) |
 | `interview.js` | 인터뷰 페이지 동작 |
-| `img/` | 사진 |
+| `common.js` | 두 페이지가 같이 쓰는 것 (다크 모드, 공유, 용어 풀이) |
+| `vendor/html2canvas.min.js` | "이미지로 저장" 버튼이 쓰는 라이브러리 (MIT, 외부 접속 없이 동작) |
+| `img/` | 사진. `img/stock/`은 Unsplash 참고 사진, `img/visits/`는 팀이 찍은 방문 사진 자리 |
 | `og-image.png` | 링크 공유 미리보기 (1200×630) |
 
 ## 글 고치기
 
 1. `data.js`를 열어 따옴표 `' '` 안의 글자만 바꿉니다. `id: '…'` 값은 바꾸지 마세요.
-2. `index.html`과 `interview.html` 맨 아래의 `?v=301` 숫자를 하나 올립니다 (예: `v=302`).
-   휴대폰이 예전 파일을 기억하고 있어도 새 파일을 받아가게 하는 장치입니다. 세 군데(`style.css`, `data.js`, `script.js`/`interview.js`) 모두 같은 숫자로 맞춥니다.
-3. GitHub에 올립니다.
+2. `index.html`과 `interview.html`에 있는 `?v=302` 숫자를 모두 하나 올립니다 (예: `v=303`).
+   휴대폰이 예전 파일을 기억하고 있어도 새 파일을 받아가게 하는 장치입니다. 한 파일 안의 `style.css`, `data.js`, `common.js`, `script.js`/`interview.js` 네 군데를 같은 숫자로 맞춥니다.
+3. 용어 풀이는 `data.js`의 `glossary`에 있습니다. `term`에 적힌 글자가 본문에 처음 나오는 자리에 점선 밑줄이 자동으로 붙습니다.
+4. GitHub에 올립니다.
 
 ## 사진 넣기
 
@@ -44,6 +47,12 @@
 - 2026년 9월 발표 당시 버전은 태그 `v1-2026-09`로 남겨 두었습니다.
   GitHub에서 Releases/Tags → `v1-2026-09` 에서 당시 파일을 볼 수 있습니다.
 - 되돌리려면 `git checkout v1-2026-09 -- .` 후 커밋하거나, GitHub 웹에서 해당 태그의 파일을 내려받아 올리면 됩니다.
+
+## 참고 사진 출처
+
+`img/hero.jpg` PJH (Unsplash) · `img/stock/microscope.jpg` Ousa Chea (Unsplash) · `img/stock/pipette.jpg` CDC (Unsplash).
+모두 Unsplash License(상업적 이용·수정 가능, 출처 표기 의무 없음). 하단에 크레딧을 적어 두었습니다.
+팀 사진이 준비되면 `data.js`의 `photos.items`에서 이 두 줄을 지우고 방문 사진으로 바꾸면 됩니다.
 
 ## 방문자 집계
 

@@ -88,4 +88,10 @@ function renderInterview() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', renderInterview);
+document.addEventListener('DOMContentLoaded', () => {
+  renderInterview();
+  DB.setupTheme();
+  DB.setupShare();
+  document.querySelectorAll('.group').forEach(g => DB.termify(g));
+  DB.setupTermPopover();
+});
