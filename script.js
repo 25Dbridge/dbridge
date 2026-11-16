@@ -181,21 +181,28 @@ function renderSim() {
   simIntro();
 }
 
-function sceneImg(name) {
+function sceneImg(name, card) {
+  const S = DATA.sim;
+  const side = (S.artSide || {})[name] || 'right';
+  card.dataset.side = side;
+  if ((S.artBusy || []).includes(name)) card.dataset.busy = '';
   const fig = make('div', 'scene__art');
-  const img = make('img'); img.alt = ''; img.loading = 'lazy'; img.decoding = 'async';
+  const img = make('img'); img.alt = ''; img.decoding = 'async';
   img.src = `img/sim/${name}.jpg`;
-  img.addEventListener('error', () => fig.classList.add('scene__art--none'));
+  img.addEventListener('error', () => { fig.remove(); card.classList.add('scene__card--noart'); });
   fig.append(img);
   return fig;
 }
+/* 다음 장면 그림을 미리 받아 둔다 */
+function preloadScene(name) { const i = new Image(); i.src = `img/sim/${name}.jpg`; }
 
 function simIntro() {
   const S = DATA.sim, st = slot('sim-stage');
   st.textContent = '';
   Object.assign(sim, { i: 0, path: null, fills: new Set(), misses: new Set(), extra: new Set(), end: null, picked: null });
   const card = make('div', 'scene__card scene__card--intro');
-  card.append(sceneImg('intro'));
+  card.append(sceneImg('intro', card));
+  preloadScene(DATA.sim.steps[0].id);
   const body = make('div', 'scene__body');
   body.append(make('p', 'scene__when', '1학년 봄'));
   body.append(make('p', 'scene__text', '임상병리학과에 들어왔다. 4년 뒤 어디에 있을까.'));
@@ -212,7 +219,8 @@ function simStep() {
   if (!step) { simEnd(); return; }
   st.textContent = '';
   const card = make('div', 'scene__card');
-  card.append(sceneImg(step.id));
+  card.append(sceneImg(step.id, card));
+  const nx = S.steps[sim.i + 1]; if (nx) preloadScene(nx.id);
   const body = make('div', 'scene__body');
   const head = make('div', 'scene__head');
   head.append(make('p', 'scene__when', step.when), make('p', 'scene__step', S.stepLabel.replace('{n}', sim.i + 1).replace('{total}', S.steps.length)));
@@ -267,7 +275,7 @@ function simEnd() {
   const key = sim.end || sim.path || 'undecided';
   const E = S.endings[key];
   const card = make('div', 'scene__card scene__card--end');
-  card.append(sceneImg(`end-${key}`));
+  card.append(sceneImg(`end-${key}`, card));
   const body = make('div', 'scene__body');
   body.append(make('p', 'scene__when', S.resultHeading));
   body.append(make('h3', 'scene__title', E.title));
@@ -279,7 +287,7 @@ function simEnd() {
     const w = make('div', 'scene__col');
     w.append(make('p', 'scene__collabel', label));
     const ul = make('ul', `scene__list ${cls}`);
-    if (!names.length) ul.append(make('li', null, S.noneLabel));
+    if (!names.length) ul.append(make('li', 'is-none', S.noneLabel));
     names.forEach(n => ul.append(make('li', null, n)));
     w.append(ul); return w;
   };

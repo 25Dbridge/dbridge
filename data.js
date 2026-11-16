@@ -163,6 +163,14 @@ const DATA = {
           { label: '그때 가서 한다', misses: ['D3'], say: '발표력과 어학 능력이 있으면 유리하다. 준비한 사람과 차이가 난다.' }
         ] }
     ],
+    // 그림에서 비어 있는 쪽. PC에서는 글 상자가 그쪽에 놓이고, 휴대폰에서는 반대쪽(인물)에 초점을 맞춥니다.
+    artSide: {
+      intro: 'right', lab: 'left', cycle: 'right', base: 'right', path: 'right', grad: 'right',
+      g4: 'right', route: 'right', talk: 'left',
+      'end-analysis': 'left', 'end-quality': 'right', 'end-ra': 'right', 'end-undecided': 'right', 'end-clinical': 'left'
+    },
+    // 그림에 빈 곳이 없어 글 상자 배경을 더 진하게 할 장면
+    artBusy: ['path', 'g4', 'grad'],
     extraMissLabels: { degree: '석사 학위 (분석·효능평가에 필요)' },
     endings: {
       analysis:  { title: '① 분석 · 효능평가로 갔다.', line: '조직학 전공자 한 사람이 사내에 없던 효능평가 체계를 만들었다. 실험을 설계하는 힘이 이 갈래의 차별점이다.' },

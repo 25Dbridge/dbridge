@@ -304,12 +304,16 @@ main > .interlude + section { border-top: 0; }
 }
 
 /* ─── 5b. 4년 미리 살아보기 ─────────────────────────────────── */
-.scene__card { border-radius: var(--radius-lg); overflow: hidden; background: var(--card); border: 1px solid var(--rule); box-shadow: var(--shadow); transition: opacity .35s var(--ease), transform .35s var(--ease); }
+.scene__card { position: relative; border-radius: var(--radius-lg); overflow: hidden; background: var(--card); border: 1px solid var(--rule); box-shadow: var(--shadow); transition: opacity .35s var(--ease), transform .35s var(--ease); }
 .scene__card.is-enter { opacity: 0; transform: translateY(8px); }
-.scene__art { aspect-ratio: 16 / 9; background: var(--paper-3); overflow: hidden; }
-.scene__art img { width: 100%; height: 100%; object-fit: cover; }
-.scene__art--none { display: none; }
-.scene__body { padding: var(--sp-3); }
+
+/* 휴대폰: 그림 위, 글 아래. 인물이 있는 쪽에 초점 */
+.scene__art { position: relative; aspect-ratio: 4 / 3; background: var(--paper-3); overflow: hidden; }
+.scene__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.scene__card[data-side="right"] .scene__art img { object-position: 22% 50%; }
+.scene__card[data-side="left"]  .scene__art img { object-position: 78% 50%; }
+
+.scene__body { position: relative; padding: var(--sp-3); }
 .scene__head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
 .scene__when { font-size: .8125rem; font-weight: 700; color: var(--accent); }
 .scene__step { font-size: .75rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
@@ -338,14 +342,30 @@ main > .interlude + section { border-top: 0; }
 .scene__list li { padding: .3rem .65rem; border-radius: 999px; font-size: .8125rem; font-weight: 600; }
 .scene__list--fill li { background: var(--same-soft); color: var(--same); }
 .scene__list--miss li { background: var(--diff-soft); color: var(--diff); }
+.scene__list li.is-none { background: none; color: var(--ink-3); padding-left: 0; }
 .scene__actions { margin-top: var(--sp-4); display: flex; flex-wrap: wrap; gap: .5rem; }
-@media (min-width: 720px) {
-  .scene__card { display: grid; grid-template-columns: 1fr 1.1fr; }
-  .scene__art { aspect-ratio: auto; min-height: 20rem; }
-  .scene__art--none { display: none; }
-  .scene__card:has(.scene__art--none) { grid-template-columns: 1fr; }
-  .scene__body { padding: var(--sp-4); }
-  .scene__cols { grid-template-columns: 1fr 1fr; }
+
+/* PC: 그림을 장면 전체에 깔고, 비어 있는 쪽에 글 상자를 띄운다 */
+@media (min-width: 900px) {
+  .scene__card { display: grid; grid-template-areas: "stack"; grid-template-columns: minmax(0, 1fr); }
+  .scene__card::before { content: ""; grid-area: stack; width: 100%; aspect-ratio: 16 / 9; align-self: start; }
+  .scene__art { grid-area: stack; aspect-ratio: auto; }
+  .scene__art img { object-position: 50% 50% !important; }
+  .scene__body {
+    grid-area: stack; align-self: center; width: min(46%, 30rem); margin: var(--sp-4);
+    padding: var(--sp-4); border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--card) 86%, transparent);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 8px 32px -12px rgba(35, 32, 46, .35);
+  }
+  .scene__card[data-side="right"] .scene__body { justify-self: end; }
+  .scene__card[data-side="left"]  .scene__body { justify-self: start; }
+  .scene__card[data-busy] .scene__body { background: color-mix(in srgb, var(--card) 94%, transparent); }
+  .scene__card--noart { display: block; }
+  .scene__card--noart::before { display: none; }
+  .scene__card--noart .scene__body { width: auto; margin: 0; box-shadow: none; background: none; }
+  .scene__opt { background: var(--card); }
+  .scene__cols { grid-template-columns: 1fr; }
 }
 @media (min-width: 1024px) { .sim { max-width: calc(var(--wide) + var(--gutter) * 2); } }
 
