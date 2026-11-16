@@ -592,16 +592,17 @@ const DATA = {
       // 팀이 찍은 방문 사진은 org 를 적어 넣습니다. 기관 카드와 갤러리에 같이 나옵니다.
       // { org: 'carna', file: 'img/visits/0629-carna-1.jpg', caption: 'Carna Biosciences 연구시설 견학' },
 
-      // org 가 없는 사진은 갤러리에만 나옵니다. (Unsplash, 출처 표기 의무 없음)
-      { file: 'img/stock/microscope.jpg', caption: '실험실 현미경 (사진: Ousa Chea, Unsplash)' },
-      { file: 'img/stock/pipette.jpg',    caption: '피펫으로 시료를 옮기는 장면 (사진: CDC, Unsplash)' }
-    ]
+    ],
+    // 분위기용 참고 사진 (Unsplash). 섹션 사이 띠 그림으로만 쓰고, 현장 사진 갤러리에는 넣지 않습니다.
+    stock: {
+      paths:    { file: 'img/stock/pipette.jpg',    alt: '피펫으로 시료를 옮기는 손',  credit: '참고 사진 · CDC, Unsplash' },
+      compare:  { file: 'img/stock/microscope.jpg', alt: '실험실 현미경',           credit: '참고 사진 · Ousa Chea, Unsplash' }
+    }
   },
   gallery: {
     heading: '현장 사진',
     lead: '각 기관의 촬영 허용 범위 안에서 기록했습니다. 촬영이 제한된 구역은 찍지 않았습니다.',
-    empty: '사진을 정리하는 중입니다.',
-    note: '팀이 찍은 현장 사진은 정리 중입니다. 지금 보이는 사진은 분위기를 위한 참고 사진입니다.'
+    empty: '사진을 정리하는 중입니다.'
   },
 
   /* ─── 남은 과제 ───────────────────────────────────────────── */
@@ -640,7 +641,7 @@ const DATA = {
     ],
     shareButton: '이 페이지 공유하기',
     copied: '링크를 복사했습니다',
-    credits: '사진: PJH(첫 화면), Ousa Chea, CDC — Unsplash License'
+    credits: '참고 사진: PJH(첫 화면), CDC, Ousa Chea — Unsplash License. 현장 사진이 아닙니다.'
   },
 
   /* ═══════════════════════════════════════════════════════════

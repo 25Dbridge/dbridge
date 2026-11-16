@@ -35,7 +35,7 @@
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
-<link rel="stylesheet" href="style.css?v=302">
+<link rel="stylesheet" href="style.css?v=303">
 </head>
 
 <body>
@@ -91,6 +91,7 @@
     <h2 class="section__title" id="finder-title" data-render="finder-heading"></h2>
     <p class="section__lead" data-render="finder-lead"></p>
 
+    <div class="finder__grid">
     <div class="finder__pick">
       <div class="pick" role="group" aria-labelledby="pick-grade-label">
         <p class="pick__label" id="pick-grade-label" data-render="finder-grade-label"></p>
@@ -103,7 +104,10 @@
     </div>
 
     <div class="finder__result" id="finder-result" aria-live="polite" data-render="finder-result"></div>
+    </div>
   </section>
+
+  <figure class="interlude" data-stock="paths"><img alt="" loading="lazy" decoding="async"><figcaption></figcaption></figure>
 
   <!-- 3. 세 갈래 -->
   <section class="paths" id="paths" aria-labelledby="paths-title">
@@ -126,6 +130,8 @@
     <p class="section__lead" data-render="compare-lead"></p>
     <ul class="compare__list" data-render="compare"></ul>
   </section>
+
+  <figure class="interlude" data-stock="compare"><img alt="" loading="lazy" decoding="async"><figcaption></figcaption></figure>
 
   <!-- 6. 다녀온 곳 -->
   <section class="visits" id="visits" aria-labelledby="visits-title">
@@ -157,6 +163,8 @@
     <h2 class="section__title" id="checklist-title" data-render="checklist-heading"></h2>
     <p class="section__lead" data-render="checklist-lead"></p>
 
+    <div class="checklist__grid">
+    <div class="checklist__left">
     <div class="grades" role="tablist" aria-label="학년 선택" data-render="grade-tabs"></div>
 
     <form class="check" id="check-form" role="tabpanel" aria-label="선택한 학년의 점검 문항">
@@ -170,6 +178,7 @@
       </fieldset>
       <p class="check__saved" data-render="check-saved" aria-live="polite"></p>
     </form>
+    </div>
 
     <div class="result" id="result" aria-live="polite">
       <h3 class="result__heading" data-render="result-heading"></h3>
@@ -181,6 +190,7 @@
         <button type="button" class="btn btn--quiet" data-action="programs" data-render="programs-button"></button>
         <button type="button" class="btn btn--quiet" data-action="reset">체크 지우기</button>
       </div>
+    </div>
     </div>
     <div class="export-sheet" id="export-sheet" aria-hidden="true"></div>
   </section>
@@ -197,11 +207,16 @@
     <h2 class="section__title" id="open-title" data-render="open-heading"></h2>
     <p class="section__lead" data-render="open-lead"></p>
 
-    <h3 class="open__sub" data-render="open-limits-label"></h3>
-    <dl class="limits" data-render="open-limits"></dl>
-
-    <h3 class="open__sub" data-render="open-questions-label"></h3>
-    <ul class="questions" data-render="open-questions"></ul>
+    <div class="open__grid">
+      <div>
+        <h3 class="open__sub" data-render="open-limits-label"></h3>
+        <dl class="limits" data-render="open-limits"></dl>
+      </div>
+      <div>
+        <h3 class="open__sub" data-render="open-questions-label"></h3>
+        <ul class="questions" data-render="open-questions"></ul>
+      </div>
+    </div>
 
     <div class="baton">
       <h3 class="open__sub" data-render="baton-heading"></h3>
@@ -401,8 +416,8 @@
   </li>
 </template>
 
-<script src="data.js?v=302"></script>
-<script src="common.js?v=302"></script>
-<script src="script.js?v=302" defer></script>
+<script src="data.js?v=303"></script>
+<script src="common.js?v=303"></script>
+<script src="script.js?v=303" defer></script>
 </body>
 </html>

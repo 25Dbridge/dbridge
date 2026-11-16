@@ -335,11 +335,6 @@ function photoNode(ph) {
   li.append(b);
   return li;
 }
-function emptyPhotoNode(stopId) {
-  const li = make('li', 'photo photo--empty');
-  li.append(make('span', null, `사진 자리\nimg/visits/월일-${stopId}-1.jpg`));
-  return li;
-}
 
 function renderVisits() {
   const V = DATA.visits;
@@ -391,9 +386,7 @@ function renderVisits() {
     row(V.labels.heard, s.heard);
 
     const photos = $('.stop__photos', li);
-    const mine = DATA.photos.items.filter(p => p.org === s.id);
-    if (mine.length) mine.forEach(p => photos.append(photoNode(p)));
-    else photos.append(emptyPhotoNode(s.id));
+    DATA.photos.items.filter(p => p.org === s.id).forEach(p => photos.append(photoNode(p)));
 
     const qa = $('.stop__qa a', li);
     qa.textContent = V.labels.qa;
@@ -683,12 +676,25 @@ function saveImage() {
 /* ─── 사진 ───────────────────────────────────────────────────── */
 function renderGallery() {
   const G = DATA.gallery;
+  // 팀이 찍은 사진이 아직 없으면 갤러리 섹션 자체를 보이지 않는다
+  if (!DATA.photos.items.length) { $('#gallery').hidden = true; return; }
   slot('gallery-heading').textContent = G.heading;
   slot('gallery-lead').textContent    = G.lead;
   const grid = slot('gallery');
-  if (!DATA.photos.items.length) { grid.append(make('li', 'gallery__empty', G.empty)); return; }
   DATA.photos.items.forEach(ph => grid.append(photoNode(ph)));
-  if (G.note && !DATA.photos.items.some(p => p.org)) slot('gallery-lead').textContent = `${G.lead} ${G.note}`;
+}
+
+/* 섹션 사이 참고 사진 띠 — 현장 사진과 섞이지 않도록 출처를 바로 아래 적는다 */
+function renderInterludes() {
+  const S = DATA.photos.stock || {};
+  $$('.interlude').forEach(fig => {
+    const st = S[fig.dataset.stock];
+    if (!st) { fig.remove(); return; }
+    const img = $('img', fig);
+    img.src = st.file; img.alt = st.alt || '';
+    img.addEventListener('error', () => fig.remove());
+    $('figcaption', fig).textContent = st.credit;
+  });
 }
 function openLightbox(ph) {
   const dlg = $('#lightbox');
@@ -785,6 +791,7 @@ function init() {
   safe('method',    renderMethod);
   safe('checklist', renderChecklist);
   safe('gallery',   renderGallery);
+  safe('interlude', renderInterludes);
   safe('open',      renderOpen);
   safe('footer',    renderFooter);
   safe('reveal',    setupReveal);
