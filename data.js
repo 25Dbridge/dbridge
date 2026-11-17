@@ -560,8 +560,7 @@ const DATA = {
       { id: 'C2', short: '영어', grades: ['g12', 'g3', 'g4'], group: 'ongoing', type: 'check',
         text: '공인 어학 점수를 준비하고 있다.',
         emptyNote: '방문한 국내 3개 기업 중 2곳이 기본 요건으로 말했습니다.',
-        programs: ['language_course', 'cbt_scholarship'],
-        noProgram: '응시료를 지원하는 제도는 찾지 못했습니다. 학과 안에서 스터디를 꾸리는 방법도 있습니다.' }
+        programs: ['language_course', 'cbt_scholarship'] }
     ],
     result: {
       headingTemplate: '지금 해 볼 수 있는 것 {n}가지',
@@ -577,7 +576,7 @@ const DATA = {
      when — 신청 시기. 모르면 비워 둡니다(표시되지 않음).
      ───────────────────────────────────────────────────────── */
   programs: {
-    undergrad_researcher: { name: '임상병리학과 연구회', kind: 'campus', when: '학과 공지 게시판에서 모집 공고 확인', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa' },
+    undergrad_researcher: { name: '학과 동아리 라온', kind: 'campus', when: '학과 공지 게시판에서 모집 공고 확인', url: 'https://uni.dongseo.ac.kr/bio/index.php?pCode=generalboa' },
     capstone:             { name: '캡스톤디자인 지원 프로그램', kind: 'campus', when: '매 학기 초 학교 공지에서 모집', url: 'https://www.dongseo.ac.kr/kr/index.php?pCode=MN2000197' },
     academic_fest:        { name: '바이오헬스융합대학 학술제 엑스포', kind: 'campus', when: '11월경', url: '' },
     ugrad_research_fund:  { name: '학부생 연구지원', kind: 'campus', when: 'MYDEX 로그인 후 검색', url: 'https://mydex.dongseo.ac.kr/loadPage.do?jspPage=/PORTAL/STUD/C/A/SSCA020_01S&menuId=00118' },
